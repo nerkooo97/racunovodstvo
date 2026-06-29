@@ -1,0 +1,138 @@
+{
+  "cantonal": {
+    "Unsko-sanski kanton": {
+      "cantonName": "Unsko-sanski kanton",
+      "healthAccount": "338-500-22751661-53",
+      "unemploymentAccount": "338-000-22100129-58",
+      "budgetAccount": "338-000-22100058-77"
+    },
+    "Posavski kanton": {
+      "cantonName": "Posavski kanton",
+      "healthAccount": "161-080-00026400-20",
+      "unemploymentAccount": "306-042-00009586-97",
+      "budgetAccount": "338-000-22104571-21"
+    },
+    "Tuzlanski kanton": {
+      "cantonName": "Tuzlanski kanton",
+      "healthAccount": "338-440-22124691-66",
+      "unemploymentAccount": "132-100-03110200-32",
+      "budgetAccount": "132-100-02560000-80"
+    },
+    "Zeničko-dobojski kanton": {
+      "cantonName": "Zeničko-dobojski kanton",
+      "healthAccount": "134-010-00000021-57",
+      "unemploymentAccount": "134-010-00001075-96",
+      "budgetAccount": "134-010-00000016-72"
+    },
+    "Bosansko-podrinjski kanton": {
+      "cantonName": "Bosansko-podrinjski kanton",
+      "healthAccount": "134-620-10082668-97",
+      "unemploymentAccount": "101-140-00004638-22",
+      "budgetAccount": "101-140-0078226-394"
+    },
+    "Srednjobosanski kanton": {
+      "cantonName": "Srednjobosanski kanton",
+      "healthAccount": "134-481-10082431-53",
+      "unemploymentAccount": "338-000-22100281-87",
+      "budgetAccount": "134-113-0360000-194"
+    },
+    "Središnjobosanski kanton": {
+      "cantonName": "Srednjobosanski kanton",
+      "healthAccount": "134-481-10082431-53",
+      "unemploymentAccount": "338-000-22100281-87",
+      "budgetAccount": "134-113-0360000-194"
+    },
+    "Kanton Središnja Bosna": {
+      "cantonName": "Srednjobosanski kanton",
+      "healthAccount": "134-481-10082431-53",
+      "unemploymentAccount": "338-000-22100281-87",
+      "budgetAccount": "134-113-0360000-194"
+    },
+    "Hercegovačko-neretvanski kanton": {
+      "cantonName": "Hercegovačko-neretvanski kanton",
+      "healthAccount": "555-090-0069475-156",
+      "unemploymentAccount": "161-020-00138001-91",
+      "budgetAccount": "134-209-0360000-146"
+    },
+    "Zapadnohercegovački kanton": {
+      "cantonName": "Zapadnohercegovački kanton",
+      "healthAccount": "102-874-0000000-362",
+      "unemploymentAccount": "338-000-22000102-21",
+      "budgetAccount": "338-000-22000040-13"
+    },
+    "Zapadno-hercegovački kanton": {
+      "cantonName": "Zapadnohercegovački kanton",
+      "healthAccount": "102-874-0000000-362",
+      "unemploymentAccount": "338-000-22000102-21",
+      "budgetAccount": "338-000-22000040-13"
+    },
+    "Kanton Sarajevo": {
+      "cantonName": "Kanton Sarajevo",
+      "healthAccount": "154-921-20146172-45",
+      "unemploymentAccount": "154-921-20101710-56",
+      "budgetAccount": "141-196-53200084-75"
+    },
+    "Kanton 10": {
+      "cantonName": "Kanton 10",
+      "healthAccount": "154-921-20048246-10",
+      "unemploymentAccount": "338-000-22000344-71",
+      "budgetAccount": "161-020-00335600-61"
+    },
+    "Una-sanski kanton": {
+      "cantonName": "Unsko-sanski kanton",
+      "healthAccount": "338-500-22751661-53",
+      "unemploymentAccount": "338-000-22100129-58",
+      "budgetAccount": "338-000-22100058-77"
+    },
+    "Bosansko-podrinjski kanton Goražde": {
+      "cantonName": "Bosansko-podrinjski kanton",
+      "healthAccount": "134-620-10082668-97",
+      "unemploymentAccount": "101-140-00004638-22",
+      "budgetAccount": "101-140-0078226-394"
+    },
+    "Livanjski kanton": {
+      "cantonName": "Kanton 10",
+      "healthAccount": "154-921-20048246-10",
+      "unemploymentAccount": "338-000-22000344-71",
+      "budgetAccount": "161-020-00335600-61"
+    }
+  },
+  "federal": {
+    "pio": {
+      "account": "102-050-00001066-98",
+      "vrstaPrihoda": "712112",
+      "budgetOrg": "5102001",
+      "label": "Budžet Federacije BiH · Doprinos za PIO/MIO"
+    },
+    "healthFederal": {
+      "account": "102-050-00000640-18",
+      "vrstaPrihoda": "712111",
+      "budgetOrg": "0000000",
+      "label": "Zavod zdravstvenog osiguranja i reosiguranja FBiH"
+    },
+    "unemploymentFederal": {
+      "account": "161-000-00285700-03",
+      "vrstaPrihoda": "712113",
+      "budgetOrg": "0000000",
+      "label": "Federalni zavod za zapošljavanje"
+    },
+    "osiFund": {
+      "account": "338-690-22963585-21",
+      "vrstaPrihoda": "722569",
+      "budgetOrg": "0000000",
+      "label": "Fond za profesionalnu rehabilitaciju i zapošljavanje osoba sa invaliditetom"
+    },
+    "waterDefault": {
+      "account": "141-196-53200084-75",
+      "vrstaPrihoda": "722529",
+      "budgetOrg": "0000000",
+      "label": "Opća vodna naknada"
+    },
+    "disasterDefault": {
+      "account": "141-196-53200084-75",
+      "vrstaPrihoda": "722581",
+      "budgetOrg": "0000000",
+      "label": "Naknada za zaštitu od prirodnih nesreća"
+    }
+  }
+}

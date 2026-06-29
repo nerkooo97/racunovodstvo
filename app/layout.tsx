@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
+import { Geist, Roboto } from "next/font/google";
 import { ThemeProvider } from "next-themes";
+import { TooltipProvider } from "@/components/ui/tooltip";
 import "./globals.css";
+import { cn } from "@/lib/utils";
+
+const roboto = Roboto({subsets:['latin'],variable:'--font-sans'});
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -9,8 +13,8 @@ const defaultUrl = process.env.VERCEL_URL
 
 export const metadata: Metadata = {
   metadataBase: new URL(defaultUrl),
-  title: "Next.js and Supabase Starter Kit",
-  description: "The fastest way to build apps with Next.js and Supabase",
+  title: "Računovodstvo — bookkeeping za BiH",
+  description: "Obračun plata, fakture, KPR, PDV i obrasci za Federaciju BiH",
 };
 
 const geistSans = Geist({
@@ -25,7 +29,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className={cn("font-sans", roboto.variable)}>
       <body className={`${geistSans.className} antialiased`}>
         <ThemeProvider
           attribute="class"
@@ -33,7 +37,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <TooltipProvider>
+            {children}
+          </TooltipProvider>
         </ThemeProvider>
       </body>
     </html>

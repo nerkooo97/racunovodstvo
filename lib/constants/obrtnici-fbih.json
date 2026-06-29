@@ -1,0 +1,38 @@
+{
+  "2026": {
+    "source": "Sl. novine FBiH br. 100/25 od 31.12.2025.",
+    "avgBrutoPriorYear": 2464,
+    "stvarniDohodak": {
+      "SLOBODNA_ZANIMANJA": 2710,
+      "OBRT_SRODNE": 1602,
+      "POLJOPRIVREDA_SUMARSTVO": 715,
+      "TRGOVAC_POJEDINAC": 715
+    },
+    "pausalni": {
+      "OBRT_SRODNE": 1355,
+      "ESNAFSKI_ZANATI": 616,
+      "POLJOPRIVREDA_SUMARSTVO": 616,
+      "TAXI": 616,
+      "TRGOVAC_POJEDINAC": 715
+    },
+    "ostali": 739
+  },
+  "kategorijePausalni": {
+    "OBRT_SRODNE": "Obrt i srodne djelatnosti",
+    "ESNAFSKI_ZANATI": "Niskoakumulativne (tradicionalni esnafski zanati)",
+    "POLJOPRIVREDA_SUMARSTVO": "Poljoprivreda i šumarstvo",
+    "TAXI": "Taxi prijevoz",
+    "TRGOVAC_POJEDINAC": "Trgovac pojedinac"
+  },
+  "kategorijeStvarni": {
+    "SLOBODNA_ZANIMANJA": "Slobodna zanimanja",
+    "OBRT_SRODNE": "Obrt i srodne djelatnosti",
+    "POLJOPRIVREDA_SUMARSTVO": "Poljoprivreda i šumarstvo",
+    "TRGOVAC_POJEDINAC": "Trgovac pojedinac"
+  },
+  "rezimiLabels": {
+    "STVARNI_DOHODAK": "Stvarni dohodak (poslovne knjige, čl. 19)",
+    "PAUSALNI": "Paušalni iznos (čl. 31)",
+    "OSTALI": "Ostali obveznici (čl. 6 t.10)"
+  }
+}

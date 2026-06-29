@@ -1,0 +1,2207 @@
+[
+  {
+    "code": "711111",
+    "name": "Porez na dobit od privredne i profesionalne djelatnosti",
+    "categoryCode": "711",
+    "categoryName": "Porezi na dobit pojedinca i preduzeća",
+    "section": "12. Zaostale uplate poreza"
+  },
+  {
+    "code": "711112",
+    "name": "Porez na dobit od poljoprivredne djelatnosti",
+    "categoryCode": "711",
+    "categoryName": "Porezi na dobit pojedinca i preduzeća",
+    "section": "12. Zaostale uplate poreza"
+  },
+  {
+    "code": "711113",
+    "name": "Porez po osnovu autorskih prava, patenata i tehničkih unapređenja",
+    "categoryCode": "711",
+    "categoryName": "Porezi na dobit pojedinca i preduzeća",
+    "section": "12. Zaostale uplate poreza"
+  },
+  {
+    "code": "711114",
+    "name": "Porez na ukupan prihod fizičkih lica",
+    "categoryCode": "711",
+    "categoryName": "Porezi na dobit pojedinca i preduzeća",
+    "section": "12. Zaostale uplate poreza"
+  },
+  {
+    "code": "711115",
+    "name": "Porez na prihod od imovine i imovinskih prava",
+    "categoryCode": "711",
+    "categoryName": "Porezi na dobit pojedinca i preduzeća",
+    "section": "12. Zaostale uplate poreza"
+  },
+  {
+    "code": "711211",
+    "name": "Porez na dobit",
+    "categoryCode": "711",
+    "categoryName": "Porezi na dobit pojedinca i preduzeća",
+    "section": "9. Porez na dobit preduzeća"
+  },
+  {
+    "code": "711212",
+    "name": "Porez po odbitku",
+    "categoryCode": "711",
+    "categoryName": "Porezi na dobit pojedinca i preduzeća",
+    "section": "9. Porez na dobit preduzeća"
+  },
+  {
+    "code": "711911",
+    "name": "Porez na dobit banaka",
+    "categoryCode": "711",
+    "categoryName": "Porezi na dobit pojedinca i preduzeća",
+    "section": "10. Porez na dobit banaka i drugih finansijskih organizacija, društava za osiguranje"
+  },
+  {
+    "code": "711912",
+    "name": "Porez na dobit mikrokreditnih organizacija",
+    "categoryCode": "711",
+    "categoryName": "Porezi na dobit pojedinca i preduzeća",
+    "section": "10. Porez na dobit banaka i drugih finansijskih organizacija, društava za osiguranje"
+  },
+  {
+    "code": "711913",
+    "name": "Porez na dobit društava za osiguranje imovine i lica",
+    "categoryCode": "711",
+    "categoryName": "Porezi na dobit pojedinca i preduzeća",
+    "section": "10. Porez na dobit banaka i drugih finansijskih organizacija, društava za osiguranje"
+  },
+  {
+    "code": "711914",
+    "name": "Porez na dobit društava za reosiguranje imovine i lica",
+    "categoryCode": "711",
+    "categoryName": "Porezi na dobit pojedinca i preduzeća",
+    "section": "10. Porez na dobit banaka i drugih finansijskih organizacija, društava za osiguranje"
+  },
+  {
+    "code": "711915",
+    "name": "Porez na dobit pravnih lica iz oblasti elektroprivrede",
+    "categoryCode": "711",
+    "categoryName": "Porezi na dobit pojedinca i preduzeća",
+    "section": "10. Porez na dobit banaka i drugih finansijskih organizacija, društava za osiguranje"
+  },
+  {
+    "code": "711916",
+    "name": "Porez na dobit pravnih lica iz oblasti pošte i telekomunikacija",
+    "categoryCode": "711",
+    "categoryName": "Porezi na dobit pojedinca i preduzeća",
+    "section": "10. Porez na dobit banaka i drugih finansijskih organizacija, društava za osiguranje"
+  },
+  {
+    "code": "711917",
+    "name": "Porez na dobit pravnih lica iz oblasti igara na sreću",
+    "categoryCode": "711",
+    "categoryName": "Porezi na dobit pojedinca i preduzeća",
+    "section": "10. Porez na dobit banaka i drugih finansijskih organizacija, društava za osiguranje"
+  },
+  {
+    "code": "711918",
+    "name": "Porez po odbitku",
+    "categoryCode": "711",
+    "categoryName": "Porezi na dobit pojedinca i preduzeća",
+    "section": "10. Porez na dobit banaka i drugih finansijskih organizacija, društava za osiguranje"
+  },
+  {
+    "code": "711919",
+    "name": "Ostali porezi na dobit pojedinca i preduzeća",
+    "categoryCode": "711",
+    "categoryName": "Porezi na dobit pojedinca i preduzeća",
+    "section": "10. Porez na dobit banaka i drugih finansijskih organizacija, društava za osiguranje"
+  },
+  {
+    "code": "712111",
+    "name": "Doprinos za zdravstveno osiguranje",
+    "categoryCode": "712",
+    "categoryName": "Doprinosi za socijalna osiguranja",
+    "section": "21. Doprinosi"
+  },
+  {
+    "code": "712112",
+    "name": "Doprinos za penzijsko i invalidsko osiguranje",
+    "categoryCode": "712",
+    "categoryName": "Doprinosi za socijalna osiguranja",
+    "section": "21. Doprinosi"
+  },
+  {
+    "code": "712113",
+    "name": "Doprinos za osiguranje od nezaposlenosti",
+    "categoryCode": "712",
+    "categoryName": "Doprinosi za socijalna osiguranja",
+    "section": "21. Doprinosi"
+  },
+  {
+    "code": "712114",
+    "name": "Dodatni doprinos za penzijsko- invalidsko osiguranje",
+    "categoryCode": "712",
+    "categoryName": "Doprinosi za socijalna osiguranja",
+    "section": "21. Doprinosi"
+  },
+  {
+    "code": "712115",
+    "name": "Dodatni doprinos za zdravstveno osiguranje",
+    "categoryCode": "712",
+    "categoryName": "Doprinosi za socijalna osiguranja",
+    "section": "21. Doprinosi"
+  },
+  {
+    "code": "712116",
+    "name": "Doprinos za zdravstveno osiguranje iz primitaka od druge samostalne djelatnosti i povremenog samostalnog rada",
+    "categoryCode": "712",
+    "categoryName": "Doprinosi za socijalna osiguranja",
+    "section": "21. Doprinosi"
+  },
+  {
+    "code": "712124",
+    "name": "Sredstva za volontere radi osiguranja za slučaj povrede na radu ili profesionalne bolesti",
+    "categoryCode": "712",
+    "categoryName": "Doprinosi za socijalna osiguranja",
+    "section": "21. Doprinosi"
+  },
+  {
+    "code": "712125",
+    "name": "Sredstva za pripravnike radi osiguranja za slučaj povrede na radu i profesionalne bolesti",
+    "categoryCode": "712",
+    "categoryName": "Doprinosi za socijalna osiguranja",
+    "section": "21. Doprinosi"
+  },
+  {
+    "code": "712126",
+    "name": "Doprinos za penzijsko i invalidsko osiguranje na primitke od druge samostalne djelatnosti i povremenog samostalnog rada",
+    "categoryCode": "712",
+    "categoryName": "Doprinosi za socijalna osiguranja",
+    "section": "21. Doprinosi"
+  },
+  {
+    "code": "712131",
+    "name": "Doprinos za penzijsko i invalidsko osiguranje koje za nezaposlene osobe plaćaju kantonalne službe za zapošljavanje",
+    "categoryCode": "712",
+    "categoryName": "Doprinosi za socijalna osiguranja",
+    "section": "21. Doprinosi"
+  },
+  {
+    "code": "712132",
+    "name": "Doprinos za zdravstveno osiguranje poljoprivrednika",
+    "categoryCode": "712",
+    "categoryName": "Doprinosi za socijalna osiguranja",
+    "section": "21. Doprinosi"
+  },
+  {
+    "code": "712133",
+    "name": "Doprinos za zdravstveno osiguranje koje za nezaposlene osobe plaćaju kantonalne službe za zapošljavanje",
+    "categoryCode": "712",
+    "categoryName": "Doprinosi za socijalna osiguranja",
+    "section": "21. Doprinosi"
+  },
+  {
+    "code": "712134",
+    "name": "Doprinos za zdravstveno osiguranje licima kojima je priznat izbjeglički status",
+    "categoryCode": "712",
+    "categoryName": "Doprinosi za socijalna osiguranja",
+    "section": "21. Doprinosi"
+  },
+  {
+    "code": "712191",
+    "name": "Doprinos za zdravstveno osiguranje radnika na radu u inostranstvu",
+    "categoryCode": "712",
+    "categoryName": "Doprinosi za socijalna osiguranja",
+    "section": "21. Doprinosi"
+  },
+  {
+    "code": "713111",
+    "name": "Porez na plaću i druga lična primanja",
+    "categoryCode": "713",
+    "categoryName": "Porezi na plaću i radnu snagu",
+    "section": "12. Zaostale uplate poreza"
+  },
+  {
+    "code": "713113",
+    "name": "Porez na dodatna primanja",
+    "categoryCode": "713",
+    "categoryName": "Porezi na plaću i radnu snagu",
+    "section": "12. Zaostale uplate poreza"
+  },
+  {
+    "code": "714111",
+    "name": "Porez na imovinu od fizičkih lica",
+    "categoryCode": "714",
+    "categoryName": "Porezi na imovinu",
+    "section": "14. Porezi na imovinu"
+  },
+  {
+    "code": "714112",
+    "name": "Porez na imovinu od pravnih lica",
+    "categoryCode": "714",
+    "categoryName": "Porezi na imovinu",
+    "section": "14. Porezi na imovinu"
+  },
+  {
+    "code": "714113",
+    "name": "Porez na imovinu za motorna vozila",
+    "categoryCode": "714",
+    "categoryName": "Porezi na imovinu",
+    "section": "14. Porezi na imovinu"
+  },
+  {
+    "code": "714121",
+    "name": "Porez na nasljeđe i poklone",
+    "categoryCode": "714",
+    "categoryName": "Porezi na imovinu",
+    "section": "14. Porezi na imovinu"
+  },
+  {
+    "code": "714131",
+    "name": "Porez na promet nepokretnosti - fizičkih lica",
+    "categoryCode": "714",
+    "categoryName": "Porezi na imovinu",
+    "section": "14. Porezi na imovinu"
+  },
+  {
+    "code": "714132",
+    "name": "Porez na promet nepokretnosti pravnih lica",
+    "categoryCode": "714",
+    "categoryName": "Porezi na imovinu",
+    "section": "14. Porezi na imovinu"
+  },
+  {
+    "code": "714191",
+    "name": "Ostali porezi na imovinu",
+    "categoryCode": "714",
+    "categoryName": "Porezi na imovinu",
+    "section": "14. Porezi na imovinu"
+  },
+  {
+    "code": "715131",
+    "name": "Porez na promet proizvoda za koje se porez na promet proizvoda plaća po općoj stopi od 20% koja je propisana članom 11. Zakona o porezu na promet proizvoda i usluga, osim proizvoda, koji prema odre…",
+    "categoryCode": "715",
+    "categoryName": "Domaći porezi na dobra i usluge (zaostali)",
+    "section": "8. Zaostale obaveze po osnovu poreza na promet ostalih proizvoda i usluga"
+  },
+  {
+    "code": "715132",
+    "name": "Porez na promet proizvoda iz člana 12. Zakona o porezu na promet proizvoda i usluga za koje se porez na promet proizvoda plaća po nižoj stopi, osim proizvoda iz člana 12. stav 1. tač. 1., 2., 4., 1…",
+    "categoryCode": "715",
+    "categoryName": "Domaći porezi na dobra i usluge (zaostali)",
+    "section": "8. Zaostale obaveze po osnovu poreza na promet ostalih proizvoda i usluga"
+  },
+  {
+    "code": "715136",
+    "name": "Porez na promet proizvoda za koje obveznik ne posjeduje vjerodostojnu dokumentaciju",
+    "categoryCode": "715",
+    "categoryName": "Domaći porezi na dobra i usluge (zaostali)",
+    "section": "8. Zaostale obaveze po osnovu poreza na promet ostalih proizvoda i usluga"
+  },
+  {
+    "code": "715137",
+    "name": "Kaznena kamata",
+    "categoryCode": "715",
+    "categoryName": "Domaći porezi na dobra i usluge (zaostali)",
+    "section": "8. Zaostale obaveze po osnovu poreza na promet ostalih proizvoda i usluga"
+  },
+  {
+    "code": "715141",
+    "name": "Porez na promet usluga, osim usluga u građevinarstvu",
+    "categoryCode": "715",
+    "categoryName": "Domaći porezi na dobra i usluge (zaostali)",
+    "section": "8. Zaostale obaveze po osnovu poreza na promet ostalih proizvoda i usluga"
+  },
+  {
+    "code": "715211",
+    "name": "Porez na dobitke od igara na sreću",
+    "categoryCode": "715",
+    "categoryName": "Domaći porezi na dobra i usluge (zaostali)",
+    "section": "12. Zaostale uplate poreza"
+  },
+  {
+    "code": "715912",
+    "name": "Porez na promet naftnih derivata po nižoj stopi iz člana 12. stav 1. tač. 13. i 16. Zakona o porezu na promet proizvoda i usluga",
+    "categoryCode": "715",
+    "categoryName": "Domaći porezi na dobra i usluge (zaostali)",
+    "section": "8. Zaostale obaveze po osnovu poreza na promet ostalih proizvoda i usluga"
+  },
+  {
+    "code": "715913",
+    "name": "Porez na promet energenata po nižoj stopi iz člana 12. stav 1. tač",
+    "categoryCode": "715",
+    "categoryName": "Domaći porezi na dobra i usluge (zaostali)",
+    "section": "8. Zaostale obaveze po osnovu poreza na promet ostalih proizvoda i usluga"
+  },
+  {
+    "code": "715914",
+    "name": "Porez na promet osnovnih proizvoda poljoprivrede, ribarstva i proizvoda koji služe za ljudsku ishranu iz člana 12. stav 1. tač. 1. i",
+    "categoryCode": "715",
+    "categoryName": "Domaći porezi na dobra i usluge (zaostali)",
+    "section": "8. Zaostale obaveze po osnovu poreza na promet ostalih proizvoda i usluga"
+  },
+  {
+    "code": "715915",
+    "name": "Porez na promet osnovnih proizvoda za građevinarstvo iz člana 12. stav 1. tačka 12. Zakona o porezu na promet proizvoda i usluga i porez na promet usluga u građevinarstvu koji se obračunava na osno…",
+    "categoryCode": "715",
+    "categoryName": "Domaći porezi na dobra i usluge (zaostali)",
+    "section": "8. Zaostale obaveze po osnovu poreza na promet ostalih proizvoda i usluga"
+  },
+  {
+    "code": "716111",
+    "name": "Prihodi od poreza na dohodak fizičkih lica od nesamostalne djelatnosti",
+    "categoryCode": "716",
+    "categoryName": "Porez na dohodak",
+    "section": "11. Porez na dohodak"
+  },
+  {
+    "code": "716112",
+    "name": "Prihodi od poreza na dohodak fizičkih lica od samostalne djelatnosti",
+    "categoryCode": "716",
+    "categoryName": "Porez na dohodak",
+    "section": "11. Porez na dohodak"
+  },
+  {
+    "code": "716113",
+    "name": "Prihodi od poreza na dohodak fizičkih lica od imovine i imovinskih prava",
+    "categoryCode": "716",
+    "categoryName": "Porez na dohodak",
+    "section": "11. Porez na dohodak"
+  },
+  {
+    "code": "716114",
+    "name": "Prihodi od poreza na dohodak fizičkih lica od ulaganja kapitala",
+    "categoryCode": "716",
+    "categoryName": "Porez na dohodak",
+    "section": "11. Porez na dohodak"
+  },
+  {
+    "code": "716115",
+    "name": "Prihodi od poreza na dohodak fizičkih lica na dobitke od nagradnih igara i igara na sreću",
+    "categoryCode": "716",
+    "categoryName": "Porez na dohodak",
+    "section": "11. Porez na dohodak"
+  },
+  {
+    "code": "716116",
+    "name": "Prihodi od poreza na dohodak od drugih samostalnih djelatnosti iz Člana 12. stav (4) Zakona o porezu na dohodak",
+    "categoryCode": "716",
+    "categoryName": "Porez na dohodak",
+    "section": "11. Porez na dohodak"
+  },
+  {
+    "code": "716117",
+    "name": "Prihodi od poreza na dohodak po konačnom obračunu",
+    "categoryCode": "716",
+    "categoryName": "Porez na dohodak",
+    "section": "11. Porez na dohodak"
+  },
+  {
+    "code": "717111",
+    "name": "Prihodi od indirektnih poreza koji pripadaju Federaciji",
+    "categoryCode": "717",
+    "categoryName": "Prihodi od indirektnih poreza",
+    "section": "7. Prihodi od indirektnih poreza"
+  },
+  {
+    "code": "717114",
+    "name": "Prihodi od indirektnih poreza na ime finansiranja autocesta u Federaciji",
+    "categoryCode": "717",
+    "categoryName": "Prihodi od indirektnih poreza",
+    "section": "7. Prihodi od indirektnih poreza"
+  },
+  {
+    "code": "717121",
+    "name": "Prihodi od indirektnih poreza koji pripadaju kantonima",
+    "categoryCode": "717",
+    "categoryName": "Prihodi od indirektnih poreza",
+    "section": "7. Prihodi od indirektnih poreza"
+  },
+  {
+    "code": "717131",
+    "name": "Prihodi od indirektnih poreza koji pripadaju direkcijama cesta",
+    "categoryCode": "717",
+    "categoryName": "Prihodi od indirektnih poreza",
+    "section": "7. Prihodi od indirektnih poreza"
+  },
+  {
+    "code": "717141",
+    "name": "Prihodi od indirektnih poreza koji pripadaju jedinicama lokalne samouprave",
+    "categoryCode": "717",
+    "categoryName": "Prihodi od indirektnih poreza",
+    "section": "7. Prihodi od indirektnih poreza"
+  },
+  {
+    "code": "717151",
+    "name": "Prihodi od indirektnih poreza koji pripadaju Gradu Sarajevu",
+    "categoryCode": "717",
+    "categoryName": "Prihodi od indirektnih poreza",
+    "section": "7. Prihodi od indirektnih poreza"
+  },
+  {
+    "code": "719111",
+    "name": "Ostali porezi",
+    "categoryCode": "719",
+    "categoryName": "Ostali porezi",
+    "section": "15. Ostali porezi"
+  },
+  {
+    "code": "719114",
+    "name": "Poseban porez na plaću za zaštitu od prirodnih i drugih nesreća",
+    "categoryCode": "719",
+    "categoryName": "Ostali porezi",
+    "section": "13. Obaveze po osnovu posebnog poreza za zaštitu od prirodnih i drugih nesreća"
+  },
+  {
+    "code": "719115",
+    "name": "Poseban porez za zaštitu od prirodnih i drugih nesreća po osnovu ugovora o djelu i privremenih i povremenih poslova",
+    "categoryCode": "719",
+    "categoryName": "Ostali porezi",
+    "section": "13. Obaveze po osnovu posebnog poreza za zaštitu od prirodnih i drugih nesreća"
+  },
+  {
+    "code": "719116",
+    "name": "Porez na potrošnju u ugostiteljstvu od pravnih lica",
+    "categoryCode": "719",
+    "categoryName": "Ostali porezi",
+    "section": "15. Ostali porezi"
+  },
+  {
+    "code": "719117",
+    "name": "Porez na potrošnju u ugostiteljstvu od fizičkih lica",
+    "categoryCode": "719",
+    "categoryName": "Ostali porezi",
+    "section": "15. Ostali porezi"
+  },
+  {
+    "code": "721111",
+    "name": "Prihodi od dividendi i udjela u profitu u državnim preduzećima i finansijskim institucijama",
+    "categoryCode": "721",
+    "categoryName": "Prihodi od preduzetničkih aktivnosti i imovine",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "721112",
+    "name": "Prihodi od davanja prava na eksploataciju prirodnih resursa",
+    "categoryCode": "721",
+    "categoryName": "Prihodi od preduzetničkih aktivnosti i imovine",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "721113",
+    "name": "Prihod od finansijske i nefinansijske imovine – od Civilne avijacije",
+    "categoryCode": "721",
+    "categoryName": "Prihodi od preduzetničkih aktivnosti i imovine",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "721114",
+    "name": "Prihodi od davanja prava patenata i autorskih prava",
+    "categoryCode": "721",
+    "categoryName": "Prihodi od preduzetničkih aktivnosti i imovine",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "721119",
+    "name": "Ostali prihodi od finansijske i nematerijalne imovine",
+    "categoryCode": "721",
+    "categoryName": "Prihodi od preduzetničkih aktivnosti i imovine",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "721121",
+    "name": "Prihodi od iznajmljivanja zemljišta",
+    "categoryCode": "721",
+    "categoryName": "Prihodi od preduzetničkih aktivnosti i imovine",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "721122",
+    "name": "Prihodi od iznajmljivanja poslovnih prostora i ostale materijalne imovine",
+    "categoryCode": "721",
+    "categoryName": "Prihodi od preduzetničkih aktivnosti i imovine",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "721123",
+    "name": "Prihodi od iznajmljivanja vozila",
+    "categoryCode": "721",
+    "categoryName": "Prihodi od preduzetničkih aktivnosti i imovine",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "721124",
+    "name": "Prihodi od iznajmljivanja opreme",
+    "categoryCode": "721",
+    "categoryName": "Prihodi od preduzetničkih aktivnosti i imovine",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "721129",
+    "name": "Prihodi od iznajmljivanja ostale materijalne imovine",
+    "categoryCode": "721",
+    "categoryName": "Prihodi od preduzetničkih aktivnosti i imovine",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "721192",
+    "name": "Povrat anuiteta od krajnjih korisnika za otplatu kredita",
+    "categoryCode": "721",
+    "categoryName": "Prihodi od preduzetničkih aktivnosti i imovine",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "721211",
+    "name": "Prihodi od kamate za depozite u banci",
+    "categoryCode": "721",
+    "categoryName": "Prihodi od preduzetničkih aktivnosti i imovine",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "721214",
+    "name": "Prihodi od GSM licence",
+    "categoryCode": "721",
+    "categoryName": "Prihodi od preduzetničkih aktivnosti i imovine",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "721215",
+    "name": "Prihod po osnovu kamata na investirana javna sredstva",
+    "categoryCode": "721",
+    "categoryName": "Prihodi od preduzetničkih aktivnosti i imovine",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "721219",
+    "name": "Ostali prihodi od finansijske i nematerijalne imovine",
+    "categoryCode": "721",
+    "categoryName": "Prihodi od preduzetničkih aktivnosti i imovine",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "721225",
+    "name": "Prihodi od zakupa javnog vodnog dobra na površinskim vodama I kategorije",
+    "categoryCode": "721",
+    "categoryName": "Prihodi od preduzetničkih aktivnosti i imovine",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "721226",
+    "name": "Prihodi od zakupa javnog vodnog dobra na površinskim vodama II kategorije Prihodi od vodnih naknada, utvrđen i Zakonom o vodama (",
+    "categoryCode": "721",
+    "categoryName": "Prihodi od preduzetničkih aktivnosti i imovine",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "721227",
+    "name": "Prihodi od zakupa korištenja sportsko-privrednih lovišta 19.1.3.a",
+    "categoryCode": "721",
+    "categoryName": "Prihodi od preduzetničkih aktivnosti i imovine",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "721231",
+    "name": "Prihodi ostvareni od prometa Lutrije BiH",
+    "categoryCode": "721",
+    "categoryName": "Prihodi od preduzetničkih aktivnosti i imovine",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "721232",
+    "name": "Prihodi ostvareni prodajom stanova",
+    "categoryCode": "721",
+    "categoryName": "Prihodi od preduzetničkih aktivnosti i imovine",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "721233",
+    "name": "Prihodi od prodaje stanova koji su u vlasništvu nadležnih nivoa vlasti",
+    "categoryCode": "721",
+    "categoryName": "Prihodi od preduzetničkih aktivnosti i imovine",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "721239",
+    "name": "Ostali prihodi od imovine",
+    "categoryCode": "721",
+    "categoryName": "Prihodi od preduzetničkih aktivnosti i imovine",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "721311",
+    "name": "Kamate primljene od pozajmica Državi",
+    "categoryCode": "721",
+    "categoryName": "Prihodi od preduzetničkih aktivnosti i imovine",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "721312",
+    "name": "Kamate primljene od pozajmica Federaciji",
+    "categoryCode": "721",
+    "categoryName": "Prihodi od preduzetničkih aktivnosti i imovine",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "721313",
+    "name": "Kamate primljene od pozajmica Republici Srpskoj",
+    "categoryCode": "721",
+    "categoryName": "Prihodi od preduzetničkih aktivnosti i imovine",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "721314",
+    "name": "Kamate primljene od pozajmica kantonima",
+    "categoryCode": "721",
+    "categoryName": "Prihodi od preduzetničkih aktivnosti i imovine",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "721315",
+    "name": "Kamate primljene od pozajmica gradovima",
+    "categoryCode": "721",
+    "categoryName": "Prihodi od preduzetničkih aktivnosti i imovine",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "721316",
+    "name": "Kamate primljene od pozajmica općinama",
+    "categoryCode": "721",
+    "categoryName": "Prihodi od preduzetničkih aktivnosti i imovine",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "721317",
+    "name": "Kamate primljene od pozajmica mjesnim zajednicama",
+    "categoryCode": "721",
+    "categoryName": "Prihodi od preduzetničkih aktivnosti i imovine",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "721321",
+    "name": "Kamate primljene od pozajmica pojedincima",
+    "categoryCode": "721",
+    "categoryName": "Prihodi od preduzetničkih aktivnosti i imovine",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "721322",
+    "name": "Kamate primljene od pozajmica neprofitnim organizacijama",
+    "categoryCode": "721",
+    "categoryName": "Prihodi od preduzetničkih aktivnosti i imovine",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "721331",
+    "name": "Kamate primljene od pozajmica javnim preduzećima",
+    "categoryCode": "721",
+    "categoryName": "Prihodi od preduzetničkih aktivnosti i imovine",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "721511",
+    "name": "Prihodi od pozitivnih kursnih razlika",
+    "categoryCode": "721",
+    "categoryName": "Prihodi od preduzetničkih aktivnosti i imovine",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "721611",
+    "name": "Prihodi od privatizacije stanova",
+    "categoryCode": "721",
+    "categoryName": "Prihodi od preduzetničkih aktivnosti i imovine",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "721612",
+    "name": "Prihodi od privatizacije banaka",
+    "categoryCode": "721",
+    "categoryName": "Prihodi od preduzetničkih aktivnosti i imovine",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "721613",
+    "name": "Prihodi od privatizacije preduzeća",
+    "categoryCode": "721",
+    "categoryName": "Prihodi od preduzetničkih aktivnosti i imovine",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "721614",
+    "name": "Prihodi od privatizacije poslovnih prostora",
+    "categoryCode": "721",
+    "categoryName": "Prihodi od preduzetničkih aktivnosti i imovine",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "721615",
+    "name": "Prihodi od ostalih vidova privatizacije",
+    "categoryCode": "721",
+    "categoryName": "Prihodi od preduzetničkih aktivnosti i imovine",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "721711",
+    "name": "Prihodi po osnovu obračunate premije za izdatu garanciju",
+    "categoryCode": "721",
+    "categoryName": "Prihodi od preduzetničkih aktivnosti i imovine",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "721712",
+    "name": "Prihodi po osnovu obračunate provizije za izdatu garanciju",
+    "categoryCode": "721",
+    "categoryName": "Prihodi od preduzetničkih aktivnosti i imovine",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "722111",
+    "name": "Taksa za detašmane",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "16. Naknade i takse"
+  },
+  {
+    "code": "722112",
+    "name": "Federalne administrativne takse",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "16. Naknade i takse"
+  },
+  {
+    "code": "722113",
+    "name": "Putničke takse - naknade za unapređenje avio prometa u Federaciji BiH",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "16. Naknade i takse"
+  },
+  {
+    "code": "722114",
+    "name": "Federalna taksa za korištenje autocesta (cestarina)",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "16. Naknade i takse"
+  },
+  {
+    "code": "722115",
+    "name": "Posebna taksa za izmirenje duga za isporuku prirodnog gasa",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "16. Naknade i takse"
+  },
+  {
+    "code": "722116",
+    "name": "Taksa za uspostavu rezervi naftnih derivata",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "16. Naknade i takse"
+  },
+  {
+    "code": "722121",
+    "name": "Kantonalne administrativne takse",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "16. Naknade i takse"
+  },
+  {
+    "code": "722131",
+    "name": "Općinske administrativne takse",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "17. Općinske naknade i takse"
+  },
+  {
+    "code": "722132",
+    "name": "Takse za držanje pasa",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "17. Općinske naknade i takse"
+  },
+  {
+    "code": "722133",
+    "name": "Takse za ovjeravanje dokumenata",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "17. Općinske naknade i takse"
+  },
+  {
+    "code": "722134",
+    "name": "Takse za vjenčanja i druge civilne registracije",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "17. Općinske naknade i takse"
+  },
+  {
+    "code": "722135",
+    "name": "Druge općinske administrativne takse",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "17. Općinske naknade i takse"
+  },
+  {
+    "code": "722211",
+    "name": "Federalne sudske takse od pravnih lica",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "16. Naknade i takse"
+  },
+  {
+    "code": "722212",
+    "name": "Federalne sudske takse od fizičkih lica",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "16. Naknade i takse"
+  },
+  {
+    "code": "722221",
+    "name": "Kantonalne sudske takse",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "16. Naknade i takse"
+  },
+  {
+    "code": "722231",
+    "name": "Općinske sudske takse",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "17. Općinske naknade i takse"
+  },
+  {
+    "code": "722311",
+    "name": "Kantonalne komunalne takse",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "16. Naknade i takse"
+  },
+  {
+    "code": "722321",
+    "name": "Općinske komunalne takse",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "17. Općinske naknade i takse"
+  },
+  {
+    "code": "722322",
+    "name": "Općinske komunalne naknade za istaknutu firmu",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "17. Općinske naknade i takse"
+  },
+  {
+    "code": "722329",
+    "name": "Ostale općinske komunalne naknade i takse",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "17. Općinske naknade i takse"
+  },
+  {
+    "code": "722411",
+    "name": "Federalne takse i naknade za pokriće troškova kontrole kvaliteta poljoprivrednih proizvoda u vanjskom prometu",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "16. Naknade i takse"
+  },
+  {
+    "code": "722412",
+    "name": "Takse za pokrivanje troškova i utvrđivanje zdravstvene ispravnosti životnih namirnica i predmeta opće upotrebe koji se uvoze",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "16. Naknade i takse"
+  },
+  {
+    "code": "722414",
+    "name": "Naknade troškova branilaca po službenoj dužnosti",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "16. Naknade i takse"
+  },
+  {
+    "code": "722415",
+    "name": "Naknade ostalih troškova kaznenog postupka",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "16. Naknade i takse"
+  },
+  {
+    "code": "722416",
+    "name": "Naknada za tehnički pregled vozila koja pripada budžetu Federacije",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "16. Naknade i takse"
+  },
+  {
+    "code": "722417",
+    "name": "Naknada za korištenje cestovnog zemljišta i obavljanje pratećih djelatnosti uz autoceste i brze ceste u Federaciji BiH",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "16. Naknade i takse"
+  },
+  {
+    "code": "722418",
+    "name": "Naknada od prisilnog izvršenja putem drugog lica o trošku subjekta nadzora – FUZIP",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "16. Naknade i takse"
+  },
+  {
+    "code": "722419",
+    "name": "Federalna naknada za obavljene obavezne kontrole pošiljki mineralnih đubriva pri uvozu u Federaciju Bosne i Hercegovine",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "16. Naknade i takse"
+  },
+  {
+    "code": "722421",
+    "name": "Kantonalne naknade",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "16. Naknade i takse"
+  },
+  {
+    "code": "722422",
+    "name": "Naknada za korištenje poljoprivrednog zemljišta u nepoljoprivredne svrhe",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "16. Naknade i takse"
+  },
+  {
+    "code": "722424",
+    "name": "Naknada za tehnički pregled vozila koja pripada kantonima",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "16. Naknade i takse"
+  },
+  {
+    "code": "722425",
+    "name": "Prihodi po osnovu „Dječije nedjelje“",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "16. Naknade i takse"
+  },
+  {
+    "code": "722426",
+    "name": "Naknada za troškove smještaja korisnika u ustanove socijalne zaštite",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "16. Naknade i takse"
+  },
+  {
+    "code": "722429",
+    "name": "Ostale kantonalne naknade",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "16. Naknade i takse"
+  },
+  {
+    "code": "722431",
+    "name": "Naknada za dodijeljeno zemljište",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "17. Općinske naknade i takse"
+  },
+  {
+    "code": "722432",
+    "name": "Naknada za osiguranje od požara",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "17. Općinske naknade i takse"
+  },
+  {
+    "code": "722433",
+    "name": "Naknada za uređenje građevinskog zemljišta",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "17. Općinske naknade i takse"
+  },
+  {
+    "code": "722434",
+    "name": "Naknada za korištenje građevinskog zemljišta",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "17. Općinske naknade i takse"
+  },
+  {
+    "code": "722435",
+    "name": "Naknada po osnovu prirodnih pogodnosti – Renta",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "17. Općinske naknade i takse"
+  },
+  {
+    "code": "722436",
+    "name": "Naknada po osnovu tehničkog pregleda građevina",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "17. Općinske naknade i takse"
+  },
+  {
+    "code": "722437",
+    "name": "Naknada za postupak legalizacije javnih površina i građevina",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "17. Općinske naknade i takse"
+  },
+  {
+    "code": "722441",
+    "name": "Općinske komunalne naknade u skladu sa kantonalnim propisima za posebne namjene",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "17. Općinske naknade i takse"
+  },
+  {
+    "code": "722442",
+    "name": "Naknada za izgradnju i održavanje javnih skloništa",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "17. Općinske naknade i takse"
+  },
+  {
+    "code": "722443",
+    "name": "Naknada za korištenje hidroakumulacionog objekta izgrađenog na potopljenom području",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "17. Općinske naknade i takse"
+  },
+  {
+    "code": "722444",
+    "name": "Naknada za prihode ostvarene radom termoelektrana",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "17. Općinske naknade i takse"
+  },
+  {
+    "code": "722449",
+    "name": "Ostale općinske naknade",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "17. Općinske naknade i takse"
+  },
+  {
+    "code": "722451",
+    "name": "Naknada za opće korisne funkcije šuma",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722452",
+    "name": "Naknada za obavljanje stručnih poslova u privatnim šumama",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722453",
+    "name": "Naknada za izdvajanje iz šumsko- privrednog područja",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722454",
+    "name": "Naknada za korištenje državnih šuma",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722455",
+    "name": "Naknada u postupku promjene namjene šumskog zemljišta (krčenje šuma)",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722456",
+    "name": "Naknada po osnovu prava služnosti državnog šumskog zemljišta",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722457",
+    "name": "Naknada po osnovu zakupa državnog šumskog zemljišta",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722458",
+    "name": "Naknada za eksproprirano državno šumsko zemljište",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722459",
+    "name": "Ostali prihodi za korištenje, zaštitu i unapređenje šuma",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722461",
+    "name": "Naknada za zauzimanje javnih površina",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "17. Općinske naknade i takse"
+  },
+  {
+    "code": "722462",
+    "name": "Naknade i kazne za parkiranje",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "17. Općinske naknade i takse"
+  },
+  {
+    "code": "722463",
+    "name": "Naknade za zakup javnih površina od kafea, restorana, kioska i pijaca",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "17. Općinske naknade i takse"
+  },
+  {
+    "code": "722464",
+    "name": "Naknade za skladištenje građevinskih materijala, kampinga, pristaništa i javnih manifestacija",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "17. Općinske naknade i takse"
+  },
+  {
+    "code": "722465",
+    "name": "Naknade za reklame postavljene na javnim površinama",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "17. Općinske naknade i takse"
+  },
+  {
+    "code": "722471",
+    "name": "Naknada za opće korisne funkcije šuma utvrđen a kantonalnim propisima",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722472",
+    "name": "Naknada za obavljanje stručnih poslova u privatnim šumama utvrđen a kantonalnim propisima",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722473",
+    "name": "Naknada za izdvajanje iz šumsko- privrednog područja utvrđen a kantonalnim propisima",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722474",
+    "name": "Naknada za korištenje državnih šuma utvrđen a kantonalnim propisima",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722475",
+    "name": "Naknada u postupku promjene namjene šumskog zemljišta (krćenje šuma) utvrđen a kantonalnim propisima",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722476",
+    "name": "Naknada po osnovu prava služnosti državnog šumskog zemljišta utvrđen a kantonalnim propisima",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722477",
+    "name": "Naknada po osnovu zakupa državnog šumskog zemljišta utvrđen a kantonalnim propisima",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722479",
+    "name": "Ostali prihodi za korištenje, zaštitu i unapređenje šuma utvrđen i kantonalnim propisima",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722481",
+    "name": "Naknade za privređivanje igara na sreću koji pripadaju Budžetu Federacije Bosne i Hercegovine",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "16. Naknade i takse"
+  },
+  {
+    "code": "722511",
+    "name": "Federalna naknada za uvjerenje o veterinarskozdravstvenom stanju životinja iz uvoza",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "16. Naknade i takse"
+  },
+  {
+    "code": "722512",
+    "name": "Federalne naknade za obavezni zdravstveni pregled bilja u prometu preko teritorije Federacije",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "16. Naknade i takse"
+  },
+  {
+    "code": "722513",
+    "name": "Federalne naknade za izvršeni veterinarsko-sanitarni pregled u prometu preko teritorije Federacije",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "16. Naknade i takse"
+  },
+  {
+    "code": "722514",
+    "name": "Federalna naknada za izvršene veterinarsko –zdravstvene preglede i kontrolu u zemlji",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "16. Naknade i takse"
+  },
+  {
+    "code": "722515",
+    "name": "Naknada za korištenje podataka izmjere katastra",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "16. Naknade i takse"
+  },
+  {
+    "code": "722516",
+    "name": "Naknada za vršenje usluga iz oblasti premjera i katastra",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "16. Naknade i takse"
+  },
+  {
+    "code": "722517",
+    "name": "Naknada za troškove postupka distribucije bilateralnih transportnih dozvola dodijeljenih domaćim prijevoznicima",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "16. Naknade i takse"
+  },
+  {
+    "code": "722518",
+    "name": "Naknade po osnovu tehničkih pregleda građevina i po osnovu stručnih ispita",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "16. Naknade i takse"
+  },
+  {
+    "code": "722519",
+    "name": "Naknada za sigurnost plovidbe koju plaćaju inostrana plovila i naknada za odobrenje za plovidbu inostranih plovila u teritorijalnim vodama Bosne i Hercegovine",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722521",
+    "name": "Posebna vodna naknada za zaštitu voda za transportna sredstva koja za pogon koriste naftu ili naftne derivate",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722522",
+    "name": "Posebna vodna naknada za zaštitu voda (ispuštanje otpadnih voda, uzgoj ribe, upotrebu vještačkih đubriva i hemikalija za zaštitu bilja)",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722523",
+    "name": "Posebna vodna naknada za korištenje površinskih i podzemnih voda za javno vodosnabdijevanje",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722524",
+    "name": "Posebna vodna naknada za korištenje površinskih i podzemnih voda, za flaširanje vode i mineralne vode, za uzgoj ribe u ribnjacima, za navodnjavanje i druge namjene",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722525",
+    "name": "Posebna vodna naknada za korištenje površinskih i podzemnih voda za industrijske procese, uključuju ći i termoelektrane",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722526",
+    "name": "Posebna vodna naknada za korištenje vode za proizvodnju električne energije u hidroelektranama",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722527",
+    "name": "Posebna vodna naknada za važenje materijala iz vodotoka",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722528",
+    "name": "Posebna vodna naknada za zaštitu od poplava",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722529",
+    "name": "Opća vodna naknada",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722531",
+    "name": "Naknada za upotrebu cesta za vozila pravnih lica",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722532",
+    "name": "Naknada za upotrebu cesta za vozila građana",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722534",
+    "name": "Naknada za vanrednu upotrebu inostranih motornih i priključnih vozila",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722535",
+    "name": "Posebna naknada za službu",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722536",
+    "name": "Naknada za vanrednu upotrebu motornih i priključnih vozila u zemlji",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722537",
+    "name": "Naknade za ceste što se plaćaju za vanrednu upotrebu javnih cesta zbog opterećenja i učestalosti vozila (vanredni prijevoz)",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722538",
+    "name": "Naknada za korištenje cestovnog zemljišta",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722539",
+    "name": "Naknada za postavljanje reklamnih panoa",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722541",
+    "name": "Naknada za korištenje opće korisnih funkcija šuma",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722542",
+    "name": "Sredstva za proširenu biološku reprodukciju šuma",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722543",
+    "name": "Naknada za krćenje šuma",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722544",
+    "name": "Naknada za ograničenje korištenja šuma",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722545",
+    "name": "Sredstva za jednostavnu biološku reprodukciju šuma",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722546",
+    "name": "Sredstva na promet šuma",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722551",
+    "name": "Naknada zagađivaća okoliša pravnih lica",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722552",
+    "name": "Naknada zagađivaća okoliša fizičkih lica",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722553",
+    "name": "Naknada korisnika okoliša pravnih lica",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722554",
+    "name": "Naknada korisnika okoliša fizičkih lica",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722555",
+    "name": "Posebne naknade za okoliš koje plaćaju pravna lica pri svakoj registraciji motornih vozila",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722556",
+    "name": "Posebne naknade za okoliš koje plaćaju fizička lica pri svakoj registraciji motornih vozila",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722557",
+    "name": "Posebne naknade za okoliš",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722558",
+    "name": "Opće naknade za okoliš",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722561",
+    "name": "Prihodi Crvenog križa/Crvenog krsta od naknada organiziranja manifestacija Crvenog križa/krsta",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722562",
+    "name": "Naknada za korištenje objekata sigurnosti u unutrašnjim i teritorijalnim vodama Bosne i Hercegovine",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "16. Naknade i takse"
+  },
+  {
+    "code": "722563",
+    "name": "Naknada domaćih i inostranih brodova za prijevoz putnika preko morskog akvatorija Neum-Klek",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "16. Naknade i takse"
+  },
+  {
+    "code": "722564",
+    "name": "Naknade za privremeno obustavljanje održavanja polaska ili reda vožnje",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "16. Naknade i takse"
+  },
+  {
+    "code": "722565",
+    "name": "Ostale naknade za ceste po posebnim propisima",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722566",
+    "name": "Sredstva po osnovu nagradnih natječaja i nagradnih igara",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722567",
+    "name": "Članarine obrtničkim komorama",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722568",
+    "name": "Sredstva za podsticanje rehabilitacije i zapošljavanja lica sa invaliditetom koja plaćaju subjekti u državnim organima",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722569",
+    "name": "Sredstva za podsticanje rehabilitacije i zapošljavanja lica sa invaliditetom koja plaćaju privredni i drugi subjekti",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722571",
+    "name": "Naknada za pregled aerodroma radi dobijanja potvrde aerodromskog operatora",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722572",
+    "name": "Naknada za utvrđivanje osposobljenosti avionskog i drugog stručnog osoblja, izdavanja odobrenja za rad organizacijama za obuku i zdravstvenim ustanovama, koje obavljaju ljekarske preglede avionskog…",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722573",
+    "name": "Naknada za provođenje operacija avionima u komercijalne svrhe",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722574",
+    "name": "Naknade za izvršeni pregled aviona",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722581",
+    "name": "Posebna naknada za zaštitu od prirodnih i drugih nesreća gdje je osnovica zbirni iznos neto plaća",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722582",
+    "name": "Posebna naknada za zaštitu od prirodnih i drugih nesreća gdje je osnovica zbirni iznos neto primitaka po osnovu druge samostalne djelatnosti i povremenog samostalnog rada",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722583",
+    "name": "Naknada za vatrogasne jedinice iz premije osiguranja imovine od požara i prirodnih sila",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722584",
+    "name": "Naknada iz funkcionalne premije osiguranja motornih vozila za vatrogasne jedinice",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722585",
+    "name": "Naknada za zajedničke profesionalne vatrogasne jedinice iz premije osiguranja imovine od požara i prirodnih sila",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722586",
+    "name": "Naknada za zajedničke profesionalne vatrogasne jedinice iz funkcionalne premije osiguranja motornih vozila Posebne naknade za zaštitu od prirodnih i drugih nesreća uplaćuju se na račun javnih priho…",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722591",
+    "name": "Naknada za polaganje stručnih ispita",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "16. Naknade i takse"
+  },
+  {
+    "code": "722592",
+    "name": "Članarine turističkih zajednica",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722593",
+    "name": "Boravišna taksa",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "18. Posebne naknade"
+  },
+  {
+    "code": "722594",
+    "name": "Naknade za obrasce koje izdaju kapetanije",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "16. Naknade i takse"
+  },
+  {
+    "code": "722595",
+    "name": "Naknade za baždarenje čamaca",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "16. Naknade i takse"
+  },
+  {
+    "code": "722596",
+    "name": "Naknade za pregled čamaca",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "16. Naknade i takse"
+  },
+  {
+    "code": "722597",
+    "name": "Federalna naknada od izdatih licenci, uvjerenja, certifikata i stručnih publikacija",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "16. Naknade i takse"
+  },
+  {
+    "code": "722599",
+    "name": "Mjesečna naknada za priređivanje igara na sreću klađenja (kladionice, automati, kasina, internet igre) i naknada za postavljanje uređaja za priređivanje klađenja",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "16. Naknade i takse"
+  },
+  {
+    "code": "722611",
+    "name": "Prihodi od pružanja usluga građanima",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "722612",
+    "name": "Prihodi od pružanja usluga pravnim licama",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "722613",
+    "name": "Prihodi od pružanja usluga drugima",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "722614",
+    "name": "Prihodi od naučno-istraživačkog rada",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "722621",
+    "name": "Prihodi od pružanja usluga drugim nivoima vlasti",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "722622",
+    "name": "Prihodi od pružanja usluga drugim nivoima vlasti – za pritvorena lica",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "722623",
+    "name": "Prihodi od pružanja usluga drugim nivoima vlasti – refundacija za štampanje matičnih knjiga i ostalih obrazaca",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "722631",
+    "name": "Vlastiti prihodi budžetskih korisnika",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "722632",
+    "name": "Prihodi od mjenica",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "722633",
+    "name": "Prihodi od prodaje taksenih maraka",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "722634",
+    "name": "Prihodi od prodaje mjeničnih blanketa",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "722711",
+    "name": "Povrat invalidnina iz ranijih godina",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "722712",
+    "name": "Povrat pogrešno isplaćenih plaća",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "722713",
+    "name": "Povrat duplo plaćenih obaveza",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "722714",
+    "name": "Povrat premija u primarnoj poljoprivrednoj proizvodnji",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "722715",
+    "name": "Povrati naknada troškova zaposlenih",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "722719",
+    "name": "Ostali povrati",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "722721",
+    "name": "Uplate za prekoraćenje troškova PTT usluga",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "722731",
+    "name": "Uplata anuiteta za date kredite pojedincima",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "722732",
+    "name": "Prihod od troškova naplate po osnovu pokretanja postupka prinudne naplate",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "722733",
+    "name": "Prihod od troškova zapljene u postupku prinudne naplate",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "722741",
+    "name": "Naplata premije osiguranja",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "722751",
+    "name": "Primljene namjenske donacije neplanirane u budžetu",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "722761",
+    "name": "Uplaćene refundacije bolovanja iz ranijih godina",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "722791",
+    "name": "Ostale neplanirane uplate",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "722792",
+    "name": "Prihodi od prekršenog garantnog otpusta (prihodi od garancija)",
+    "categoryCode": "722",
+    "categoryName": "Naknade, takse i prihodi od pružanja javnih usluga",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "723111",
+    "name": "Novčane kazne za prekršaje koje pripadaju Federaciji i troškovi prekršajnog postupka od fizičkih lica",
+    "categoryCode": "723",
+    "categoryName": "Novčane kazne (neporezne)",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "723112",
+    "name": "Novčane kazne za prekršaje koje pripadaju Federaciji i troškovi prekršajnog postupka od pravnih lica",
+    "categoryCode": "723",
+    "categoryName": "Novčane kazne (neporezne)",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "723113",
+    "name": "Novčane kazne za kaznena djela koje pripadaju Federaciji",
+    "categoryCode": "723",
+    "categoryName": "Novčane kazne (neporezne)",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "723114",
+    "name": "Novčane kazne za prekršaje koje izriču federalni organi uprave i troškovi postupka",
+    "categoryCode": "723",
+    "categoryName": "Novčane kazne (neporezne)",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "723115",
+    "name": "Novčane kazne za privredne prestupe koje pripadaju Federaciji i troškovi postupka",
+    "categoryCode": "723",
+    "categoryName": "Novčane kazne (neporezne)",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "723116",
+    "name": "Novčane kazne za saobraćajne prekršaje",
+    "categoryCode": "723",
+    "categoryName": "Novčane kazne (neporezne)",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "723117",
+    "name": "Novčane kazne za prekršaje koji su registrovani u registru novVanih kazni i troškovi prekršajnog postupka",
+    "categoryCode": "723",
+    "categoryName": "Novčane kazne (neporezne)",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "723118",
+    "name": "Prihodi od prodaje oduzete robe po postupku Porezne uprave",
+    "categoryCode": "723",
+    "categoryName": "Novčane kazne (neporezne)",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "723119",
+    "name": "Prihodi od prodaje oduzete robe po pravosnažnim rješenjima",
+    "categoryCode": "723",
+    "categoryName": "Novčane kazne (neporezne)",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "723121",
+    "name": "Novčane kazne po kantonalnim propisima",
+    "categoryCode": "723",
+    "categoryName": "Novčane kazne (neporezne)",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "723122",
+    "name": "Ostale kazne",
+    "categoryCode": "723",
+    "categoryName": "Novčane kazne (neporezne)",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "723123",
+    "name": "Novčane kazne za prekršaje koje su registrovane u registru novčanih kazni i troškovi prekršajnog postupka",
+    "categoryCode": "723",
+    "categoryName": "Novčane kazne (neporezne)",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "723129",
+    "name": "Ostali prihodi",
+    "categoryCode": "723",
+    "categoryName": "Novčane kazne (neporezne)",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "723131",
+    "name": "Novčane kazne po općinskim propisima",
+    "categoryCode": "723",
+    "categoryName": "Novčane kazne (neporezne)",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "723132",
+    "name": "Ostale kazne",
+    "categoryCode": "723",
+    "categoryName": "Novčane kazne (neporezne)",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "723133",
+    "name": "Novčane kazne za prekršaje koje su registrovane u registru novčanih kazni i troškovi prekršajnog postupka",
+    "categoryCode": "723",
+    "categoryName": "Novčane kazne (neporezne)",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "723139",
+    "name": "Ostali prihodi",
+    "categoryCode": "723",
+    "categoryName": "Novčane kazne (neporezne)",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "723141",
+    "name": "Novčane kazne koje su propisane u Članu 16. Zakona o sukobu interesa u organima vlasti u Federaciji Bosne i Hercegovine",
+    "categoryCode": "723",
+    "categoryName": "Novčane kazne (neporezne)",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "723142",
+    "name": "Prihodi od imovinske koristi pribavljeni krivičnim djelom, oduzeti u skladu sa Članom 115. KriviVnog zakona Federacije Bosne i Hercegovine",
+    "categoryCode": "723",
+    "categoryName": "Novčane kazne (neporezne)",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "731111",
+    "name": "Primljeni tekući transferi od inostranih vlada",
+    "categoryCode": "731",
+    "categoryName": "Tekuće transfere",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "731121",
+    "name": "Primljeni tekući transferi od međunarodnih organizacija",
+    "categoryCode": "731",
+    "categoryName": "Tekuće transfere",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "732111",
+    "name": "Primljeni tekući transferi od Države",
+    "categoryCode": "732",
+    "categoryName": "Kapitalne primljene transfere",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "732112",
+    "name": "Primljeni tekući transferi od Federacije",
+    "categoryCode": "732",
+    "categoryName": "Kapitalne primljene transfere",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "732113",
+    "name": "Primljeni tekući transferi od Republike Srpske",
+    "categoryCode": "732",
+    "categoryName": "Kapitalne primljene transfere",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "732114",
+    "name": "Primljeni tekući transferi od kantona",
+    "categoryCode": "732",
+    "categoryName": "Kapitalne primljene transfere",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "732115",
+    "name": "Primljeni tekući transferi od gradova",
+    "categoryCode": "732",
+    "categoryName": "Kapitalne primljene transfere",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "732116",
+    "name": "Primljeni tekući transferi od općina",
+    "categoryCode": "732",
+    "categoryName": "Kapitalne primljene transfere",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "732131",
+    "name": "Transfer od Federalnog Zavoda za zapošljavanje",
+    "categoryCode": "732",
+    "categoryName": "Kapitalne primljene transfere",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "732132",
+    "name": "Transfer od Federalnog Zavoda zdravstvenog osiguranja i reosiguranja",
+    "categoryCode": "732",
+    "categoryName": "Kapitalne primljene transfere",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "732141",
+    "name": "Primljeni tekući transferi od FBiH – Uredba",
+    "categoryCode": "732",
+    "categoryName": "Kapitalne primljene transfere",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "732142",
+    "name": "Primljeni tekući transferi od FBiH – Uredba",
+    "categoryCode": "732",
+    "categoryName": "Kapitalne primljene transfere",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "732143",
+    "name": "Primljeni tekući transferi od FBiH za demobilizirane branioce i Članove njihove porodice",
+    "categoryCode": "732",
+    "categoryName": "Kapitalne primljene transfere",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "732144",
+    "name": "Primljeni tekući transferi od FBiH za branitelje po Zakonu o pravima branilaca i Članova njihovih porodica",
+    "categoryCode": "732",
+    "categoryName": "Kapitalne primljene transfere",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "732145",
+    "name": "Primljeni tekući transferi od FBiH za pokriće dijela penzija po osnovu Člana 94. Zakona o penzijskom i invalidskom osiguranju",
+    "categoryCode": "732",
+    "categoryName": "Kapitalne primljene transfere",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "732146",
+    "name": "Primljeni tekući transferi od FBiH za penzije bivše JNA u skladu sa Članom 139. Zakona o penzijskom i invalidskom osiguranju",
+    "categoryCode": "732",
+    "categoryName": "Kapitalne primljene transfere",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "732147",
+    "name": "Primljeni tekući transferi od FBiH – Uredba 1",
+    "categoryCode": "732",
+    "categoryName": "Kapitalne primljene transfere",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "732148",
+    "name": "Primljeni tekući transferi od FBiH – Zakon o službi u vojsci FBiH",
+    "categoryCode": "732",
+    "categoryName": "Kapitalne primljene transfere",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "732149",
+    "name": "Primljeni tekući transferi od FBiH –",
+    "categoryCode": "732",
+    "categoryName": "Kapitalne primljene transfere",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "733111",
+    "name": "Donacije od fizičkih lica",
+    "categoryCode": "733",
+    "categoryName": "Grupa 733",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "733112",
+    "name": "Donacije od pravnih lica",
+    "categoryCode": "733",
+    "categoryName": "Grupa 733",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "733115",
+    "name": "Donacije od fizičkih i pravnih lica za poticaj za zapošljavanje",
+    "categoryCode": "733",
+    "categoryName": "Grupa 733",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "733116",
+    "name": "Donacije od domaćih fizičkih i pravnih lica za otklanjanje posljedica prirodne nesreće i obnovu područja zahvaćenih prirodnom nesrećom",
+    "categoryCode": "733",
+    "categoryName": "Grupa 733",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "733121",
+    "name": "Donacije od inostranih fizičkih lica",
+    "categoryCode": "733",
+    "categoryName": "Grupa 733",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "733122",
+    "name": "Donacije od inostranih pravnih lica",
+    "categoryCode": "733",
+    "categoryName": "Grupa 733",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "733125",
+    "name": "Donacije od inostranih fizičkih i pravnih lica za poticaj za zapošljavanje",
+    "categoryCode": "733",
+    "categoryName": "Grupa 733",
+    "section": "19. Ostali neporezni prihodi"
+  },
+  {
+    "code": "733126",
+    "name": "Donacije od inostranih fizičkih i pravnih lica za otklanjanje posljedica prirodne nesreće i obnovu područja zahvaćenih prirodnom nesrećom",
+    "categoryCode": "733",
+    "categoryName": "Grupa 733",
+    "section": "19. Ostali neporezni prihodi"
+  }
+]
