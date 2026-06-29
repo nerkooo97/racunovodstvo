@@ -1,8 +1,9 @@
 "use client";
 
-import { useTransition } from "react";
+import { useTransition, useState, useEffect } from "react";
 import { logout } from "@/app/actions/auth";
 import Link from "next/link";
+import { useTheme } from "next-themes";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -16,10 +17,19 @@ import {
   IconLogout,
   IconSwitchHorizontal,
   IconChevronDown,
+  IconSun,
+  IconMoon,
 } from "@tabler/icons-react";
 
 export function AppHeader({ userEmail }: { userEmail: string }) {
   const [isPending, startTransition] = useTransition();
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const initials = userEmail.slice(0, 2).toUpperCase();
 
   return (
@@ -32,6 +42,20 @@ export function AppHeader({ userEmail }: { userEmail: string }) {
       </Link>
 
       <div className="flex-1" />
+
+      <button
+        onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+        className="h-8 w-8 rounded-md flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-accent transition-colors mr-2 outline-none"
+        title="Promijeni temu"
+      >
+        {!mounted ? (
+          <div className="h-4.5 w-4.5" />
+        ) : theme === "dark" ? (
+          <IconSun className="size-4.5" />
+        ) : (
+          <IconMoon className="size-4.5" />
+        )}
+      </button>
 
       <DropdownMenu>
         <DropdownMenuTrigger asChild>

@@ -1,8 +1,9 @@
 "use client";
 
-import { useTransition } from "react";
+import { useTransition, useState, useEffect } from "react";
 import { logout } from "@/app/actions/auth";
 import Link from "next/link";
+import { useTheme } from "next-themes";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,10 +12,17 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { LogOut, User, Building2, ChevronDown } from "lucide-react";
+import { LogOut, User, Building2, ChevronDown, Sun, Moon } from "lucide-react";
 
 export default function Header({ userEmail }: { userEmail: string }) {
   const [isPending, startTransition] = useTransition();
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const initials = userEmail.slice(0, 2).toUpperCase();
 
   return (
@@ -30,6 +38,20 @@ export default function Header({ userEmail }: { userEmail: string }) {
       </Link>
 
       <div className="flex-1" />
+
+      <button
+        onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+        className="h-8 w-8 rounded-md flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-accent transition-colors mr-2 outline-none"
+        title="Promijeni temu"
+      >
+        {!mounted ? (
+          <div className="h-4 w-4" />
+        ) : theme === "dark" ? (
+          <Sun className="h-4 w-4" />
+        ) : (
+          <Moon className="h-4 w-4" />
+        )}
+      </button>
 
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
