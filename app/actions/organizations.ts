@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
+import { appCookieSecure } from "@/lib/supabase/cookie-options";
 
 const createOrgSchema = z.object({
   name: z.string().min(1, "Naziv je obavezan"),
@@ -12,11 +13,19 @@ const createOrgSchema = z.object({
 });
 
 export async function createOrganization(formData: FormData) {
+  console.log("createOrganization pozvan sa:", Object.fromEntries(formData.entries()));
   const supabase = await createClient();
   const {
     data: { user },
+    error: userError,
   } = await supabase.auth.getUser();
-  if (!user) redirect("/login");
+  
+  console.log("createOrganization - getUser rezultat:", { user: user?.id, userError });
+  
+  if (!user) {
+    console.log("createOrganization - Nema korisnika, redirect na /login");
+    redirect("/login");
+  }
 
   const parsed = createOrgSchema.safeParse({
     name: formData.get("name"),
@@ -24,17 +33,28 @@ export async function createOrganization(formData: FormData) {
   });
 
   if (!parsed.success) {
+    console.log("createOrganization - Validacija neuspješna:", parsed.error.issues);
     return { error: parsed.error.issues[0]?.message ?? "Nevažeći podaci." };
   }
 
+  console.log("createOrganization - Pokušavam insert u bazu za user:", user.id);
   const { error } = await supabase.from("organizations").insert({
     name: parsed.data.name,
     type: parsed.data.type,
     owner_id: user.id,
   });
 
-  if (error) return { error: "Greška pri kreiranju djelatnosti." };
+  if (error) {
+    console.error("createOrganization greška pri insertu:", error);
+    return {
+      error:
+        error.message.includes("relation") && error.message.includes("organizations")
+          ? "Tabela organizations ne postoji — pokrenite SQL migracije na Supabaseu."
+          : error.message || "Greška pri kreiranju djelatnosti.",
+    };
+  }
 
+  console.log("createOrganization - Insert uspješan! Revalidacija /dashboard i redirect.");
   revalidatePath("/dashboard");
   redirect("/dashboard");
 }
@@ -155,7 +175,7 @@ export async function setActiveOrg(orgId: string) {
   const cookieStore = await cookies();
   cookieStore.set("active_org_id", orgId, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
+    secure: appCookieSecure(),
     sameSite: "lax",
     path: "/",
     maxAge: 60 * 60 * 24 * 30,

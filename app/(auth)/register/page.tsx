@@ -22,7 +22,7 @@ export default function RegisterPage() {
     setError(null);
 
     const supabase = createClient();
-    const { error } = await supabase.auth.signUp({ email, password });
+    const { data, error } = await supabase.auth.signUp({ email, password });
 
     if (error) {
       setError(error.message);
@@ -30,7 +30,17 @@ export default function RegisterPage() {
       return;
     }
 
+    // Bez automatske potvrde emaila korisnik nema sesiju — ne preusmjeravaj na dashboard.
+    if (!data.session) {
+      setError(
+        "Račun je kreiran. Provjerite email za potvrdu prije prijave. Ako ne stigne mail, administrator mora uključiti ENABLE_EMAIL_AUTOCONFIRM=true na Supabaseu."
+      );
+      setLoading(false);
+      return;
+    }
+
     router.push("/dashboard");
+    return;
   };
 
   return (

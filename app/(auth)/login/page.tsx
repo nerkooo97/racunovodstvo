@@ -22,10 +22,27 @@ export default function LoginPage() {
     setError(null);
 
     const supabase = createClient();
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
 
     if (error) {
-      setError("Pogrešan email ili lozinka.");
+      const msg = error.message.toLowerCase();
+      if (msg.includes("email not confirmed") || msg.includes("not confirmed")) {
+        setError(
+          "Email nije potvrđen. Provjerite inbox ili kontaktirajte administratora da uključi automatsku potvrdu na Supabaseu."
+        );
+      } else if (error.status === 500) {
+        setError(
+          "Supabase auth greška (500). Provjerite da je email potvrđen i da Supabase servis radi ispravno."
+        );
+      } else {
+        setError(error.message || "Pogrešan email ili lozinka.");
+      }
+      setLoading(false);
+      return;
+    }
+
+    if (!data.session) {
+      setError("Prijava nije uspjela — sesija nije kreirana.");
       setLoading(false);
       return;
     }

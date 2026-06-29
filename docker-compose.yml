@@ -4,8 +4,6 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        # NEXT_PUBLIC_* se ugrađuju u JS bundle tokom build-a,
-        # pa moraju biti proslijeđeni kao build argumenti (ne samo runtime).
         NEXT_PUBLIC_SUPABASE_URL: ${NEXT_PUBLIC_SUPABASE_URL}
         NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: ${NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY}
     restart: unless-stopped
@@ -13,6 +11,10 @@ services:
       NODE_ENV: production
       NEXT_PUBLIC_SUPABASE_URL: ${NEXT_PUBLIC_SUPABASE_URL}
       NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: ${NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY}
+      # Na HTTP deployu (bez TLS) obavezno false — inače sesija ne stiže do server actions
+      COOKIE_SECURE: ${COOKIE_SECURE:-false}
+      # Opcionalno: https://tvoja-domena.ba (za automatski secure kad pređeš na HTTPS)
+      NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-}
     expose:
       - "3000"
     # Dokploy preko Traefik-a sam usmjerava domenu na port 3000 ovog servisa.
