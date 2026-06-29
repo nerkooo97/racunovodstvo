@@ -21,6 +21,14 @@ export interface ContractFillInput {
   annualLeaveUsage?: "full" | "remaining";
   handoverItems?: string;
   referencedContractNumber?: string;
+  office?: string;
+  regNumber?: string;
+  activityCode?: string;
+  activityName?: string;
+  changeType?: string;
+  changeDate?: string;
+  endDate?: string;
+  membersJson?: string;
 }
 
 export interface ContractOrgRow {

@@ -26,7 +26,7 @@ export default async function DashboardLayout({
 
   const { data: orgs, error: orgsError } = await supabase
     .from("organizations")
-    .select("id, name, type, tax_id, logo_url, city, canton, plan")
+    .select("id, name, type, tax_id, logo_url, address, city, canton, plan")
     .eq("owner_id", data.user.id)
     .order("created_at", { ascending: true });
 
@@ -55,6 +55,7 @@ export default async function DashboardLayout({
           type: o.type as "obrt" | "doo",
           tax_id: o.tax_id ?? null,
           logo_url: o.logo_url ?? null,
+          address: o.address ?? null,
           city: o.city ?? null,
           canton: o.canton ?? null,
           plan: o.plan ?? "free",

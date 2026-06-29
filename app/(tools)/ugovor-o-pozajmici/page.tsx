@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { formatKM } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -12,6 +12,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useOrganization } from "@/contexts/organization-context";
+import { Download, FileText } from "lucide-react";
 
 interface RepaymentRow {
   month: number;
@@ -54,9 +56,17 @@ function calcAnnuity(principal: number, annualRate: number, months: number): Rep
 }
 
 export default function UgovorOPozajmiciPage() {
-  const [submitted, setSubmitted] = useState(false);
-  const [schedule, setSchedule] = useState<RepaymentRow[]>([]);
+  // Active organization integration
+  let org: any = null;
+  try {
+    const ctx = useOrganization();
+    org = ctx.organization;
+  } catch (e) {
+    // Gracefully handle case where it's accessed outside the dashboard
+  }
+
   const [loanType, setLoanType] = useState<"kratkorocno" | "dugorocno">("kratkorocno");
+  const [firmRole, setFirmRole] = useState<"lender" | "borrower">("lender");
   const [fields, setFields] = useState({
     lender_name:    "",
     lender_address: "",
@@ -79,22 +89,96 @@ export default function UgovorOPozajmiciPage() {
     currency:       "BAM",
   });
 
+  useEffect(() => {
+    if (org) {
+      if (firmRole === "lender") {
+        setFields((prev) => ({
+          ...prev,
+          lender_name: org.name || "",
+          lender_address: org.address || org.city || "",
+          lender_jib: org.tax_id || "",
+          // Clear borrower if it matches org data
+          borrower_name: prev.borrower_name === org.name ? "" : prev.borrower_name,
+          borrower_address: prev.borrower_address === (org.address || org.city) ? "" : prev.borrower_address,
+          borrower_jib: prev.borrower_jib === org.tax_id ? "" : prev.borrower_jib,
+        }));
+      } else {
+        setFields((prev) => ({
+          ...prev,
+          borrower_name: org.name || "",
+          borrower_address: org.address || org.city || "",
+          borrower_jib: org.tax_id || "",
+          // Clear lender if it matches org data
+          lender_name: prev.lender_name === org.name ? "" : prev.lender_name,
+          lender_address: prev.lender_address === (org.address || org.city) ? "" : prev.lender_address,
+          lender_jib: prev.lender_jib === org.tax_id ? "" : prev.lender_jib,
+        }));
+      }
+    }
+  }, [org, firmRole]);
+
   function set(field: keyof typeof fields) {
     return (e: React.ChangeEvent<HTMLInputElement>) =>
       setFields((prev) => ({ ...prev, [field]: e.target.value }));
   }
 
-  function handleGenerate() {
-    const principal = parseFloat(fields.amount) || 0;
-    const rate      = parseFloat(fields.interest_rate) || 0;
-    const months    = parseInt(fields.term_months) || 12;
-    if (principal > 0) {
-      setSchedule(calcAnnuity(principal, rate, months));
-    }
-    setSubmitted(true);
+
+  function buildQuery(): string {
+    const params = new URLSearchParams({
+      lender_name: fields.lender_name,
+      lender_address: fields.lender_address,
+      lender_jib: fields.lender_jib,
+      borrower_name: fields.borrower_name,
+      borrower_address: fields.borrower_address,
+      borrower_jib: fields.borrower_jib,
+      amount: fields.amount,
+      currency: fields.currency,
+      interest_rate: fields.interest_rate,
+      term_months: fields.term_months,
+      start_date: fields.start_date,
+      purpose: fields.purpose,
+      bank_account: fields.bank_account,
+      bank_name: fields.bank_name,
+      note: fields.note,
+      court: fields.court,
+      copies: fields.copies,
+      place: fields.place,
+      sign_date: fields.sign_date,
+      _t: String(Date.now()),
+    });
+    return params.toString();
   }
 
-  const totalInterest = schedule.reduce((s, r) => s + r.interest, 0);
+  function validateForm() {
+    const principal = parseFloat(fields.amount) || 0;
+    if (!fields.amount || isNaN(principal) || principal <= 0) {
+      alert("Molimo unesite ispravan iznos pozajmice.");
+      return false;
+    }
+    if (!fields.lender_name.trim()) {
+      alert("Molimo unesite ime/naziv zajmodavca.");
+      return false;
+    }
+    if (!fields.borrower_name.trim()) {
+      alert("Molimo unesite ime/naziv zajmoprimca.");
+      return false;
+    }
+    return true;
+  }
+
+  function downloadPdf() {
+    if (!validateForm()) return;
+    const url = `/api/pdf?type=ugovor-o-pozajmici&${buildQuery()}`;
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `ugovor-o-pozajmici-${fields.borrower_name.trim().replace(/\s+/g, "-") || "dokument"}.pdf`;
+    a.click();
+  }
+
+  function openPdfPreview() {
+    if (!validateForm()) return;
+    window.open(`/api/pdf?type=ugovor-o-pozajmici&${buildQuery()}`, "_blank", "noopener,noreferrer");
+  }
 
   return (
     <div className="max-w-2xl">
@@ -119,21 +203,47 @@ export default function UgovorOPozajmiciPage() {
         ))}
       </div>
 
+      {org && (
+        <div className="flex flex-col gap-1.5 mb-6 border-b pb-4">
+          <Label className="text-xs text-muted-foreground">Uloga organizacije "{org.name}" u ugovoru:</Label>
+          <div className="flex flex-wrap gap-2">
+            <button
+              type="button"
+              onClick={() => setFirmRole("lender")}
+              className={`px-3 py-1.5 rounded-md border text-xs font-medium transition-colors ${
+                firmRole === "lender" ? "bg-primary text-primary-foreground" : "bg-background text-muted-foreground"
+              }`}
+            >
+              Firma daje pozajmicu (Zajmodavac)
+            </button>
+            <button
+              type="button"
+              onClick={() => setFirmRole("borrower")}
+              className={`px-3 py-1.5 rounded-md border text-xs font-medium transition-colors ${
+                firmRole === "borrower" ? "bg-primary text-primary-foreground" : "bg-background text-muted-foreground"
+              }`}
+            >
+              Firma prima pozajmicu (Zajmoprimac)
+            </button>
+          </div>
+        </div>
+      )}
+
       <div className="grid grid-cols-2 gap-4 mb-6">
         <div className="col-span-2">
           <h2 className="font-semibold text-sm mb-2">Zajmodavac</h2>
         </div>
         <div className="flex flex-col gap-1">
           <Label>Naziv / Ime i prezime</Label>
-          <Input value={fields.lender_name} onChange={set("lender_name")} />
+          <Input value={fields.lender_name} onChange={set("lender_name")} disabled={!!org && firmRole === "lender"} />
         </div>
         <div className="flex flex-col gap-1">
           <Label>Adresa</Label>
-          <Input value={fields.lender_address} onChange={set("lender_address")} />
+          <Input value={fields.lender_address} onChange={set("lender_address")} disabled={!!org && firmRole === "lender"} />
         </div>
         <div className="flex flex-col gap-1">
           <Label>LK / ID broj</Label>
-          <Input value={fields.lender_jib} onChange={set("lender_jib")} />
+          <Input value={fields.lender_jib} onChange={set("lender_jib")} disabled={!!org && firmRole === "lender"} />
         </div>
 
         <div className="col-span-2 pt-2">
@@ -141,15 +251,15 @@ export default function UgovorOPozajmiciPage() {
         </div>
         <div className="flex flex-col gap-1">
           <Label>Naziv / Ime i prezime</Label>
-          <Input value={fields.borrower_name} onChange={set("borrower_name")} />
+          <Input value={fields.borrower_name} onChange={set("borrower_name")} disabled={!!org && firmRole === "borrower"} />
         </div>
         <div className="flex flex-col gap-1">
           <Label>Adresa</Label>
-          <Input value={fields.borrower_address} onChange={set("borrower_address")} />
+          <Input value={fields.borrower_address} onChange={set("borrower_address")} disabled={!!org && firmRole === "borrower"} />
         </div>
         <div className="flex flex-col gap-1">
           <Label>LK / ID broj</Label>
-          <Input value={fields.borrower_jib} onChange={set("borrower_jib")} />
+          <Input value={fields.borrower_jib} onChange={set("borrower_jib")} disabled={!!org && firmRole === "borrower"} />
         </div>
 
         <div className="col-span-2 pt-2">
@@ -232,84 +342,25 @@ export default function UgovorOPozajmiciPage() {
         PU može primijeniti tržišnu kamatnu stopu.
       </div>
 
-      <Button onClick={handleGenerate} className="mb-6">Generiši ugovor i plan otplate</Button>
-
-      {submitted && (
-        <div className="space-y-6">
-          {/* Ugovor tekst */}
-          <div className="border rounded-md p-6 text-sm space-y-3 bg-white">
-            <div className="text-center">
-              <h2 className="font-bold text-base uppercase">UGOVOR O POZAJMICI</h2>
-            </div>
-            <p>
-              Zaključen između: <strong>{fields.lender_name}</strong>
-              {fields.lender_jib && `, JIB/JMBG: ${fields.lender_jib}`} (zajmodavac),
-            </p>
-            <p>
-              i <strong>{fields.borrower_name}</strong>
-              {fields.borrower_jib && `, JIB/JMBG: ${fields.borrower_jib}`} (zajmoprimac).
-            </p>
-            <p>
-              Zajmodavac daje zajmoprimcu pozajmicu u iznosu od{" "}
-              <strong>{formatKM(parseFloat(fields.amount) || 0)}</strong>
-              {parseFloat(fields.interest_rate) > 0
-                ? ` uz godišnju kamatnu stopu od ${fields.interest_rate}%`
-                : " bez naknade (beskamatna pozajmica)"}.
-            </p>
-            {fields.purpose && <p><strong>Namjena:</strong> {fields.purpose}</p>}
-            <p>
-              Rok otplate: <strong>{fields.term_months} rata</strong>, počev od {fields.start_date}.
-            </p>
-            {totalInterest > 0 && (
-              <p>Ukupna kamata: {formatKM(totalInterest)}</p>
-            )}
-            <div className="mt-6 grid grid-cols-2 gap-8 pt-6 border-t">
-              <div>
-                <p className="text-muted-foreground text-xs mb-8">Zajmodavac:</p>
-                <p className="border-t border-foreground/30 pt-1">{fields.lender_name}</p>
-              </div>
-              <div>
-                <p className="text-muted-foreground text-xs mb-8">Zajmoprimac:</p>
-                <p className="border-t border-foreground/30 pt-1">{fields.borrower_name}</p>
-              </div>
-            </div>
-            <p className="text-xs text-muted-foreground text-right">{fields.place}, {fields.sign_date}</p>
-          </div>
-
-          {/* Plan otplate */}
-          {schedule.length > 0 && (
-            <div>
-              <h2 className="font-semibold mb-2">Plan otplate</h2>
-              <table className="w-full text-sm border rounded-md overflow-hidden">
-                <thead className="bg-muted/50">
-                  <tr>
-                    <th className="px-3 py-2 text-left">Rata</th>
-                    <th className="px-3 py-2 text-right">Rata (KM)</th>
-                    <th className="px-3 py-2 text-right">Kamata (KM)</th>
-                    <th className="px-3 py-2 text-right">Glavnica (KM)</th>
-                    <th className="px-3 py-2 text-right">Ostatak (KM)</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {schedule.map((row, i) => (
-                    <tr key={row.month} className={i % 2 === 0 ? "bg-muted/20" : ""}>
-                      <td className="px-3 py-1.5">{row.month}.</td>
-                      <td className="px-3 py-1.5 text-right font-mono">{formatKM(row.payment)}</td>
-                      <td className="px-3 py-1.5 text-right font-mono">{formatKM(row.interest)}</td>
-                      <td className="px-3 py-1.5 text-right font-mono">{formatKM(row.principal)}</td>
-                      <td className="px-3 py-1.5 text-right font-mono">{formatKM(row.balance)}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
-
-          <div className="flex gap-2 print:hidden">
-            <Button variant="outline" onClick={() => window.print()}>Štampaj</Button>
-          </div>
-        </div>
-      )}
+      <div className="flex flex-wrap gap-2 pt-4">
+        <Button
+          type="button"
+          className="gap-1.5"
+          onClick={downloadPdf}
+        >
+          <Download className="h-4 w-4" />
+          Preuzmi PDF
+        </Button>
+        <Button
+          type="button"
+          variant="outline"
+          className="gap-1.5"
+          onClick={openPdfPreview}
+        >
+          <FileText className="h-4 w-4" />
+          Pregled / štampaj
+        </Button>
+      </div>
     </div>
   );
 }

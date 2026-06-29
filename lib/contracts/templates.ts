@@ -83,6 +83,12 @@ export const EMPLOYEE_CONTRACT_TEMPLATES: ContractTemplate[] = [
     category: "otkaz",
     kind: "pdf",
   },
+  {
+    id: "zo3",
+    label: "ZO-3 prijava / odjava osiguranja",
+    category: "ostalo",
+    kind: "pdf",
+  },
 ];
 
 export function getContractTemplate(id: string): ContractTemplate | undefined {

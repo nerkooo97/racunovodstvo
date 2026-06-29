@@ -75,6 +75,14 @@ export function parseContractFillInput(
           : undefined,
     handoverItems: get("handoverItems"),
     referencedContractNumber: get("referencedContractNumber"),
+    office: get("office"),
+    regNumber: get("regNumber"),
+    activityCode: get("activityCode"),
+    activityName: get("activityName"),
+    changeType: get("changeType"),
+    changeDate: get("changeDate"),
+    endDate: get("endDate"),
+    membersJson: get("membersJson"),
   };
 }
 

@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
+import { useOrganization } from "@/contexts/organization-context";
 import {
   calculateUodFromBruto,
   calculateUodFromNeto,
@@ -16,6 +17,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Button } from "@/components/ui/button";
+import { Download, FileText } from "lucide-react";
 
 const CANTONS = [
   { code: "01", name: "Unsko-sanski kanton" },
@@ -37,6 +40,15 @@ const EXPENSE_OPTIONS: { value: UodExpenseType; label: string }[] = [
 ];
 
 export default function UgovorODjeluPage() {
+  // Active organization integration
+  let org: any = null;
+  try {
+    const ctx = useOrganization();
+    org = ctx.organization;
+  } catch (e) {
+    // Gracefully handle case where it's accessed outside the dashboard
+  }
+
   const [direction,    setDirection]    = useState<"neto" | "bruto">("neto");
   const [expenseType,  setExpenseType]  = useState<UodExpenseType>("standard");
   const [amount,       setAmount]       = useState("");
@@ -56,6 +68,14 @@ export default function UgovorODjeluPage() {
   const [mjesto,        setMjesto]        = useState("");
   const [sud,           setSud]           = useState("");
   const [kanton,        setKanton]        = useState("09");
+
+  useEffect(() => {
+    if (org) {
+      setNaruciocNaziv(org.name || "");
+      setNaruciocAdresa(org.address || org.city || "");
+      setNaruciocJib(org.tax_id || "");
+    }
+  }, [org]);
 
   const val = parseFloat(amount.replace(",", "."));
   const isValid = !isNaN(val) && val > 0;
@@ -77,6 +97,55 @@ export default function UgovorODjeluPage() {
         { naziv: "Opća vodna naknada — Kanton",               sifra: "722582", iznos: result.water },
       ]
     : [];
+  function buildQuery(): string {
+    const params = new URLSearchParams({
+      naruciocNaziv,
+      naruciocAdresa,
+      naruciocJib,
+      izvrsName,
+      izvrsAdresa,
+      izvrsJmbg,
+      izvrsZiro,
+      opis,
+      datumZakl,
+      rokIzvrs,
+      brojUgovora,
+      mjesto,
+      sud,
+      kanton,
+      direction,
+      expenseType,
+      amount,
+      _t: String(Date.now()),
+    });
+    return params.toString();
+  }
+
+  function validateForm() {
+    if (!amount || isNaN(parseFloat(amount.replace(",", "."))) || parseFloat(amount.replace(",", ".")) <= 0) {
+      alert("Molimo unesite ispravan iznos naknade.");
+      return false;
+    }
+    if (!izvrsName.trim()) {
+      alert("Molimo unesite ime i prezime izvršioca posla.");
+      return false;
+    }
+    return true;
+  }
+
+  function downloadPdf() {
+    if (!validateForm()) return;
+    const url = `/api/pdf?type=ugovor-o-djelu&${buildQuery()}`;
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `ugovor-o-djelu-${izvrsName.trim().replace(/\s+/g, "-") || "dokument"}.pdf`;
+    a.click();
+  }
+
+  function openPdfPreview() {
+    if (!validateForm()) return;
+    window.open(`/api/pdf?type=ugovor-o-djelu&${buildQuery()}`, "_blank", "noopener,noreferrer");
+  }
 
   return (
     <div className="max-w-2xl space-y-6">
@@ -172,15 +241,15 @@ export default function UgovorODjeluPage() {
         <div className="grid grid-cols-2 gap-3">
           <div className="col-span-2 flex flex-col gap-1">
             <Label className="text-xs">Naziv / Ime i prezime</Label>
-            <Input value={naruciocNaziv} onChange={(e) => setNaruciocNaziv(e.target.value)} />
+            <Input value={naruciocNaziv} onChange={(e) => setNaruciocNaziv(e.target.value)} disabled={!!org} />
           </div>
           <div className="flex flex-col gap-1">
             <Label className="text-xs">Adresa</Label>
-            <Input value={naruciocAdresa} onChange={(e) => setNaruciocAdresa(e.target.value)} />
+            <Input value={naruciocAdresa} onChange={(e) => setNaruciocAdresa(e.target.value)} disabled={!!org} />
           </div>
           <div className="flex flex-col gap-1">
             <Label className="text-xs">JIB / ID broj</Label>
-            <Input value={naruciocJib} onChange={(e) => setNaruciocJib(e.target.value)} />
+            <Input value={naruciocJib} onChange={(e) => setNaruciocJib(e.target.value)} disabled={!!org} />
           </div>
         </div>
       </div>
@@ -279,14 +348,24 @@ export default function UgovorODjeluPage() {
         UoD mora biti ograničen vremenski i predmetno.
       </div>
 
-      <div className="flex gap-3">
-        <button
+      <div className="flex flex-wrap gap-2 pt-2">
+        <Button
           type="button"
-          className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium hover:bg-accent"
-          onClick={() => window.print()}
+          className="gap-1.5"
+          onClick={downloadPdf}
         >
-          Štampaj / PDF
-        </button>
+          <Download className="h-4 w-4" />
+          Preuzmi PDF
+        </Button>
+        <Button
+          type="button"
+          variant="outline"
+          className="gap-1.5"
+          onClick={openPdfPreview}
+        >
+          <FileText className="h-4 w-4" />
+          Pregled / štampaj
+        </Button>
       </div>
     </div>
   );

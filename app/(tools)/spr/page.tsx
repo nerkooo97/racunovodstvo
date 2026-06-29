@@ -13,6 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Download, FileText } from "lucide-react";
 
 const YEARS = Array.from({ length: 8 }, (_, i) => String(2019 + i));
 
@@ -84,6 +85,69 @@ export default function SprPage() {
         />
       </div>
     );
+  }
+
+  async function generatePdfAction(action: "download" | "preview") {
+    const payload = {
+      jmb,
+      fullName: name,
+      address,
+      city,
+      
+      jib,
+      year: selectedYear,
+      contactChanged,
+      businessName,
+      businessAddress,
+      activityCode,
+      activityName,
+
+      r11,
+      r12,
+      r13,
+      r14,
+      r15,
+
+      r17,
+      r18,
+      r19,
+      r20,
+      r21,
+      r22,
+      r23,
+
+      r27,
+    };
+
+    try {
+      const res = await fetch("/api/pdf/spr", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) {
+        const txt = await res.text();
+        throw new Error(txt);
+      }
+
+      const blob = await res.blob();
+      const fileUrl = URL.createObjectURL(blob);
+
+      if (action === "download") {
+        const a = document.createElement("a");
+        a.href = fileUrl;
+        a.download = `spr-1053-${selectedYear}.pdf`;
+        a.click();
+      } else {
+        window.open(fileUrl, "_blank", "noopener,noreferrer");
+      }
+    } catch (e: any) {
+      console.error(e);
+      alert(`Greška prilikom generisanja PDF-a: ${e.message}`);
+    }
   }
 
   return (
@@ -241,15 +305,27 @@ export default function SprPage() {
           </div>
         </section>
 
-        <div className="flex gap-3">
+        <div className="flex gap-2 flex-wrap pt-2">
           <Button type="button" onClick={() => setSubmitted(true)}>
             Prikaži pregled
           </Button>
-          {submitted && (
-            <Button type="button" variant="outline" onClick={() => window.print()}>
-              Štampaj / PDF
-            </Button>
-          )}
+          <Button
+            type="button"
+            className="gap-1.5"
+            onClick={() => generatePdfAction("download")}
+          >
+            <Download className="h-4 w-4" />
+            Preuzmi PDF
+          </Button>
+          <Button
+            type="button"
+            variant="outline"
+            className="gap-1.5"
+            onClick={() => generatePdfAction("preview")}
+          >
+            <FileText className="h-4 w-4" />
+            Pregled / štampaj
+          </Button>
         </div>
 
         {submitted && (

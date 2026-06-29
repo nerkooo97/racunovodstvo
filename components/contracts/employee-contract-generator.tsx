@@ -82,6 +82,16 @@ export default function EmployeeContractGenerator({
   );
   const [loading, setLoading] = useState(false);
 
+  // ZO-3 states
+  const [office, setOffice] = useState("");
+  const [regNumber, setRegNumber] = useState("");
+  const [activityCode, setActivityCode] = useState("");
+  const [activityName, setActivityName] = useState("");
+  const [changeType, setChangeType] = useState("01");
+  const [changeDate, setChangeDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [familyMembers, setFamilyMembers] = useState<Array<{ id: number; jmbg: string; fullName: string; relationship: string }>>([]);
+
   const selected = allTemplates.find((t) => t.id === templateId);
   const showUgovorFields = isUgovorTemplate(templateId);
   const showPeriodFields = isPeriodTemplate(templateId);
@@ -112,6 +122,14 @@ export default function EmployeeContractGenerator({
       annualLeaveUsage,
       handoverItems: handoverItems || undefined,
       referencedContractNumber: referencedContractNumber || undefined,
+      office: office || undefined,
+      regNumber: regNumber || undefined,
+      activityCode: activityCode || undefined,
+      activityName: activityName || undefined,
+      changeType: changeType || undefined,
+      changeDate: changeDate || undefined,
+      endDate: endDate || undefined,
+      membersJson: familyMembers.length > 0 ? JSON.stringify(familyMembers.map(m => ({ jmbg: m.jmbg, fullName: m.fullName, relationship: m.relationship }))) : undefined,
     };
   }
 
@@ -158,6 +176,18 @@ export default function EmployeeContractGenerator({
     if (handoverItems) params.set("handoverItems", handoverItems);
     if (referencedContractNumber) {
       params.set("referencedContractNumber", referencedContractNumber);
+    }
+    if (templateId === "zo3") {
+      if (office) params.set("office", office);
+      if (regNumber) params.set("regNumber", regNumber);
+      if (activityCode) params.set("activityCode", activityCode);
+      if (activityName) params.set("activityName", activityName);
+      if (changeType) params.set("changeType", changeType);
+      if (changeDate) params.set("changeDate", changeDate);
+      if (endDate) params.set("endDate", endDate);
+      if (familyMembers.length > 0) {
+        params.set("membersJson", JSON.stringify(familyMembers.map(m => ({ jmbg: m.jmbg, fullName: m.fullName, relationship: m.relationship }))));
+      }
     }
     if (inline) params.set("inline", "1");
     return params.toString();
@@ -352,7 +382,7 @@ export default function EmployeeContractGenerator({
           </>
         ) : null}
 
-        {!showUgovorFields && !showSporazumniFields ? (
+        {!showUgovorFields && !showSporazumniFields && templateId !== "zo3" ? (
           <div className="space-y-1 sm:col-span-2">
             <Label className="text-xs text-muted-foreground">Obrazloženje</Label>
             <Textarea
@@ -498,6 +528,154 @@ export default function EmployeeContractGenerator({
                 onChange={(e) => setSeverancePay(e.target.value)}
                 placeholder="npr. 1.500,00 KM"
               />
+            </div>
+          </>
+        ) : null}
+
+        {templateId === "zo3" ? (
+          <>
+            <div className="space-y-1">
+              <Label className="text-xs text-muted-foreground">Poslovnica / Područni ured</Label>
+              <Input
+                className="h-9 text-sm"
+                value={office}
+                onChange={(e) => setOffice(e.target.value)}
+                placeholder="npr. Novo Sarajevo"
+              />
+            </div>
+            <div className="space-y-1">
+              <Label className="text-xs text-muted-foreground">Registarski broj obveznika</Label>
+              <Input
+                className="h-9 text-sm"
+                value={regNumber}
+                onChange={(e) => setRegNumber(e.target.value)}
+              />
+            </div>
+            <div className="space-y-1">
+              <Label className="text-xs text-muted-foreground">Šifra djelatnosti poslodavca</Label>
+              <Input
+                className="h-9 text-sm"
+                value={activityCode}
+                onChange={(e) => setActivityCode(e.target.value)}
+              />
+            </div>
+            <div className="space-y-1">
+              <Label className="text-xs text-muted-foreground">Naziv djelatnosti poslodavca</Label>
+              <Input
+                className="h-9 text-sm"
+                value={activityName}
+                onChange={(e) => setActivityName(e.target.value)}
+              />
+            </div>
+            <div className="space-y-1">
+              <Label className="text-xs text-muted-foreground">Vrsta promjene</Label>
+              <Select value={changeType} onValueChange={setChangeType}>
+                <SelectTrigger className="h-9 text-sm">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="01">01 — Prijava</SelectItem>
+                  <SelectItem value="02">02 — Promjena</SelectItem>
+                  <SelectItem value="03">03 — Odjava</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="space-y-1">
+              <Label className="text-xs text-muted-foreground">Datum promjene</Label>
+              <Input
+                className="h-9 text-sm"
+                type="date"
+                value={changeDate}
+                onChange={(e) => setChangeDate(e.target.value)}
+              />
+            </div>
+            {changeType === "03" ? (
+              <div className="space-y-1">
+                <Label className="text-xs text-muted-foreground">Datum prestanka rada</Label>
+                <Input
+                  className="h-9 text-sm"
+                  type="date"
+                  value={endDate}
+                  onChange={(e) => setEndDate(e.target.value)}
+                />
+              </div>
+            ) : null}
+
+            {/* Članovi porodice */}
+            <div className="col-span-2 pt-2 border-t">
+              <div className="flex items-center justify-between mb-3">
+                <Label className="text-sm font-semibold">Članovi porodice (opciono, max 10)</Label>
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  className="h-7 text-xs"
+                  onClick={() => {
+                    if (familyMembers.length < 10) {
+                      setFamilyMembers(prev => [...prev, { id: Date.now(), jmbg: "", fullName: "", relationship: "" }]);
+                    }
+                  }}
+                >
+                  + Dodaj člana
+                </Button>
+              </div>
+              
+              {familyMembers.length === 0 ? (
+                <p className="text-xs text-muted-foreground italic mb-2">Nema dodanih članova porodice.</p>
+              ) : (
+                <div className="space-y-3">
+                  {familyMembers.map((m) => (
+                    <div key={m.id} className="flex gap-2 items-end border p-2 rounded-md bg-muted/20">
+                      <div className="flex-1 space-y-1">
+                        <Label className="text-[10px] text-muted-foreground">Ime i prezime</Label>
+                        <Input
+                          className="h-7 text-xs"
+                          value={m.fullName}
+                          onChange={(e) => {
+                            const val = e.target.value;
+                            setFamilyMembers(prev => prev.map(x => x.id === m.id ? { ...x, fullName: val } : x));
+                          }}
+                        />
+                      </div>
+                      <div className="flex-1 space-y-1">
+                        <Label className="text-[10px] text-muted-foreground">JMBG</Label>
+                        <Input
+                          className="h-7 text-xs"
+                          value={m.jmbg}
+                          maxLength={13}
+                          onChange={(e) => {
+                            const val = e.target.value;
+                            setFamilyMembers(prev => prev.map(x => x.id === m.id ? { ...x, jmbg: val } : x));
+                          }}
+                        />
+                      </div>
+                      <div className="flex-1 space-y-1">
+                        <Label className="text-[10px] text-muted-foreground">Srodstvo</Label>
+                        <Input
+                          className="h-7 text-xs"
+                          value={m.relationship}
+                          placeholder="npr. supružnik, dijete"
+                          onChange={(e) => {
+                            const val = e.target.value;
+                            setFamilyMembers(prev => prev.map(x => x.id === m.id ? { ...x, relationship: val } : x));
+                          }}
+                        />
+                      </div>
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="sm"
+                        className="h-7 px-2 text-destructive hover:bg-destructive/10"
+                        onClick={() => {
+                          setFamilyMembers(prev => prev.filter(x => x.id !== m.id));
+                        }}
+                      >
+                        ✕
+                      </Button>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </>
         ) : null}

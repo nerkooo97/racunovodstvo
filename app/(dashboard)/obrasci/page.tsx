@@ -3,16 +3,6 @@ import PageHeader from "@/components/shared/page-header";
 
 const OBRASCI = [
   {
-    href: "/obrasci/preracun-plate",
-    title: "Preračun plate",
-    description: "Kalkulator neto ↔ bruto plata",
-  },
-  {
-    href: "/obrasci/pdv-kalkulator",
-    title: "PDV kalkulator",
-    description: "Obračun PDV-a — 17% i oslobođene transakcije",
-  },
-  {
     href: "/obrasci/ams",
     title: "AMS-1035",
     description: "Ugovor o djelu — kalkulator honorara i doprinosa",
@@ -26,11 +16,6 @@ const OBRASCI = [
     href: "/obrasci/gpd",
     title: "GPD-1051",
     description: "Godišnji porez na dohodak — godišnja prijava",
-  },
-  {
-    href: "/obrasci/zo3",
-    title: "ZO-3",
-    description: "Zahtjev za osiguranje — prijava/odjava radnika",
   },
   {
     href: "/obrasci/pldi",

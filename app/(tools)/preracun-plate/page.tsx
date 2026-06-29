@@ -17,7 +17,7 @@ import {
 type Direction = "gross" | "net";
 type OrgType   = "obrt" | "doo";
 
-export default function PreracunPlatePage() {
+export default function PreracunPlatePage({ hideHeader = false }: { hideHeader?: boolean }) {
   const [direction, setDirection] = useState<Direction>("gross");
   const [amount, setAmount]       = useState("");
   const [orgType, setOrgType]     = useState<OrgType>("obrt");
@@ -37,10 +37,14 @@ export default function PreracunPlatePage() {
 
   return (
     <div className="max-w-2xl">
-      <h1 className="text-2xl font-bold mb-1">Preračun plate</h1>
-      <p className="text-muted-foreground text-sm mb-6">
-        Besplatni kalkulator za preračun bruto/neto plate u FBiH.
-      </p>
+      {!hideHeader && (
+        <>
+          <h1 className="text-2xl font-bold mb-1">Preračun plate</h1>
+          <p className="text-muted-foreground text-sm mb-6">
+            Besplatni kalkulator za preračun bruto/neto plate u FBiH.
+          </p>
+        </>
+      )}
 
       <div className="grid grid-cols-2 gap-4 mb-8">
         <div className="flex flex-col gap-1">

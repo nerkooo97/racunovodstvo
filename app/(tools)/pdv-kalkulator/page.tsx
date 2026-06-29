@@ -29,7 +29,7 @@ function fmt(n: number, currency: Currency): string {
   );
 }
 
-export default function PdvKalkulatorPage() {
+export default function PdvKalkulatorPage({ hideHeader = false }: { hideHeader?: boolean }) {
   const [direction, setDirection] = useState<Direction>("add");
   const [currency, setCurrency]   = useState<Currency>("BAM");
   const [amount, setAmount]       = useState("");
@@ -54,10 +54,14 @@ export default function PdvKalkulatorPage() {
 
   return (
     <div className="max-w-md">
-      <h1 className="text-2xl font-bold mb-1">PDV kalkulator</h1>
-      <p className="text-muted-foreground text-sm mb-6">
-        Izračun PDV-a prema BiH stopi od 17%.
-      </p>
+      {!hideHeader && (
+        <>
+          <h1 className="text-2xl font-bold mb-1">PDV kalkulator</h1>
+          <p className="text-muted-foreground text-sm mb-6">
+            Izračun PDV-a prema BiH stopi od 17%.
+          </p>
+        </>
+      )}
 
       <div className="flex flex-col gap-4 mb-8">
         <div className="grid grid-cols-2 gap-3">

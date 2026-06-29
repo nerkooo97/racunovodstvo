@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Download, FileText } from "lucide-react";
 
 const PERSONAL_DEDUCTION_ANNUAL = 3600; // 300 × 12
 
@@ -98,6 +99,68 @@ export default function GpdPage() {
   }, [taxCoeff, r8, r9, r10, r11, r12, r13, r14, r19, r20, r27, r28, r29, r30]);
 
   const yearFull = yearPrefix + yearSuffix;
+
+  async function generatePdfAction(action: "download" | "preview") {
+    const payload = {
+      jmb,
+      fullName: name,
+      address,
+      city,
+      contactChanged,
+      year: yearFull,
+      phone,
+      email,
+      
+      r8,
+      r9,
+      r10,
+      r11,
+      r12,
+      r13,
+      r14,
+      
+      taxCoeff,
+      r19,
+      r20,
+      
+      r27,
+      r28,
+      r29,
+      r30,
+      
+      paymentChoice,
+    };
+
+    try {
+      const res = await fetch("/api/pdf/gpd", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) {
+        const txt = await res.text();
+        throw new Error(txt);
+      }
+
+      const blob = await res.blob();
+      const fileUrl = URL.createObjectURL(blob);
+
+      if (action === "download") {
+        const a = document.createElement("a");
+        a.href = fileUrl;
+        a.download = `gpd-1051-${yearFull}.pdf`;
+        a.click();
+      } else {
+        window.open(fileUrl, "_blank", "noopener,noreferrer");
+      }
+    } catch (e: any) {
+      console.error(e);
+      alert(`Greška prilikom generisanja PDF-a: ${e.message}`);
+    }
+  }
 
   return (
     <div className="max-w-2xl">
@@ -261,15 +324,27 @@ export default function GpdPage() {
           )}
         </section>
 
-        <div className="flex gap-3">
+        <div className="flex gap-2 flex-wrap pt-2">
           <Button type="button" onClick={() => setSubmitted(true)}>
             Prikaži pregled
           </Button>
-          {submitted && (
-            <Button type="button" variant="outline" onClick={() => window.print()}>
-              Štampaj / PDF
-            </Button>
-          )}
+          <Button
+            type="button"
+            className="gap-1.5"
+            onClick={() => generatePdfAction("download")}
+          >
+            <Download className="h-4 w-4" />
+            Preuzmi PDF
+          </Button>
+          <Button
+            type="button"
+            variant="outline"
+            className="gap-1.5"
+            onClick={() => generatePdfAction("preview")}
+          >
+            <FileText className="h-4 w-4" />
+            Pregled / štampaj
+          </Button>
         </div>
 
         {submitted && (

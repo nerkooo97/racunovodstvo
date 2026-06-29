@@ -10,6 +10,7 @@ export interface OrgData {
   type: "obrt" | "doo";
   tax_id: string | null;
   logo_url: string | null;
+  address: string | null;
   city: string | null;
   canton: string | null;
   plan: string;

@@ -4,6 +4,8 @@ import { handleFakturaPdf } from "./faktura/route";
 import { handleJs3100Pdf, POST as handleJs3100Post } from "./js3100/route";
 import { handlePdvSdPdf } from "./pdv-sd/route";
 import { handleFinancialStatementsPdf } from "./financijski-izvjestaji/route";
+import { handleUgovorODjeluPdf } from "./ugovor-o-djelu/route";
+import { handleUgovorOPozajmiciPdf } from "./ugovor-o-pozajmici/route";
 
 export async function GET(req: NextRequest) {
   const { searchParams } = req.nextUrl;
@@ -27,6 +29,14 @@ export async function GET(req: NextRequest) {
 
   if (type === "finansijski-izvjestaji") {
     return handleFinancialStatementsPdf(req);
+  }
+
+  if (type === "ugovor-o-djelu") {
+    return handleUgovorODjeluPdf(req);
+  }
+
+  if (type === "ugovor-o-pozajmici") {
+    return handleUgovorOPozajmiciPdf(req);
   }
 
   return new NextResponse("Unknown type", { status: 400 });

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -12,6 +12,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useOrganization } from "@/contexts/organization-context";
+import { Download, FileText } from "lucide-react";
 
 const ASSET_TYPES = [
   { label: "Računari i softver",    rate: 33.33, years: 3  },
@@ -62,6 +64,14 @@ function kvEnd(kvStart: number, rate: number): number {
 }
 
 export default function PldiPage() {
+  let org: any = null;
+  try {
+    const ctx = useOrganization();
+    org = ctx.organization;
+  } catch (e) {
+    // Gracefully handle case where it's accessed outside the dashboard
+  }
+
   const currentYear = new Date().getFullYear();
   const [year, setYear] = useState(String(currentYear));
   const [jmb, setJmb] = useState("");
@@ -74,6 +84,14 @@ export default function PldiPage() {
   const [activityName, setActivityName] = useState("");
   const [manualPeriod, setManualPeriod] = useState(false);
   const [rows, setRows] = useState<AssetRow[]>([newRow()]);
+
+  useEffect(() => {
+    if (org) {
+      setJib(org.tax_id || "");
+      setBusinessName(org.name || "");
+      setBusinessAddress(org.address || org.city || "");
+    }
+  }, [org]);
 
   function updateRow(id: number, field: keyof AssetRow, value: string | boolean) {
     setRows((prev) =>
@@ -115,6 +133,62 @@ export default function PldiPage() {
   const totalKvStart = rows.reduce((s, r) => s + (parseFloat(r.kv_start) || 0), 0);
   const totalAmort   = rows.reduce((s, r) => s + amortizacija(parseFloat(r.kv_start) || 0, parseFloat(r.rate) || 0), 0);
   const totalKvEnd   = rows.reduce((s, r) => s + kvEnd(parseFloat(r.kv_start) || 0, parseFloat(r.rate) || 0), 0);
+
+  async function generatePdfAction(action: "download" | "preview") {
+    const payload = {
+      year,
+      jmb,
+      fullName,
+      address,
+      jib,
+      businessName,
+      businessAddress,
+      activityCode,
+      activityName,
+      manualPeriod,
+      rows: rows.map(r => ({
+        name: r.name,
+        acquisition_date: r.acquisition_date,
+        doc_number: r.doc_number,
+        acquisition_value: parseFloat(r.acquisition_value) || 0,
+        kv_start: parseFloat(r.kv_start) || 0,
+        years: parseFloat(r.years) || 0,
+        rate: parseFloat(r.rate) || 0,
+        sale_date: r.sale_date || undefined,
+        written_off: r.written_off,
+      }))
+    };
+
+    try {
+      const res = await fetch("/api/pdf/pldi", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) {
+        const txt = await res.text();
+        throw new Error(txt);
+      }
+
+      const blob = await res.blob();
+      const fileUrl = URL.createObjectURL(blob);
+
+      if (action === "download") {
+        const a = document.createElement("a");
+        a.href = fileUrl;
+        a.download = `pldi-1043-${year}.pdf`;
+        a.click();
+      } else {
+        window.open(fileUrl, "_blank", "noopener,noreferrer");
+      }
+    } catch (e: any) {
+      console.error(e);
+      alert(`Greška prilikom generisanja PDF-a: ${e.message}`);
+    }
+  }
 
   return (
     <div className="max-w-5xl">
@@ -336,15 +410,26 @@ export default function PldiPage() {
         </table>
       </div>
 
-      <div className="flex gap-3 flex-wrap">
+      <div className="flex gap-2 flex-wrap pt-2">
         <Button type="button" variant="outline" onClick={addRow}>
           + Dodaj sredstvo
         </Button>
         <Button
           type="button"
-          onClick={() => window.print()}
+          className="gap-1.5"
+          onClick={() => generatePdfAction("download")}
         >
-          Preuzmi PLDI-1043 PDF
+          <Download className="h-4 w-4" />
+          Preuzmi PDF
+        </Button>
+        <Button
+          type="button"
+          variant="outline"
+          className="gap-1.5"
+          onClick={() => generatePdfAction("preview")}
+        >
+          <FileText className="h-4 w-4" />
+          Pregled / štampaj
         </Button>
       </div>
 
