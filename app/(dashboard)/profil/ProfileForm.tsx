@@ -14,6 +14,7 @@ import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import FormSection from "@/components/shared/form-section";
 import { KATEGORIJE_PAUSALNI, KATEGORIJE_STVARNI, REZIMI_LABELS, getObrtnikOsnovica } from "@/lib/constants/obrtnici-fbih";
+import { proxyImageUrl } from "@/lib/image-proxy";
 
 const TEKUCA_GODINA = 2026;
 
@@ -65,8 +66,11 @@ interface Org {
 
 export default function ProfileForm({ org }: { org: Org }) {
   const fileRef = useRef<HTMLInputElement>(null);
-  const [logoFile, setLogoFile] = useState<File | null>(null);
-  const [logoPreview, setLogoPreview] = useState<string | null>(org.logo_url);
+  // rawLogoUrl = originalni Supabase URL (čuva se u bazi)
+  // logoUrl    = proxy URL za prikaz u browseru (izbjegava cookie problem na localhost)
+  const [rawLogoUrl, setRawLogoUrl] = useState<string | null>(org.logo_url);
+  const [logoUrl, setLogoUrl] = useState<string | null>(proxyImageUrl(org.logo_url));
+  const [logoUploading, setLogoUploading] = useState(false);
   const [serverError, setServerError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
   const [isPending, startTransition] = useTransition();
@@ -139,11 +143,38 @@ export default function ProfileForm({ org }: { org: Org }) {
     setShowActivitySuggestions(false);
   }
 
-  function handleLogoChange(e: React.ChangeEvent<HTMLInputElement>) {
+  async function handleLogoChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
-    setLogoFile(file);
-    setLogoPreview(URL.createObjectURL(file));
+
+    // Momentalni lokalni preview
+    setLogoUrl(URL.createObjectURL(file));
+    setLogoUploading(true);
+
+    try {
+      const fd = new FormData();
+      fd.append("logo", file);
+      const res = await fetch(`/api/organizations/${org.id}/logo`, {
+        method: "POST",
+        body: fd,
+      });
+      const json = await res.json();
+      if (json.logo_url) {
+        // Čuvamo originalni URL za bazu, proxy URL za prikaz
+        setRawLogoUrl(json.logo_url);
+        setLogoUrl(proxyImageUrl(json.logo_url));
+      } else {
+        setServerError(json.error ?? "Greška pri uploadu logotipa.");
+        setRawLogoUrl(org.logo_url);
+        setLogoUrl(proxyImageUrl(org.logo_url));
+      }
+    } catch {
+      setServerError("Greška pri uploadu logotipa.");
+      setRawLogoUrl(org.logo_url);
+      setLogoUrl(proxyImageUrl(org.logo_url));
+    } finally {
+      setLogoUploading(false);
+    }
   }
 
   function onSubmit(data: FormValues) {
@@ -166,14 +197,16 @@ export default function ProfileForm({ org }: { org: Org }) {
       }
     });
 
-    if (logoFile) fd.append("logo", logoFile);
+    // Pošalji originalni Supabase URL (ne proxy URL) u bazu
+    if (rawLogoUrl) {
+      fd.append("logo_url", rawLogoUrl);
+    }
 
     startTransition(async () => {
       const result = await updateOrganization(fd);
       if ("error" in result) {
         setServerError(result.error);
       } else {
-        if (result.logo_url) setLogoPreview(result.logo_url);
         setSuccess(true);
       }
     });
@@ -474,10 +507,10 @@ export default function ProfileForm({ org }: { org: Org }) {
       </FormSection>
 
       <FormSection title="Logo">        <div className="flex items-start gap-6">
-          {logoPreview && (
+          {logoUrl && (
             <div className="relative w-24 h-24 rounded-md border overflow-hidden bg-muted flex-shrink-0">
               <Image
-                src={logoPreview}
+                src={logoUrl}
                 alt="Logo preview"
                 fill
                 className="object-contain p-1"
@@ -500,11 +533,12 @@ export default function ProfileForm({ org }: { org: Org }) {
               variant="outline"
               size="sm"
               onClick={() => fileRef.current?.click()}
+              disabled={logoUploading}
             >
-              {logoPreview ? "Promijeni logo" : "Odaberi logo"}
+              {logoUploading ? "Učitavanje..." : logoUrl ? "Promijeni logo" : "Odaberi logo"}
             </Button>
-            {logoFile && (
-              <p className="text-xs text-muted-foreground">{logoFile.name}</p>
+            {logoUploading && (
+              <p className="text-xs text-muted-foreground">Uploadujem logotip...</p>
             )}
           </div>
         </div>

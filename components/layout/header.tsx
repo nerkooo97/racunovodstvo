@@ -26,7 +26,7 @@ export default function Header({ userEmail }: { userEmail: string }) {
   const initials = userEmail.slice(0, 2).toUpperCase();
 
   return (
-    <header className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 h-14 flex items-center px-6">
+    <header className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 h-12 flex items-center px-6">
       <Link
         href="/dashboard"
         className="flex items-center gap-2 font-semibold text-sm tracking-tight hover:opacity-80 transition-opacity"
@@ -38,20 +38,6 @@ export default function Header({ userEmail }: { userEmail: string }) {
       </Link>
 
       <div className="flex-1" />
-
-      <button
-        onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-        className="h-8 w-8 rounded-md flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-accent transition-colors mr-2 outline-none"
-        title="Promijeni temu"
-      >
-        {!mounted ? (
-          <div className="h-4 w-4" />
-        ) : theme === "dark" ? (
-          <Sun className="h-4 w-4" />
-        ) : (
-          <Moon className="h-4 w-4" />
-        )}
-      </button>
 
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
@@ -84,6 +70,27 @@ export default function Header({ userEmail }: { userEmail: string }) {
               Sve organizacije
             </Link>
           </DropdownMenuItem>
+          {mounted && (
+            <DropdownMenuItem
+              onSelect={(e) => {
+                e.preventDefault();
+                setTheme(theme === "dark" ? "light" : "dark");
+              }}
+              className="cursor-pointer gap-2"
+            >
+              {theme === "dark" ? (
+                <>
+                  <Sun className="h-4 w-4" />
+                  <span>Svijetla tema</span>
+                </>
+              ) : (
+                <>
+                  <Moon className="h-4 w-4" />
+                  <span>Tamna tema</span>
+                </>
+              )}
+            </DropdownMenuItem>
+          )}
           <DropdownMenuSeparator />
           <DropdownMenuItem
             onSelect={() => startTransition(() => logout())}

@@ -3,7 +3,9 @@ import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import { selectOrgAndRedirect } from "@/app/actions/organizations";
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { proxyImageUrl } from "@/lib/image-proxy";
 
 export default async function OrganizationsPage() {
   await connection();
@@ -15,7 +17,7 @@ export default async function OrganizationsPage() {
 
   const { data: orgs } = await supabase
     .from("organizations")
-    .select("id, name, type, tax_id, city, plan")
+    .select("id, name, type, tax_id, city, plan, logo_url")
     .eq("owner_id", user.id)
     .order("created_at", { ascending: true });
 
@@ -36,31 +38,47 @@ export default async function OrganizationsPage() {
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2">
-        {orgs.map((org) => (
-          <div
-            key={org.id}
-            className="border rounded-lg p-5 flex items-center justify-between gap-4 hover:bg-accent/20 transition-colors"
-          >
-            <div className="flex items-center gap-3 min-w-0">
-              <div className="w-10 h-10 rounded-md bg-primary text-primary-foreground flex items-center justify-center font-bold text-sm shrink-0">
-                {org.name.slice(0, 2).toUpperCase()}
+        {orgs.map((org) => {
+          const logoSrc = proxyImageUrl(org.logo_url);
+          return (
+            <div
+              key={org.id}
+              className="border rounded-lg p-5 flex items-center justify-between gap-4 hover:bg-accent/20 transition-colors"
+            >
+              <div className="flex items-center gap-3 min-w-0">
+                {logoSrc ? (
+                  <div className="w-10 h-10 rounded-md overflow-hidden shrink-0 border bg-muted">
+                    <Image
+                      src={logoSrc}
+                      alt={org.name}
+                      width={40}
+                      height={40}
+                      className="object-contain w-full h-full"
+                      unoptimized
+                    />
+                  </div>
+                ) : (
+                  <div className="w-10 h-10 rounded-md bg-primary text-primary-foreground flex items-center justify-center font-bold text-sm shrink-0">
+                    {org.name.slice(0, 2).toUpperCase()}
+                  </div>
+                )}
+                <div className="min-w-0">
+                  <p className="font-semibold truncate">{org.name}</p>
+                  <p className="text-sm text-muted-foreground">
+                    {org.type === "obrt" ? "Obrt" : "d.o.o."}
+                    {org.tax_id ? ` · JIB: ${org.tax_id}` : ""}
+                  </p>
+                </div>
               </div>
-              <div className="min-w-0">
-                <p className="font-semibold truncate">{org.name}</p>
-                <p className="text-sm text-muted-foreground">
-                  {org.type === "obrt" ? "Obrt" : "d.o.o."}
-                  {org.tax_id ? ` · JIB: ${org.tax_id}` : ""}
-                </p>
-              </div>
+              <form action={selectOrgAndRedirect} className="shrink-0">
+                <input type="hidden" name="orgId" value={org.id} />
+                <Button type="submit" size="sm">
+                  Otvori
+                </Button>
+              </form>
             </div>
-            <form action={selectOrgAndRedirect} className="shrink-0">
-              <input type="hidden" name="orgId" value={org.id} />
-              <Button type="submit" size="sm">
-                Otvori
-              </Button>
-            </form>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

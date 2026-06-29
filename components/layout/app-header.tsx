@@ -43,20 +43,6 @@ export function AppHeader({ userEmail }: { userEmail: string }) {
 
       <div className="flex-1" />
 
-      <button
-        onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-        className="h-8 w-8 rounded-md flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-accent transition-colors mr-2 outline-none"
-        title="Promijeni temu"
-      >
-        {!mounted ? (
-          <div className="h-4.5 w-4.5" />
-        ) : theme === "dark" ? (
-          <IconSun className="size-4.5" />
-        ) : (
-          <IconMoon className="size-4.5" />
-        )}
-      </button>
-
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <button className="flex items-center gap-2 rounded-md px-2 py-1.5 hover:bg-accent transition-colors text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring">
@@ -86,6 +72,27 @@ export function AppHeader({ userEmail }: { userEmail: string }) {
               Promijeni organizaciju
             </Link>
           </DropdownMenuItem>
+          {mounted && (
+            <DropdownMenuItem
+              onSelect={(e) => {
+                e.preventDefault();
+                setTheme(theme === "dark" ? "light" : "dark");
+              }}
+              className="cursor-pointer gap-2"
+            >
+              {theme === "dark" ? (
+                <>
+                  <IconSun className="size-4" />
+                  <span>Svijetla tema</span>
+                </>
+              ) : (
+                <>
+                  <IconMoon className="size-4" />
+                  <span>Tamna tema</span>
+                </>
+              )}
+            </DropdownMenuItem>
+          )}
           <DropdownMenuSeparator />
           <DropdownMenuItem
             onSelect={() => startTransition(() => logout())}

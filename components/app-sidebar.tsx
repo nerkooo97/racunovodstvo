@@ -30,12 +30,8 @@ export function AppSidebar({ userEmail, ...props }: AppSidebarProps) {
 
   return (
     <Sidebar collapsible="offcanvas" {...props}>
-      <SidebarHeader className="border-b pb-3">
-        <div className="flex items-center gap-2.5 px-1 py-1">
-        </div>
-        <div className="mt-2">
-          <OrgSwitcher />
-        </div>
+      <SidebarHeader className="h-12 border-b flex items-center px-3 py-0 justify-center">
+        <OrgSwitcher />
       </SidebarHeader>
 
       <SidebarContent className="gap-0">

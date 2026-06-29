@@ -1,12 +1,15 @@
 "use client"
 
-import { useTransition } from "react"
+import { useTransition, useState, useEffect } from "react"
 import Link from "next/link"
+import { useTheme } from "next-themes"
 import {
   IconBuilding,
   IconDotsVertical,
   IconLogout,
   IconSwitchHorizontal,
+  IconSun,
+  IconMoon,
 } from "@tabler/icons-react"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import {
@@ -33,6 +36,13 @@ export function NavUser({
 }) {
   const { isMobile } = useSidebar()
   const [isPending, startTransition] = useTransition()
+  const { theme, setTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
   const initials = user.email.slice(0, 2).toUpperCase()
 
   return (
@@ -89,6 +99,27 @@ export function NavUser({
                   Promijeni organizaciju
                 </Link>
               </DropdownMenuItem>
+              {mounted && (
+                <DropdownMenuItem
+                  onSelect={(e) => {
+                    e.preventDefault();
+                    setTheme(theme === "dark" ? "light" : "dark");
+                  }}
+                  className="cursor-pointer gap-2"
+                >
+                  {theme === "dark" ? (
+                    <>
+                      <IconSun className="size-4" />
+                      <span>Svijetla tema</span>
+                    </>
+                  ) : (
+                    <>
+                      <IconMoon className="size-4" />
+                      <span>Tamna tema</span>
+                    </>
+                  )}
+                </DropdownMenuItem>
+              )}
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem

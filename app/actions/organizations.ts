@@ -95,7 +95,6 @@ export async function updateOrganization(
   if (!user) redirect("/login");
 
   const raw = Object.fromEntries(formData.entries());
-  const logoFile = formData.get("logo") as File | null;
 
   const parsed = updateOrgSchema.safeParse({
     ...raw,
@@ -113,6 +112,7 @@ export async function updateOrganization(
     email: raw.email || null,
     bank_account: raw.bank_account || null,
     bank_name: raw.bank_name || null,
+    logo_url: raw.logo_url || null,
     owner_tax_regime: raw.owner_tax_regime || null,
     owner_activity_category: raw.owner_activity_category || null,
   });
@@ -125,35 +125,16 @@ export async function updateOrganization(
 
   const { orgId, ...fields } = parsed.data;
 
-  let logo_url = fields.logo_url ?? null;
-
-  if (logoFile && logoFile.size > 0) {
-    const ext = logoFile.name.split(".").pop()?.toLowerCase() ?? "jpg";
-    const path = `${user.id}/${orgId}.${ext}`;
-    const buffer = await logoFile.arrayBuffer();
-
-    const { error: uploadError } = await supabase.storage
-      .from("logos")
-      .upload(path, buffer, {
-        contentType: logoFile.type,
-        upsert: true,
-      });
-
-    if (uploadError) return { error: uploadError.message };
-
-    logo_url = supabase.storage.from("logos").getPublicUrl(path).data.publicUrl;
-  }
-
   const { error } = await supabase
     .from("organizations")
-    .update({ ...fields, logo_url })
+    .update(fields)
     .eq("id", orgId)
     .eq("owner_id", user.id);
 
   if (error) return { error: error.message };
 
   revalidatePath("/profil");
-  return { success: true, logo_url: logo_url ?? undefined };
+  return { success: true, logo_url: fields.logo_url ?? undefined };
 }
 
 export async function setActiveOrg(orgId: string) {
