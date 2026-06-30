@@ -37,6 +37,8 @@ export interface JournalLineInput {
   debit: number;
   credit: number;
   sort_order?: number;
+  /** Opciono — veže stavku naloga za konkretnog partnera (saldakonti, analitičke kartice). */
+  partner_id?: string | null;
 }
 
 export interface JournalLine extends JournalLineInput {

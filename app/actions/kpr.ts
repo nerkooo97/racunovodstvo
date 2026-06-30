@@ -19,11 +19,13 @@ interface KprEntryInput {
   income_bank: number;
   income_other: number;
   income_total: number;
+  income_vat: number;
   expense_goods: number;
   expense_salaries: number;
   expense_contribs: number;
   expense_other: number;
   expense_total: number;
+  expense_vat: number;
   debit: number;
   credit: number;
 }
@@ -59,11 +61,13 @@ export async function addKprEntry(input: KprEntryInput): Promise<{ error?: strin
     income_bank: input.income_bank,
     income_other: input.income_other,
     income_total: input.income_total,
+    income_vat: input.income_vat,
     expense_goods: input.expense_goods,
     expense_salaries: input.expense_salaries,
     expense_contribs: input.expense_contribs,
     expense_other: input.expense_other,
     expense_total: input.expense_total,
+    expense_vat: input.expense_vat,
     debit: input.debit,
     credit: input.credit,
   });

@@ -8,11 +8,14 @@ export type OrgType = "obrt" | "doo";
 export type OrgFeature =
   | "kpr"
   | "kpr_auto_from_bank"
+  | "kp"
   | "owner_tax_regime"
   | "invoices"
   | "pdv"
   | "payroll"
   | "bank_statements"
+  | "fixed_assets"
+  | "received_invoices"
   | "general_ledger";
 
 export interface RegimeDefinition {
@@ -52,17 +55,22 @@ const FEATURES_BY_TYPE: Record<OrgType, ReadonlySet<OrgFeature>> = {
   obrt: new Set([
     "kpr",
     "kpr_auto_from_bank",
+    "kp",
     "owner_tax_regime",
     "invoices",
     "pdv",
     "payroll",
     "bank_statements",
+    "fixed_assets",
+    "received_invoices",
   ]),
   doo: new Set([
     "invoices",
     "pdv",
     "payroll",
     "bank_statements",
+    "fixed_assets",
+    "received_invoices",
     "general_ledger",
   ]),
 };
@@ -107,6 +115,10 @@ export function assertFeature(
 /** URL-ovi koji zahtijevaju određenu mogućnost */
 export const ROUTE_FEATURES: { prefix: string; feature: OrgFeature }[] = [
   { prefix: "/kpr", feature: "kpr" },
+  { prefix: "/kp", feature: "kp" },
+  { prefix: "/dugotrajnaimovina", feature: "fixed_assets" },
+  { prefix: "/primljene-fakture", feature: "received_invoices" },
+  { prefix: "/epo", feature: "received_invoices" },
 ];
 
 export function routeRequiresFeature(pathname: string): OrgFeature | null {

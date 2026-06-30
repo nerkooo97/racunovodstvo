@@ -2,7 +2,6 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { IconCalculator } from "@tabler/icons-react"
 import {
   Sidebar,
   SidebarContent,
@@ -18,6 +17,17 @@ import { NavUser } from "@/components/nav-user"
 import OrgSwitcher from "@/components/layout/org-switcher"
 import { useOrganization } from "@/contexts/organization-context"
 import { getVisibleNavSections } from "@/lib/organization/nav"
+
+const ORG_TYPE_BADGE: Record<"obrt" | "doo", { label: string; className: string }> = {
+  obrt: {
+    label: "Obrt",
+    className: "bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-400",
+  },
+  doo: {
+    label: "D.O.O.",
+    className: "bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-400",
+  },
+}
 
 interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
   userEmail: string
@@ -38,8 +48,15 @@ export function AppSidebar({ userEmail, ...props }: AppSidebarProps) {
         {nav.map((section, idx) => (
           <SidebarGroup key={idx} className="py-1">
             {section.title && (
-              <SidebarGroupLabel className="text-[10px] tracking-widest uppercase text-muted-foreground/60 px-3 py-1">
+              <SidebarGroupLabel className="text-[10px] tracking-widest uppercase text-muted-foreground/60 px-3 py-1 flex items-center gap-1.5">
                 {section.title}
+                {section.orgType && (
+                  <span
+                    className={`inline-flex items-center rounded px-1 py-0 text-[9px] font-bold tracking-normal normal-case leading-4 ${ORG_TYPE_BADGE[section.orgType].className}`}
+                  >
+                    {ORG_TYPE_BADGE[section.orgType].label}
+                  </span>
+                )}
               </SidebarGroupLabel>
             )}
             <SidebarMenu>

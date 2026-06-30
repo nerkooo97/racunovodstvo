@@ -57,11 +57,13 @@ export default function KprEntryForm({ year, partners }: Props) {
   const [incCash, setIncCash] = useState("");
   const [incBank, setIncBank] = useState("");
   const [incOther, setIncOther] = useState("");
+  const [incVat, setIncVat] = useState("");
 
   const [expGoods, setExpGoods] = useState("");
   const [expSalaries, setExpSalaries] = useState("");
   const [expContribs, setExpContribs] = useState("");
   const [expOther, setExpOther] = useState("");
+  const [expVat, setExpVat] = useState("");
 
   const n = (v: string) => parseFloat(v.replace(",", ".")) || 0;
   const incTotal = n(incCash) + n(incBank) + n(incOther);
@@ -111,11 +113,13 @@ export default function KprEntryForm({ year, partners }: Props) {
         income_bank: n(incBank),
         income_other: n(incOther),
         income_total: incTotal,
+        income_vat: n(incVat),
         expense_goods: n(expGoods),
         expense_salaries: n(expSalaries),
         expense_contribs: n(expContribs),
         expense_other: n(expOther),
         expense_total: expTotal,
+        expense_vat: n(expVat),
         debit: expTotal,
         credit: incTotal,
       });
@@ -263,10 +267,22 @@ export default function KprEntryForm({ year, partners }: Props) {
               placeholder="0.00"
             />
           </div>
+          <div className="flex flex-col gap-1">
+            <Label className="text-xs">PDV (izlazni)</Label>
+            <Input
+              type="number"
+              min={0}
+              step="0.01"
+              value={incVat}
+              onChange={(e) => setIncVat(e.target.value)}
+              placeholder="0.00"
+            />
+          </div>
         </div>
         {incTotal > 0 && (
           <div className="text-sm font-semibold text-green-700">
             Ukupno prihodi: {incTotal.toFixed(2)} KM
+            {n(incVat) > 0 && <span className="font-normal text-muted-foreground ml-2">(PDV: {n(incVat).toFixed(2)} KM)</span>}
           </div>
         )}
       </FormSection>
@@ -317,10 +333,22 @@ export default function KprEntryForm({ year, partners }: Props) {
               placeholder="0.00"
             />
           </div>
+          <div className="flex flex-col gap-1">
+            <Label className="text-xs">PDV (ulazni)</Label>
+            <Input
+              type="number"
+              min={0}
+              step="0.01"
+              value={expVat}
+              onChange={(e) => setExpVat(e.target.value)}
+              placeholder="0.00"
+            />
+          </div>
         </div>
         {expTotal > 0 && (
           <div className="text-sm font-semibold text-red-700">
             Ukupno rashodi: {expTotal.toFixed(2)} KM
+            {n(expVat) > 0 && <span className="font-normal text-muted-foreground ml-2">(PDV: {n(expVat).toFixed(2)} KM)</span>}
           </div>
         )}
       </FormSection>

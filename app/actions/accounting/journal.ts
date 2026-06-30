@@ -98,6 +98,7 @@ export async function postJournalEntry(
     debit: round2(l.debit || 0),
     credit: round2(l.credit || 0),
     sort_order: l.sort_order ?? i,
+    partner_id: l.partner_id ?? null,
   }));
 
   const { error: linesErr } = await supabase

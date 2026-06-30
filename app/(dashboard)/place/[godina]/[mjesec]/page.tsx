@@ -132,6 +132,7 @@ export default async function PeriodPage({
         month={month}
         periodId={periodId}
         status={period?.status ?? null}
+        orgType={orgType}
       />
 
       {items && items.length > 0 ? (

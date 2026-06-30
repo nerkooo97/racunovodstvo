@@ -103,6 +103,37 @@ export function kufEntryToLines(e: LedgerEntry): JournalLineInput[] {
   return b.build();
 }
 
+/**
+ * Post-procesira listu linija naloga i dodaje partner_id na liniju koja
+ * odgovara kontu kupca (KIF/uplata) ili dobavljača (KUF/isplata).
+ * Mutira ulazni niz radi performansi — poziva se odmah nakon build().
+ */
+export function attachPartnerId(
+  lines: JournalLineInput[],
+  direction: "kif" | "kuf",
+  partnerId: string | null | undefined,
+  partnerKind: string | null | undefined
+): JournalLineInput[] {
+  if (!partnerId) return lines;
+  const isForeign =
+    partnerKind === "foreign" || partnerKind === "import_customs";
+  const targetAccounts =
+    direction === "kif"
+      ? isForeign
+        ? [POSTING_ACCOUNTS.customersForeign]
+        : [POSTING_ACCOUNTS.customersDomestic, POSTING_ACCOUNTS.cash]
+      : isForeign
+        ? [POSTING_ACCOUNTS.suppliersForeign]
+        : [POSTING_ACCOUNTS.suppliersDomestic];
+
+  for (const line of lines) {
+    if (targetAccounts.includes(line.account_code as never)) {
+      line.partner_id = partnerId;
+    }
+  }
+  return lines;
+}
+
 export interface BankTxForPosting {
   direction: "credit" | "debit";
   amount: number;

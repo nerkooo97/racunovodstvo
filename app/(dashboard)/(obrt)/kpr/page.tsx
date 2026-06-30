@@ -34,8 +34,10 @@ export default async function KprPage({
     (acc, e) => ({
       income:  acc.income  + (e.income_total  ?? e.credit ?? 0),
       expense: acc.expense + (e.expense_total ?? e.debit  ?? 0),
+      incomeVat:  acc.incomeVat  + (e.income_vat  ?? 0),
+      expenseVat: acc.expenseVat + (e.expense_vat ?? 0),
     }),
-    { income: 0, expense: 0 }
+    { income: 0, expense: 0, incomeVat: 0, expenseVat: 0 }
   );
 
   const years = Array.from({ length: 5 }, (_, i) => currentYear - i);
@@ -65,7 +67,7 @@ export default async function KprPage({
 
       {/* Kumulativni zbir */}
       {entries && entries.length > 0 && (
-        <div className="grid grid-cols-3 gap-4 mb-4">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-4">
           <div className="border rounded-md p-3">
             <div className="text-xs text-muted-foreground mb-1">Ukupni prihodi</div>
             <div className="font-mono font-semibold text-green-700">{formatKM(totals.income)}</div>
@@ -80,6 +82,17 @@ export default async function KprPage({
               {formatKM(totals.income - totals.expense)}
             </div>
           </div>
+          {(totals.incomeVat > 0 || totals.expenseVat > 0) && (
+            <div className="border rounded-md p-3">
+              <div className="text-xs text-muted-foreground mb-1">PDV neto</div>
+              <div className="font-mono font-semibold">
+                {formatKM(totals.incomeVat - totals.expenseVat)}
+              </div>
+              <div className="text-xs text-muted-foreground mt-0.5">
+                Izlazni: {formatKM(totals.incomeVat)} · Ulazni: {formatKM(totals.expenseVat)}
+              </div>
+            </div>
+          )}
         </div>
       )}
 
@@ -95,13 +108,17 @@ export default async function KprPage({
                 <TableHead>Partner</TableHead>
                 <TableHead>Opis</TableHead>
                 <TableHead className="text-right">Prihodi (KM)</TableHead>
+                <TableHead className="text-right">PDV izl.</TableHead>
                 <TableHead className="text-right">Rashodi (KM)</TableHead>
+                <TableHead className="text-right">PDV ul.</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {entries.map((e) => {
                 const income  = e.income_total  ?? e.credit ?? 0;
                 const expense = e.expense_total ?? e.debit  ?? 0;
+                const incVat  = e.income_vat  ?? 0;
+                const expVat  = e.expense_vat ?? 0;
                 return (
                   <TableRow key={e.id}>
                     <TableCell className="font-mono text-sm">{e.entry_number}</TableCell>
@@ -113,8 +130,14 @@ export default async function KprPage({
                     <TableCell className="text-right font-mono text-sm text-green-700">
                       {income > 0 ? formatKM(income) : "—"}
                     </TableCell>
+                    <TableCell className="text-right font-mono text-sm text-muted-foreground">
+                      {incVat > 0 ? formatKM(incVat) : "—"}
+                    </TableCell>
                     <TableCell className="text-right font-mono text-sm text-red-700">
                       {expense > 0 ? formatKM(expense) : "—"}
+                    </TableCell>
+                    <TableCell className="text-right font-mono text-sm text-muted-foreground">
+                      {expVat > 0 ? formatKM(expVat) : "—"}
                     </TableCell>
                   </TableRow>
                 );
@@ -122,7 +145,9 @@ export default async function KprPage({
               <TableRow className="font-bold border-t-2 bg-muted/30">
                 <TableCell colSpan={6}>UKUPNO {year}</TableCell>
                 <TableCell className="text-right font-mono text-green-700">{formatKM(totals.income)}</TableCell>
+                <TableCell className="text-right font-mono text-muted-foreground">{totals.incomeVat > 0 ? formatKM(totals.incomeVat) : "—"}</TableCell>
                 <TableCell className="text-right font-mono text-red-700">{formatKM(totals.expense)}</TableCell>
+                <TableCell className="text-right font-mono text-muted-foreground">{totals.expenseVat > 0 ? formatKM(totals.expenseVat) : "—"}</TableCell>
               </TableRow>
             </TableBody>
           </Table>

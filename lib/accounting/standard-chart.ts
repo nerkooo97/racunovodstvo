@@ -42,8 +42,10 @@ export const STANDARD_CHART: StandardAccount[] = [
   // ── Klasa 3 — Kapital ──
   { code: "3", name: "Kapital", account_class: 3, account_type: "equity", is_synthetic: true },
   { code: "3000", name: "Osnovni (upisani) kapital", account_class: 3, account_type: "equity", parent_code: "3" },
-  { code: "3400", name: "Neraspoređena dobit", account_class: 3, account_type: "equity", parent_code: "3" },
-  { code: "3500", name: "Gubitak", account_class: 3, account_type: "equity", parent_code: "3" },
+  { code: "3400", name: "Neraspoređena dobit ranijih perioda", account_class: 3, account_type: "equity", parent_code: "3" },
+  { code: "3410", name: "Neraspoređena dobit izvještajnog perioda", account_class: 3, account_type: "equity", parent_code: "3" },
+  { code: "3500", name: "Akumulirani gubici ranijih perioda", account_class: 3, account_type: "equity", parent_code: "3" },
+  { code: "3510", name: "Gubitak izvještajnog perioda", account_class: 3, account_type: "equity", parent_code: "3" },
 
   // ── Klasa 4 — Obaveze ──
   { code: "4", name: "Obaveze", account_class: 4, account_type: "liability", is_synthetic: true },
@@ -51,8 +53,10 @@ export const STANDARD_CHART: StandardAccount[] = [
   { code: "4330", name: "Dobavljači u inostranstvu", account_class: 4, account_type: "liability", parent_code: "4" },
   { code: "4500", name: "Obaveze za neto plate", account_class: 4, account_type: "liability", parent_code: "4" },
   { code: "4700", name: "Obaveze za PDV (izlazni)", account_class: 4, account_type: "liability", parent_code: "4" },
-  { code: "4800", name: "Obaveze za poreze (porez na dohodak)", account_class: 4, account_type: "liability", parent_code: "4" },
+  { code: "4800", name: "Obaveze za porez na dohodak (radnici)", account_class: 4, account_type: "liability", parent_code: "4" },
   { code: "4810", name: "Obaveze za doprinose", account_class: 4, account_type: "liability", parent_code: "4" },
+  { code: "4820", name: "Obaveze za porez na dobit preduzeća", account_class: 4, account_type: "liability", parent_code: "4" },
+  { code: "2340", name: "Akontacije poreza na dobit", account_class: 2, account_type: "asset", parent_code: "2" },
 
   // ── Klasa 5 — Rashodi ──
   { code: "5", name: "Rashodi", account_class: 5, account_type: "expense", is_synthetic: true },
@@ -60,6 +64,8 @@ export const STANDARD_CHART: StandardAccount[] = [
   { code: "5300", name: "Troškovi usluga", account_class: 5, account_type: "expense", parent_code: "5" },
   { code: "5200", name: "Troškovi bruto plata", account_class: 5, account_type: "expense", parent_code: "5" },
   { code: "5210", name: "Troškovi doprinosa na plate (na teret poslodavca)", account_class: 5, account_type: "expense", parent_code: "5" },
+  { code: "5400", name: "Amortizacija (u visini porezno priznatih rashoda)", account_class: 5, account_type: "expense", parent_code: "5" },
+  { code: "5410", name: "Amortizacija iznad porezno priznatih rashoda", account_class: 5, account_type: "expense", parent_code: "5" },
   { code: "5500", name: "Nematerijalni troškovi (neodbitni PDV i ostalo)", account_class: 5, account_type: "expense", parent_code: "5" },
 
   // ── Klasa 6 — Prihodi ──
@@ -68,9 +74,14 @@ export const STANDARD_CHART: StandardAccount[] = [
   { code: "6010", name: "Prihodi od izvoza", account_class: 6, account_type: "income", parent_code: "6" },
   { code: "6900", name: "Ostali prihodi", account_class: 6, account_type: "income", parent_code: "6" },
 
-  // ── Klasa 7 — Zaključak ──
+  // ── Klasa 7 — Otvaranje i zaključak (tehnički konti, bez poslovnih transakcija) ──
   { code: "7", name: "Otvaranje i zaključak", account_class: 7, account_type: "equity", is_synthetic: true },
-  { code: "7100", name: "Razgraničenje / rezultat poslovanja", account_class: 7, account_type: "equity", parent_code: "7" },
+  { code: "7000", name: "Otvarajući račun glavne knjige", account_class: 7, account_type: "equity", parent_code: "7" },
+  { code: "7100", name: "Rashodi tekuće godine (za zatvaranje kl. 5)", account_class: 7, account_type: "equity", parent_code: "7" },
+  { code: "7120", name: "Prihodi tekuće godine (za zatvaranje kl. 6)", account_class: 7, account_type: "equity", parent_code: "7" },
+  { code: "7200", name: "Račun dobitka ili gubitka", account_class: 7, account_type: "equity", parent_code: "7" },
+  { code: "7210", name: "Porezni rashod perioda (porez na dobit)", account_class: 7, account_type: "equity", parent_code: "7" },
+  { code: "7260", name: "Prijenos dobiti ili gubitka na kapital", account_class: 7, account_type: "equity", parent_code: "7" },
 ];
 
 /**
@@ -98,6 +109,18 @@ export const POSTING_ACCOUNTS = {
   grossSalaryExpense: "5200",
   employerContribExpense: "5210",
   nonMaterialExpense: "5500",
+  depreciationExpense: "5400",
+  accumulatedDepreciation: "0290",
+  corporateTaxExpense: "7210",
+  corporateTaxPayable: "4820",
+  corporateTaxPrepaid: "2340",
+  retainedEarningsCurrentYear: "3410",
+  currentYearLoss: "3510",
+  closingExpenses: "7100",
+  closingRevenues: "7120",
+  netResult: "7200",
+  resultTransfer: "7260",
+  openingEntry: "7000",
 } as const;
 
 export type PostingAccountRole = keyof typeof POSTING_ACCOUNTS;

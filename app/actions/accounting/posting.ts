@@ -11,6 +11,7 @@ import {
   kifEntryToLines,
   kufEntryToLines,
   salaryToLines,
+  attachPartnerId,
 } from "@/lib/accounting/posting-rules";
 import { ensureChartOfAccounts } from "./accounts";
 import { postJournalEntry } from "./journal";
@@ -78,12 +79,13 @@ export async function postPdvPeriodToGl(
       continue;
     }
 
-    const lines =
+    const rawLines =
       e.record_type === "kif" ? kifEntryToLines(e) : kufEntryToLines(e);
-    if (lines.length < 2) {
+    if (rawLines.length < 2) {
       skipped++;
       continue;
     }
+    const lines = attachPartnerId(rawLines, e.record_type, e.partner_id, e.partner_kind);
 
     const sourceType =
       e.record_type === "kif"
@@ -164,11 +166,14 @@ export async function postBankStatementToGl(
     }
 
     const direction = t.direction === "credit" ? "credit" : "debit";
-    const lines = bankTxToLines({
+    const bankLines = bankTxToLines({
       direction,
       amount: Number(t.amount) || 0,
       has_partner: t.partner_id != null,
     });
+    const lines = t.partner_id
+      ? attachPartnerId(bankLines, direction === "credit" ? "kif" : "kuf", t.partner_id as string, "domestic")
+      : bankLines;
     if (lines.length < 2) {
       skipped++;
       continue;

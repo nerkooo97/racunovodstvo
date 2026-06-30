@@ -15,6 +15,7 @@ export interface ActiveOrganization {
   type: OrgType;
   is_vat_registered: boolean;
   plan: string;
+  tax_id: string | null;
 }
 
 export async function getActiveOrganization(): Promise<{
@@ -33,7 +34,7 @@ export async function getActiveOrganization(): Promise<{
 
   const { data: org } = await supabase
     .from("organizations")
-    .select("id, name, type, is_vat_registered, plan")
+    .select("id, name, type, is_vat_registered, plan, tax_id")
     .eq("id", orgId)
     .single();
 
@@ -48,6 +49,7 @@ export async function getActiveOrganization(): Promise<{
       type: normalizeOrgType(org.type),
       is_vat_registered: org.is_vat_registered ?? false,
       plan: org.plan ?? "free",
+      tax_id: org.tax_id ?? null,
     },
   };
 }

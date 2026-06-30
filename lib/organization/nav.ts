@@ -5,6 +5,7 @@ import {
   IconMail,
   IconArrowsLeftRight,
   IconFileInvoice,
+  IconFileImport,
   IconUsers,
   IconBook,
   IconReceiptTax,
@@ -16,6 +17,11 @@ import {
   IconSettings,
   IconFolder,
   IconReportAnalytics,
+  IconPackage,
+  IconLayoutList,
+  IconAddressBook,
+  IconCalendarStats,
+  IconCalculator,
 } from "@tabler/icons-react";
 import {
   getSettingsNavLabel,
@@ -36,10 +42,13 @@ export interface NavItemConfig {
 
 export interface NavSectionConfig {
   title?: string;
+  /** Označava kojoj vrsti organizacije sekcija pripada — za vizualni prikaz u sidebaru */
+  orgType?: "obrt" | "doo";
   items: NavItemConfig[];
 }
 
 export const NAV_SECTIONS: NavSectionConfig[] = [
+  // ─── Zajedničke sekcije ─────────────────────────────────────────────────────
   {
     items: [{ title: "Početna", url: "/dashboard", icon: IconDashboard }],
   },
@@ -50,6 +59,12 @@ export const NAV_SECTIONS: NavSectionConfig[] = [
       { title: "Inbox", url: "/inbox", icon: IconMail },
       { title: "Transakcije", url: "/transakcije", icon: IconArrowsLeftRight },
       { title: "Fakture", url: "/fakture", icon: IconFileInvoice },
+      {
+        title: "Primljene fakture",
+        url: "/primljene-fakture",
+        icon: IconFileImport,
+        feature: "received_invoices",
+      },
       { title: "Partneri", url: "/partneri", icon: IconUsers },
     ],
   },
@@ -62,56 +77,40 @@ export const NAV_SECTIONS: NavSectionConfig[] = [
   {
     title: "Evidencije",
     items: [
-      {
-        title: "Računovodstvo",
-        url: "/racunovodstvo",
-        icon: IconReportAnalytics,
-      },
-      {
-        title: "KPR-1041",
-        url: "/kpr",
-        icon: IconBook,
-        feature: "kpr",
-      },
+      { title: "Računovodstvo", url: "/racunovodstvo", icon: IconReportAnalytics },
       { title: "PDV evidencije", url: "/pdv", icon: IconReceiptTax },
+      { title: "Dugotrajna imovina", url: "/dugotrajnaimovina", icon: IconPackage, feature: "fixed_assets" },
+      { title: "EPO-1044", url: "/epo", icon: IconArrowsLeftRight, feature: "received_invoices" },
       { title: "Obrasci", url: "/obrasci", icon: IconForms },
     ],
   },
+
+  // ─── Obrt — specifične evidencije (vidljive samo za obrt) ────────────────────
   {
-    title: "Glavna knjiga",
+    title: "Obrt — Knjige",
+    orgType: "obrt",
     items: [
-      {
-        title: "Kontni plan",
-        url: "/knjigovodstvo/kontni-plan",
-        icon: IconBook,
-        feature: "general_ledger",
-      },
-      {
-        title: "Dnevnik",
-        url: "/knjigovodstvo/dnevnik",
-        icon: IconFileInvoice,
-        feature: "general_ledger",
-      },
-      {
-        title: "Bruto bilans",
-        url: "/knjigovodstvo/bruto-bilans",
-        icon: IconReportAnalytics,
-        feature: "general_ledger",
-      },
-      {
-        title: "Finansijski izvještaji",
-        url: "/knjigovodstvo/finansijski-izvjestaji",
-        icon: IconReportAnalytics,
-        feature: "general_ledger",
-      },
-      {
-        title: "Usklađivanje (PDV ↔ GK)",
-        url: "/knjigovodstvo/uskladjivanje",
-        icon: IconArrowsLeftRight,
-        feature: "general_ledger",
-      },
+      { title: "KPR-1041", url: "/kpr", icon: IconBook, feature: "kpr" },
+      { title: "KP-1042", url: "/kp", icon: IconLayoutList, feature: "kp" },
     ],
   },
+
+  // ─── DOO — Glavna knjiga (vidljiva samo za d.o.o.) ──────────────────────────
+  {
+    title: "Glavna knjiga",
+    orgType: "doo",
+    items: [
+      { title: "Kontni plan", url: "/knjigovodstvo/kontni-plan", icon: IconBook, feature: "general_ledger" },
+      { title: "Dnevnik", url: "/knjigovodstvo/dnevnik", icon: IconFileInvoice, feature: "general_ledger" },
+      { title: "Bruto bilans", url: "/knjigovodstvo/bruto-bilans", icon: IconReportAnalytics, feature: "general_ledger" },
+      { title: "Saldakonti", url: "/saldakonti", icon: IconAddressBook, feature: "general_ledger" },
+      { title: "Finansijski izvještaji", url: "/knjigovodstvo/finansijski-izvjestaji", icon: IconReportAnalytics, feature: "general_ledger" },
+      { title: "Usklađivanje (PDV ↔ GK)", url: "/knjigovodstvo/uskladjivanje", icon: IconArrowsLeftRight, feature: "general_ledger" },
+      { title: "Zaključak godine", url: "/zakljucak-godine", icon: IconCalendarStats, feature: "general_ledger" },
+    ],
+  },
+
+  // ─── Zajedničke sekcije ─────────────────────────────────────────────────────
   {
     title: "Zaposlenici",
     items: [
