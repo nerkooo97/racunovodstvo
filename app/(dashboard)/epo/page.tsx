@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import PageHeader from "@/components/shared/page-header";
 import { formatKM, formatDate } from "@/lib/utils";
 import { requireOrgFeature } from "@/lib/organization/server";
+import { getActiveYear } from "@/lib/year";
 import {
   Table,
   TableBody,
@@ -17,13 +18,11 @@ type TabType = "potrazivanja" | "obaveze";
 export default async function EpoPage({
   searchParams,
 }: {
-  searchParams: Promise<{ godina?: string; tab?: string }>;
+  searchParams: Promise<{ tab?: string }>;
 }) {
   const sp = await searchParams;
   const { supabase, org } = await requireOrgFeature("received_invoices");
-
-  const currentYear = new Date().getFullYear();
-  const year = parseInt(sp.godina ?? "") || currentYear;
+  const year = await getActiveYear();
   const tab: TabType =
     sp.tab === "obaveze" ? "obaveze" : "potrazivanja";
 
@@ -65,8 +64,6 @@ export default async function EpoPage({
     0
   );
 
-  const years = Array.from({ length: 5 }, (_, i) => currentYear - i);
-
   return (
     <div>
       <PageHeader
@@ -77,22 +74,6 @@ export default async function EpoPage({
           <Link href="/primljene-fakture/nova">+ Nova primljena faktura</Link>
         </Button>
       </PageHeader>
-
-      <div className="flex gap-2 mb-4 flex-wrap">
-        {years.map((y) => (
-          <Link
-            key={y}
-            href={`/epo?godina=${y}&tab=${tab}`}
-            className={`px-3 py-1 rounded-md border text-sm transition-colors ${
-              y === year
-                ? "bg-primary text-primary-foreground"
-                : "bg-background text-muted-foreground hover:bg-muted"
-            }`}
-          >
-            {y}
-          </Link>
-        ))}
-      </div>
 
       {/* Summary cards */}
       <div className="grid grid-cols-2 gap-4 mb-6">
@@ -131,7 +112,7 @@ export default async function EpoPage({
       {/* Tabs */}
       <div className="flex gap-1 mb-4 border-b">
         <Link
-          href={`/epo?godina=${year}&tab=potrazivanja`}
+          href={`/epo?tab=potrazivanja`}
           className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
             tab === "potrazivanja"
               ? "border-primary text-primary"
@@ -141,7 +122,7 @@ export default async function EpoPage({
           Potraživanja ({issued.length})
         </Link>
         <Link
-          href={`/epo?godina=${year}&tab=obaveze`}
+          href={`/epo?tab=obaveze`}
           className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
             tab === "obaveze"
               ? "border-primary text-primary"

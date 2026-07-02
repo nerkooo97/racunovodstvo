@@ -19,8 +19,8 @@ import {
   KIF_DOCUMENT_TYPES,
   MVP_DOCUMENT_CODES,
   SALE_CATEGORIES,
-  VAT_RATE,
 } from "@/lib/pdv/constants";
+import { getTaxConfig } from "@/lib/constants/tax-config";
 import { round2 } from "@/lib/pdv/amounts";
 
 export default function KifForm({ year, month }: { year: number; month: number }) {
@@ -44,6 +44,10 @@ export default function KifForm({ year, month }: { year: number; month: number }
   const [base0, setBase0] = useState("");
   const [notes, setNotes] = useState("");
 
+  const vatRate = useMemo(() => {
+    return getTaxConfig(docDate || `${year}-${month}-01`).vatRate * 100;
+  }, [docDate, year, month]);
+
   const total = useMemo(() => {
     return round2(
       (parseFloat(base17) || 0) + (parseFloat(vat17) || 0) + (parseFloat(base0) || 0)
@@ -52,7 +56,7 @@ export default function KifForm({ year, month }: { year: number; month: number }
 
   function applyVat() {
     const b = parseFloat(base17) || 0;
-    setVat17(round2(b * (VAT_RATE / 100)).toFixed(2));
+    setVat17(round2(b * (vatRate / 100)).toFixed(2));
   }
 
   function submit() {

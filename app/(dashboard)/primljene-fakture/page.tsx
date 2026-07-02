@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import PageHeader from "@/components/shared/page-header";
 import { formatKM, formatDate } from "@/lib/utils";
 import { requireOrgFeature } from "@/lib/organization/server";
+import { getActiveYear } from "@/lib/year";
 import {
   Table,
   TableBody,
@@ -16,13 +17,11 @@ import ReceivedInvoiceDeleteButton from "./ReceivedInvoiceDeleteButton";
 export default async function PrimljeneFakturePage({
   searchParams,
 }: {
-  searchParams: Promise<{ godina?: string; status?: string }>;
+  searchParams: Promise<{ status?: string }>;
 }) {
   const sp = await searchParams;
   const { supabase, org } = await requireOrgFeature("received_invoices");
-
-  const currentYear = new Date().getFullYear();
-  const year = parseInt(sp.godina ?? "") || currentYear;
+  const year = await getActiveYear();
   const status = sp.status ?? "sve";
 
   const from = `${year}-01-01`;
@@ -48,8 +47,6 @@ export default async function PrimljeneFakturePage({
   const totalPaid = filtered.reduce((s, i) => s + (i.paid_amount ?? 0), 0);
   const totalUnpaid = totalAmount - totalPaid;
 
-  const years = Array.from({ length: 5 }, (_, i) => currentYear - i);
-
   return (
     <div>
       <PageHeader
@@ -61,27 +58,11 @@ export default async function PrimljeneFakturePage({
         </Button>
       </PageHeader>
 
-      <div className="flex gap-2 mb-4 flex-wrap">
-        {years.map((y) => (
-          <Link
-            key={y}
-            href={`/primljene-fakture?godina=${y}`}
-            className={`px-3 py-1 rounded-md border text-sm transition-colors ${
-              y === year
-                ? "bg-primary text-primary-foreground"
-                : "bg-background text-muted-foreground hover:bg-muted"
-            }`}
-          >
-            {y}
-          </Link>
-        ))}
-      </div>
-
       <div className="flex gap-2 mb-4">
         {(["sve", "neplacene", "placene"] as const).map((s) => (
           <Link
             key={s}
-            href={`/primljene-fakture?godina=${year}&status=${s}`}
+            href={`/primljene-fakture?status=${s}`}
             className={`px-3 py-1 rounded-md text-sm transition-colors ${
               status === s
                 ? "bg-secondary text-secondary-foreground font-medium"

@@ -29,15 +29,10 @@ function RowList({ rows }: { rows: StatementRow[] }) {
   );
 }
 
-export default async function FinansijskiIzvjestajiPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ godina?: string }>;
-}) {
+export default async function FinansijskiIzvjestajiPage() {
   await requireOrgFeature("general_ledger");
-
-  const { godina } = await searchParams;
-  const year = parseInt(godina ?? "", 10) || new Date().getFullYear();
+  const { getActiveYear } = await import("@/lib/year");
+  const year = await getActiveYear();
 
   const res = await getTrialBalance(year);
   const tb = res.rows ?? [];

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
+import { getActiveOrgId } from "@/lib/supabase/get-active-org";
 import { generateFilledMip1023Pdf, Mip1023FillData, Mip1023RowItem } from "@/lib/pdf/mip-1023-fill";
 import { calculateFromGross, SalaryCalculation } from "@/lib/calculations/salary";
 
@@ -12,13 +13,10 @@ export async function GET(req: NextRequest) {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return new NextResponse("Unauthorized", { status: 401 });
 
-  const { data: org } = await supabase
-    .from("organizations")
-    .select("id, name, tax_id, activity_code, activity_name, type")
-    .eq("owner_id", user.id)
-    .order("created_at", { ascending: true })
-    .limit(1)
-    .single();
+  const activeOrgId = await getActiveOrgId(supabase, user.id);
+  const { data: org } = activeOrgId
+    ? await supabase.from("organizations").select("id, name, tax_id, activity_code, activity_name, type").eq("id", activeOrgId).single()
+    : { data: null };
 
   if (!org) return new NextResponse("No organization", { status: 404 });
 
@@ -52,7 +50,7 @@ export async function GET(req: NextRequest) {
 
   const rowItems: Mip1023RowItem[] = (items ?? []).map((it) => {
     const emp = Array.isArray(it.employee) ? it.employee[0] : it.employee;
-    const calc: SalaryCalculation = calculateFromGross(it.gross_salary ?? 0, it.tax_coefficient ?? 1.0, orgType);
+    const calc: SalaryCalculation = calculateFromGross(it.gross_salary ?? 0, it.tax_coefficient ?? 1.0, orgType, undefined, undefined, `${period.year}-${String(period.month).padStart(2, "0")}-01`);
 
     totalGross += calc.gross_salary;
     totalContribFrom += calc.total_contributions_from;

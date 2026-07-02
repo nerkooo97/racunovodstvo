@@ -1,0 +1,134 @@
+Obrazac KP1042 Knjiga prometa nastavak
+odObrazac KP1042 Knjiga prometa nastavak
+Donos  ukupan zbir sa prethodne straniceRow1
+Donos  ukupan zbir sa prethodne straniceRow1_2
+Donos  ukupan zbir sa prethodne straniceRow1_3
+Donos  ukupan zbir sa prethodne straniceRow1_4
+Donos  ukupan zbir sa prethodne straniceRow2
+Donos  ukupan zbir sa prethodne straniceRow2_2
+Donos  ukupan zbir sa prethodne straniceRow2_3
+Donos  ukupan zbir sa prethodne straniceRow2_4
+Donos  ukupan zbir sa prethodne straniceRow3
+Donos  ukupan zbir sa prethodne straniceRow3_2
+Donos  ukupan zbir sa prethodne straniceRow3_3
+Donos  ukupan zbir sa prethodne straniceRow3_4
+Donos  ukupan zbir sa prethodne straniceRow4
+Donos  ukupan zbir sa prethodne straniceRow4_2
+Donos  ukupan zbir sa prethodne straniceRow4_3
+Donos  ukupan zbir sa prethodne straniceRow4_4
+Donos  ukupan zbir sa prethodne straniceRow5
+Donos  ukupan zbir sa prethodne straniceRow5_2
+Donos  ukupan zbir sa prethodne straniceRow5_3
+Donos  ukupan zbir sa prethodne straniceRow5_4
+Donos  ukupan zbir sa prethodne straniceRow6
+Donos  ukupan zbir sa prethodne straniceRow6_2
+Donos  ukupan zbir sa prethodne straniceRow6_3
+Donos  ukupan zbir sa prethodne straniceRow6_4
+Donos  ukupan zbir sa prethodne straniceRow7
+Donos  ukupan zbir sa prethodne straniceRow7_2
+Donos  ukupan zbir sa prethodne straniceRow7_3
+Donos  ukupan zbir sa prethodne straniceRow7_4
+Donos  ukupan zbir sa prethodne straniceRow8
+Donos  ukupan zbir sa prethodne straniceRow8_2
+Donos  ukupan zbir sa prethodne straniceRow8_3
+Donos  ukupan zbir sa prethodne straniceRow8_4
+Donos  ukupan zbir sa prethodne straniceRow9
+Donos  ukupan zbir sa prethodne straniceRow9_2
+Donos  ukupan zbir sa prethodne straniceRow9_3
+Donos  ukupan zbir sa prethodne straniceRow9_4
+Donos  ukupan zbir sa prethodne straniceRow10
+Donos  ukupan zbir sa prethodne straniceRow10_2
+Donos  ukupan zbir sa prethodne straniceRow10_3
+Donos  ukupan zbir sa prethodne straniceRow10_4
+Donos  ukupan zbir sa prethodne straniceRow11
+Donos  ukupan zbir sa prethodne straniceRow11_2
+Donos  ukupan zbir sa prethodne straniceRow11_3
+Donos  ukupan zbir sa prethodne straniceRow11_4
+Donos  ukupan zbir sa prethodne straniceRow12
+Donos  ukupan zbir sa prethodne straniceRow12_2
+Donos  ukupan zbir sa prethodne straniceRow12_3
+Donos  ukupan zbir sa prethodne straniceRow12_4
+Donos  ukupan zbir sa prethodne straniceRow13
+Donos  ukupan zbir sa prethodne straniceRow13_2
+Donos  ukupan zbir sa prethodne straniceRow13_3
+Donos  ukupan zbir sa prethodne straniceRow13_4
+Donos  ukupan zbir sa prethodne straniceRow14
+Donos  ukupan zbir sa prethodne straniceRow14_2
+Donos  ukupan zbir sa prethodne straniceRow14_3
+Donos  ukupan zbir sa prethodne straniceRow14_4
+Donos  ukupan zbir sa prethodne straniceRow15
+Donos  ukupan zbir sa prethodne straniceRow15_2
+Donos  ukupan zbir sa prethodne straniceRow15_3
+Donos  ukupan zbir sa prethodne straniceRow15_4
+Donos  ukupan zbir sa prethodne straniceRow16
+Donos  ukupan zbir sa prethodne straniceRow16_2
+Donos  ukupan zbir sa prethodne straniceRow16_3
+Donos  ukupan zbir sa prethodne straniceRow16_4
+Donos  ukupan zbir sa prethodne straniceRow17
+Donos  ukupan zbir sa prethodne straniceRow17_2
+Donos  ukupan zbir sa prethodne straniceRow17_3
+Donos  ukupan zbir sa prethodne straniceRow17_4
+Donos  ukupan zbir sa prethodne straniceRow18
+Donos  ukupan zbir sa prethodne straniceRow18_2
+Donos  ukupan zbir sa prethodne straniceRow18_3
+Donos  ukupan zbir sa prethodne straniceRow18_4
+fill_2.0
+fill_2.1.0
+fill_2.1.1
+fill_7_2.0
+fill_7_2.1.0
+fill_7_2.1.1
+fill_12.0
+fill_12.1.0
+fill_12.1.1
+fill_17_2.0
+fill_17_2.1.0
+fill_17_2.1.1
+fill_22.0
+fill_22.1.0
+fill_22.1.1
+fill_27.0
+fill_27.1.0
+fill_27.1.1
+fill_32.0
+fill_32.1.0
+fill_32.1.1
+fill_37.0
+fill_37.1.0
+fill_37.1.1
+fill_42.0
+fill_42.1.0
+fill_42.1.1
+fill_47.0
+fill_47.1.0
+fill_47.1.1
+fill_52.0
+fill_52.1.0
+fill_52.1.1
+fill_57.0
+fill_57.1.0
+fill_57.1.1
+fill_62.0
+fill_62.1.0
+fill_62.1.1
+fill_67.0
+fill_67.1.0
+fill_67.1.1
+fill_72.0
+fill_72.1.0
+fill_72.1.1
+fill_77.0
+fill_77.1.0
+fill_77.1.1
+fill_82.0
+fill_82.1.0
+fill_82.1.1
+fill_87.0
+fill_87.1.0
+fill_87.1.1
+fill_92.0
+fill_92.1.0
+fill_92.1.1
+fill_93.0
+fill_93.1.0
+fill_93.1.1

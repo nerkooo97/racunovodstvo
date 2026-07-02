@@ -4,8 +4,8 @@ import { redirect } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { formatKM } from "@/lib/utils";
 import { getActiveOrgId } from "@/lib/supabase/get-active-org";
+import { getActiveYear } from "@/lib/year";
 import { getRegime } from "@/lib/organization/regime";
 import {
   Users,
@@ -99,7 +99,7 @@ export default async function DashboardPage() {
   if (!org) redirect("/nova-djelatnost");
 
   const now   = new Date();
-  const year  = now.getFullYear();
+  const year  = await getActiveYear();
   const month = now.getMonth() + 1;
 
   const [

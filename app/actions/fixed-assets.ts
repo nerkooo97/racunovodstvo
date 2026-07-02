@@ -20,21 +20,46 @@ interface FixedAssetInput {
   notes: string | null;
 }
 
+/**
+ * Amortizacija se priznaje od mjeseca stavljanja u upotrebu (čl. 19 st. 5
+ * Zakona o porezu na dobit FBiH) — pro-rata po mjesecima u godini nabavke.
+ */
 function annualDepreciation(
   acquisitionCost: number,
   rate: number,
   acquisitionDate: string,
   year: number
 ): { annual: number; accumulated: number; bookValue: number } {
-  const acqYear = new Date(acquisitionDate).getFullYear();
-  const yearsElapsed = year - acqYear + 1;
-  const annual = Math.round(acquisitionCost * (rate / 100) * 100) / 100;
-  const accumulated = Math.min(
-    Math.round(annual * Math.max(0, yearsElapsed) * 100) / 100,
-    acquisitionCost
-  );
+  const acq = new Date(acquisitionDate);
+  const acqYear = acq.getFullYear();
+  const acqMonth = acq.getMonth() + 1; // 1-12
+  const fullAnnual = Math.round(acquisitionCost * (rate / 100) * 100) / 100;
+
+  // Amortizacija za konkretnu godinu: u godini nabavke pro-rata od mjeseca nabavke
+  const annualFor = (y: number): number => {
+    if (y < acqYear) return 0;
+    if (y === acqYear) {
+      const months = 12 - acqMonth + 1;
+      return Math.round(fullAnnual * (months / 12) * 100) / 100;
+    }
+    return fullAnnual;
+  };
+
+  let accumulated = 0;
+  for (let y = acqYear; y <= year; y++) {
+    accumulated = Math.round((accumulated + annualFor(y)) * 100) / 100;
+    if (accumulated >= acquisitionCost) {
+      accumulated = acquisitionCost;
+      break;
+    }
+  }
+
+  // Godišnji iznos ograničen preostalom vrijednošću (zadnja godina otpisa)
+  const priorAccumulated = Math.max(0, Math.round((accumulated - annualFor(year)) * 100) / 100);
+  const annual = Math.min(annualFor(year), Math.round((acquisitionCost - priorAccumulated) * 100) / 100);
+
   const bookValue = Math.max(0, Math.round((acquisitionCost - accumulated) * 100) / 100);
-  return { annual, accumulated, bookValue };
+  return { annual: Math.max(0, annual), accumulated, bookValue };
 }
 
 export async function addFixedAsset(
@@ -86,7 +111,14 @@ export async function addFixedAsset(
   }
 
   if (yearRows.length > 0) {
-    await supabase.from("fixed_asset_years").insert(yearRows);
+    const { error: yearsErr } = await supabase
+      .from("fixed_asset_years")
+      .insert(yearRows);
+    if (yearsErr) {
+      // Sredstvo bez amortizacionih redova je nepotpuno — ukloni ga i javi grešku
+      await supabase.from("fixed_assets").delete().eq("id", data.id);
+      return { error: `Greška pri obračunu amortizacije: ${yearsErr.message}` };
+    }
   }
 
   revalidatePath("/dugotrajnaimovina");

@@ -12,16 +12,16 @@ import {
 import { formatKM } from "@/lib/utils";
 import { requireOrgFeature } from "@/lib/organization/server";
 import { getTrialBalance } from "@/app/actions/accounting/reports";
+import { getActiveYear } from "@/lib/year";
 
 export default async function BrutoBilansPage({
   searchParams,
 }: {
-  searchParams: Promise<{ godina?: string; mjesec?: string }>;
+  searchParams: Promise<{ mjesec?: string }>;
 }) {
   await requireOrgFeature("general_ledger");
-
-  const { godina, mjesec } = await searchParams;
-  const year = parseInt(godina ?? "", 10) || new Date().getFullYear();
+  const year = await getActiveYear();
+  const { mjesec } = await searchParams;
   const month = mjesec ? parseInt(mjesec, 10) : undefined;
 
   const res = await getTrialBalance(year, month);
@@ -59,7 +59,7 @@ export default async function BrutoBilansPage({
               <TableRow key={r.code}>
                 <TableCell className="font-mono">
                   <Link
-                    href={`/knjigovodstvo/kartica/${r.code}?godina=${year}`}
+                    href={`/knjigovodstvo/kartica/${r.code}`}
                     className="text-primary hover:underline"
                   >
                     {r.code}

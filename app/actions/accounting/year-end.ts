@@ -22,18 +22,25 @@ export async function getYearEndSummary(year: number): Promise<{ error?: string;
   const check = assertFeature(org.type, "general_ledger");
   if (!check.ok) return { error: check.error };
 
-  const { data: lines } = await supabase
-    .from("journal_lines")
-    .select("account_code, debit, credit, journal_entries!inner(period_year, source_type)")
-    .eq("organization_id", org.id)
-    .eq("journal_entries.period_year", year);
+  const [{ data: lines }, { data: period }] = await Promise.all([
+    supabase
+      .from("journal_lines")
+      .select("account_code, debit, credit, journal_entries!inner(period_year, source_type)")
+      .eq("organization_id", org.id)
+      .eq("journal_entries.period_year", year),
+    supabase
+      .from("accounting_periods")
+      .select("status")
+      .eq("organization_id", org.id)
+      .eq("year", year)
+      .maybeSingle(),
+  ]);
 
   let totalRevenue = 0;
   let totalExpenses = 0;
-  let alreadyClosed = false;
+  let alreadyClosed = period?.status === "closed";
 
   for (const line of lines ?? []) {
-    const entry = line.journal_entries as unknown as { period_year: number; source_type: string };
     const code = line.account_code as string;
     const debit = Number(line.debit) || 0;
     const credit = Number(line.credit) || 0;
@@ -78,13 +85,24 @@ export async function closeYear(
   const entryDate = `${year}-12-31`;
   const sourcePrefix = `year-end-${year}-${org.id}`;
 
-  // Provjeri idempotenciju
-  const { count } = await supabase
-    .from("journal_entries")
-    .select("id", { count: "exact", head: true })
-    .eq("organization_id", org.id)
-    .eq("source_id", `${sourcePrefix}-1`);
-  if ((count ?? 0) > 0) return { error: `Godina ${year}. je već zaključena.` };
+  // Provjeri idempotenciju: zaključana godina ili već postojeći zaključni nalog.
+  // (Konkurentne pozive dodatno štiti unique indeks na source_id u bazi.)
+  const [{ data: period }, { count }] = await Promise.all([
+    supabase
+      .from("accounting_periods")
+      .select("status")
+      .eq("organization_id", org.id)
+      .eq("year", year)
+      .maybeSingle(),
+    supabase
+      .from("journal_entries")
+      .select("id", { count: "exact", head: true })
+      .eq("organization_id", org.id)
+      .eq("source_id", `${sourcePrefix}-1`),
+  ]);
+  if (period?.status === "closed" || (count ?? 0) > 0) {
+    return { error: `Godina ${year}. je već zaključena.` };
+  }
 
   // ─── Dohvati salde klase 5 i 6 ──────────────────────────────────────────
   const { data: lines } = await supabase
@@ -168,8 +186,12 @@ export async function closeYear(
     }
 
     if (tax > 0) {
+      // D 7210 / P 4820 — porez na dobit kao obaveza
       lines3.push({ account_code: POSTING_ACCOUNTS.corporateTaxExpense, debit: tax, credit: 0, sort_order: 3 });
       lines3.push({ account_code: POSTING_ACCOUNTS.corporateTaxPayable, debit: 0, credit: tax, sort_order: 4 });
+      // D 7200 / P 7210 — zatvaranje 7210 na rezultat, da klasa 7 ostane saldirana
+      lines3.push({ account_code: POSTING_ACCOUNTS.netResult, debit: tax, credit: 0, sort_order: 5 });
+      lines3.push({ account_code: POSTING_ACCOUNTS.corporateTaxExpense, debit: 0, credit: tax, sort_order: 6 });
     }
 
     if (lines3.length >= 2) {
@@ -228,6 +250,20 @@ export async function closeYear(
       });
       if (res5.error) return { error: `Nalog 4b: ${res5.error}` };
     }
+  }
+
+  // Zaključaj godinu — dalja knjiženja/izmjene blokira DB trigger (period guard)
+  const { error: lockErr } = await supabase
+    .from("accounting_periods")
+    .upsert({
+      organization_id: org.id,
+      year,
+      status: "closed",
+      closed_at: new Date().toISOString(),
+      closed_by: user.id,
+    });
+  if (lockErr) {
+    return { error: `Nalozi su proknjiženi, ali zaključavanje godine nije uspjelo: ${lockErr.message}` };
   }
 
   revalidatePath("/knjigovodstvo/dnevnik");

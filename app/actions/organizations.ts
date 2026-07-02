@@ -13,17 +13,12 @@ const createOrgSchema = z.object({
 });
 
 export async function createOrganization(formData: FormData) {
-  console.log("createOrganization pozvan sa:", Object.fromEntries(formData.entries()));
   const supabase = await createClient();
   const {
     data: { user },
-    error: userError,
   } = await supabase.auth.getUser();
-  
-  console.log("createOrganization - getUser rezultat:", { user: user?.id, userError });
-  
+
   if (!user) {
-    console.log("createOrganization - Nema korisnika, redirect na /login");
     redirect("/login");
   }
 
@@ -33,11 +28,9 @@ export async function createOrganization(formData: FormData) {
   });
 
   if (!parsed.success) {
-    console.log("createOrganization - Validacija neuspješna:", parsed.error.issues);
     return { error: parsed.error.issues[0]?.message ?? "Nevažeći podaci." };
   }
 
-  console.log("createOrganization - Pokušavam insert u bazu za user:", user.id);
   const { error } = await supabase.from("organizations").insert({
     name: parsed.data.name,
     type: parsed.data.type,
@@ -54,7 +47,6 @@ export async function createOrganization(formData: FormData) {
     };
   }
 
-  console.log("createOrganization - Insert uspješan! Revalidacija /dashboard i redirect.");
   revalidatePath("/dashboard");
   redirect("/dashboard");
 }
@@ -138,36 +130,58 @@ export async function updateOrganization(
 }
 
 export async function setActiveOrg(orgId: string) {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (!user) redirect("/login");
+  try {
+    const supabase = await createClient();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    if (!user) redirect("/login");
 
-  const { data: org } = await supabase
-    .from("organizations")
-    .select("id")
-    .eq("id", orgId)
-    .eq("owner_id", user.id)
-    .single();
+    const { data: org, error: orgError } = await supabase
+      .from("organizations")
+      .select("id")
+      .eq("id", orgId)
+      .eq("owner_id", user.id)
+      .single();
 
-  if (!org) return { error: "Organizacija nije pronađena" };
+    if (orgError || !org) {
+      return { error: orgError?.message || "Organizacija nije pronađena" };
+    }
 
-  const cookieStore = await cookies();
-  cookieStore.set("active_org_id", orgId, {
-    httpOnly: true,
-    secure: appCookieSecure(),
-    sameSite: "lax",
-    path: "/",
-    maxAge: 60 * 60 * 24 * 30,
-  });
+    const cookieStore = await cookies();
+    cookieStore.set("active_org_id", orgId, {
+      httpOnly: true,
+      secure: appCookieSecure(),
+      sameSite: "lax",
+      path: "/",
+      maxAge: 60 * 60 * 24 * 30,
+    });
 
-  revalidatePath("/", "layout");
+    revalidatePath("/", "layout");
+    return { success: true };
+  } catch (err: any) {
+    console.error("setActiveOrg error:", err);
+    if (err && err.digest && err.digest.startsWith("NEXT_REDIRECT")) {
+      throw err;
+    }
+    return { error: err.message || "Neočekivana greška pri postavljanju aktivne organizacije" };
+  }
 }
 
-export async function selectOrgAndRedirect(formData: FormData) {
-  const orgId = formData.get("orgId") as string;
-  if (!orgId) return;
-  await setActiveOrg(orgId);
-  redirect("/dashboard");
+export async function selectOrgAndRedirect(formData: FormData): Promise<void> {
+  try {
+    const orgId = formData.get("orgId") as string;
+    if (!orgId) return;
+    const res = await setActiveOrg(orgId);
+    if (res && "error" in res) {
+      console.error("selectOrgAndRedirect error:", res.error);
+      return;
+    }
+    redirect("/dashboard");
+  } catch (err: any) {
+    if (err && err.digest && err.digest.startsWith("NEXT_REDIRECT")) {
+      throw err;
+    }
+    console.error("selectOrgAndRedirect redirection error:", err);
+  }
 }

@@ -1,4 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
+import { getActiveOrgId } from "@/lib/supabase/get-active-org";
+import { getActiveYear } from "@/lib/year";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -25,22 +27,19 @@ const STATUS_MAP: Record<string, { label: string; variant: "default" | "secondar
   cancelled:   { label: "Otkazano",   variant: "outline" },
 };
 
-const now = new Date();
-const CURRENT_YEAR  = now.getFullYear();
-const CURRENT_MONTH = now.getMonth() + 1;
+const CURRENT_MONTH = new Date().getMonth() + 1;
 
 export default async function PlacePage() {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
-  const { data: org } = await supabase
-    .from("organizations")
-    .select("id, name")
-    .eq("owner_id", user.id)
-    .order("created_at", { ascending: true })
-    .limit(1)
-    .single();
+  const activeYear = await getActiveYear();
+
+  const activeOrgId = await getActiveOrgId(supabase, user.id);
+  const { data: org } = activeOrgId
+    ? await supabase.from("organizations").select("id, name").eq("id", activeOrgId).single()
+    : { data: null };
 
   if (!org) redirect("/nova-djelatnost");
 
@@ -55,7 +54,7 @@ export default async function PlacePage() {
     <div>
       <PageHeader title="Obračun plata" description={org.name}>
         <Button asChild>
-          <Link href={`/place/${CURRENT_YEAR}/${CURRENT_MONTH}`}>
+          <Link href={`/place/${activeYear}/${CURRENT_MONTH}`}>
             Novi obračun
           </Link>
         </Button>
@@ -97,7 +96,7 @@ export default async function PlacePage() {
         <div className="rounded-lg border border-dashed p-12 text-center">
           <p className="text-muted-foreground mb-4">Još nema obračuna plata.</p>
           <Button asChild>
-            <Link href={`/place/${CURRENT_YEAR}/${CURRENT_MONTH}`}>
+            <Link href={`/place/${activeYear}/${CURRENT_MONTH}`}>
               Kreiraj obračun za ovaj mjesec
             </Link>
           </Button>

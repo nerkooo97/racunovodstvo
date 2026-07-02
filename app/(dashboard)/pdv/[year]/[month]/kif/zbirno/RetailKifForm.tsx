@@ -9,7 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import FormSection from "@/components/shared/form-section";
 import { addRetailKifEntry } from "@/app/actions/pdv/kif";
 import { round2 } from "@/lib/pdv/amounts";
-import { VAT_RATE } from "@/lib/pdv/constants";
+import { getTaxConfig } from "@/lib/constants/tax-config";
 
 export default function RetailKifForm({
   year,
@@ -33,6 +33,10 @@ export default function RetailKifForm({
   const [base0, setBase0] = useState("");
   const [notes, setNotes] = useState("");
 
+  const vatRate = useMemo(() => {
+    return getTaxConfig(docDate || `${year}-${month}-01`).vatRate * 100;
+  }, [docDate, year, month]);
+
   const total = useMemo(
     () =>
       round2(
@@ -42,10 +46,10 @@ export default function RetailKifForm({
   );
 
   function deriveFromGross() {
-    // Ako korisnik zna bruto promet sa PDV-om, izvuci osnovicu i PDV (17%).
+    // Ako korisnik zna bruto promet sa PDV-om, izvuci osnovicu i PDV.
     const gross = parseFloat(base17) || 0;
     if (gross <= 0) return;
-    const base = round2(gross / (1 + VAT_RATE / 100));
+    const base = round2(gross / (1 + vatRate / 100));
     setBase17(base.toFixed(2));
     setVat17(round2(gross - base).toFixed(2));
   }

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { renderToBuffer } from "@react-pdf/renderer";
 import { createElement } from "react";
 import { createClient } from "@/lib/supabase/server";
+import { getActiveOrgId } from "@/lib/supabase/get-active-org";
 import { PlatniListic, PlatniListicList, PlatniListicData } from "@/lib/pdf/platni-listic";
 import { calculateFromGross, calculateActiveDaysInMonth } from "@/lib/calculations/salary";
 
@@ -18,13 +19,10 @@ export async function handlePlatniListicPdf(req: NextRequest) {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return new NextResponse("Unauthorized", { status: 401 });
 
-  const { data: org } = await supabase
-    .from("organizations")
-    .select("id, name, address, city, tax_id, type")
-    .eq("owner_id", user.id)
-    .order("created_at", { ascending: true })
-    .limit(1)
-    .single();
+  const activeOrgId = await getActiveOrgId(supabase, user.id);
+  const { data: org } = activeOrgId
+    ? await supabase.from("organizations").select("id, name, address, city, tax_id, type").eq("id", activeOrgId).single()
+    : { data: null };
 
   if (!org) return new NextResponse("No organization", { status: 404 });
 
@@ -88,14 +86,17 @@ function mapItemToPdfData(item: any, org: any): PlatniListicData {
   const period = Array.isArray(item.period) ? item.period[0] : item.period;
   const orgType = (org.type as "obrt" | "doo") ?? "obrt";
 
+  const targetYear = period?.year ?? new Date().getFullYear();
+  const targetMonth = period?.month ?? (new Date().getMonth() + 1);
+
   const calc = calculateFromGross(
     item.gross_salary ?? 0,
     item.tax_coefficient ?? 1.0,
-    orgType
+    orgType,
+    undefined,
+    undefined,
+    `${targetYear}-${String(targetMonth).padStart(2, "0")}-01`
   );
-
-  const targetYear = period?.year ?? new Date().getFullYear();
-  const targetMonth = period?.month ?? (new Date().getMonth() + 1);
 
   const { activeDays, totalDays } = calculateActiveDaysInMonth(
     targetYear,

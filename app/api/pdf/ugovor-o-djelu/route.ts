@@ -35,7 +35,7 @@ export async function handleUgovorODjeluPdf(req: NextRequest) {
   };
 
   const buffer = await renderToBuffer(
-    createElement(UgovorODjeluDocument, { data })
+    createElement(UgovorODjeluDocument, { data }) as any
   );
 
   const filename = `ugovor-o-djelu-${data.izvrsName.replace(/\s+/g, "-") || "dokument"}.pdf`;

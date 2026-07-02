@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { renderToBuffer } from "@react-pdf/renderer";
 import { createElement } from "react";
 import { createClient } from "@/lib/supabase/server";
+import { getActiveOrgId } from "@/lib/supabase/get-active-org";
 import { FakturaPdf } from "@/lib/pdf/faktura";
 
 export async function handleFakturaPdf(req: NextRequest) {
@@ -13,13 +14,10 @@ export async function handleFakturaPdf(req: NextRequest) {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return new NextResponse("Unauthorized", { status: 401 });
 
-  const { data: org } = await supabase
-    .from("organizations")
-    .select("id, name, address, city, tax_id, vat_number")
-    .eq("owner_id", user.id)
-    .order("created_at", { ascending: true })
-    .limit(1)
-    .single();
+  const activeOrgId = await getActiveOrgId(supabase, user.id);
+  const { data: org } = activeOrgId
+    ? await supabase.from("organizations").select("id, name, address, city, tax_id, vat_number").eq("id", activeOrgId).single()
+    : { data: null };
 
   if (!org) return new NextResponse("No organization", { status: 404 });
 

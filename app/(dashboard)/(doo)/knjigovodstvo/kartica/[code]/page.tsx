@@ -13,19 +13,17 @@ import {
 import { formatKM, formatDate } from "@/lib/utils";
 import { requireOrgFeature } from "@/lib/organization/server";
 import { getAccountCard } from "@/app/actions/accounting/reports";
+import { getActiveYear } from "@/lib/year";
 
 export default async function KarticaKontaPage({
   params,
-  searchParams,
 }: {
   params: Promise<{ code: string }>;
-  searchParams: Promise<{ godina?: string }>;
 }) {
   await requireOrgFeature("general_ledger");
 
   const { code } = await params;
-  const { godina } = await searchParams;
-  const year = parseInt(godina ?? "", 10) || new Date().getFullYear();
+  const year = await getActiveYear();
 
   const res = await getAccountCard(code, year);
   const rows = res.rows ?? [];
@@ -37,7 +35,7 @@ export default async function KarticaKontaPage({
         description={`${res.name ?? ""} · ${year}`}
       >
         <Button asChild variant="outline" size="sm" className="gap-1.5">
-          <Link href={`/knjigovodstvo/bruto-bilans?godina=${year}`}>
+          <Link href="/knjigovodstvo/bruto-bilans">
             <ArrowLeft className="h-4 w-4" />
             Bruto bilans
           </Link>

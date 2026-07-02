@@ -4,15 +4,10 @@ import PageHeader from "@/components/shared/page-header";
 import KpEntryForm from "@/components/forms/kp-entry-form";
 import { ArrowLeft } from "lucide-react";
 import { requireOrgFeature } from "@/lib/organization/server";
+import { getActiveYear } from "@/lib/year";
 
-export default async function KpNoviPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ godina?: string }>;
-}) {
-  const sp = await searchParams;
-  const year = parseInt(sp.godina ?? "") || new Date().getFullYear();
-
+export default async function KpNoviPage() {
+  const year = await getActiveYear();
   await requireOrgFeature("kp");
 
   return (
@@ -22,7 +17,7 @@ export default async function KpNoviPage({
         description={`Evidencija naplaćenog prometa za ${year}. godinu`}
       >
         <Button asChild variant="outline" size="sm" className="gap-1.5">
-          <Link href={`/kp?godina=${year}`}>
+          <Link href="/kp">
             <ArrowLeft className="h-4 w-4" />
             Nazad na KP
           </Link>

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
+import { getActiveOrgId } from "@/lib/supabase/get-active-org";
 import { saveEmployeeDocumentRecord } from "@/app/actions/organization-documents";
 import {
   documentYearFromDate,
@@ -16,13 +17,10 @@ async function getEmployeeAndOrg(employeeId: string) {
   } = await supabase.auth.getUser();
   if (!user) return null;
 
-  const { data: org } = await supabase
-    .from("organizations")
-    .select("id, name, address, city, tax_id")
-    .eq("owner_id", user.id)
-    .order("created_at", { ascending: true })
-    .limit(1)
-    .single();
+  const activeOrgId = await getActiveOrgId(supabase, user.id);
+  const { data: org } = activeOrgId
+    ? await supabase.from("organizations").select("id, name, address, city, tax_id").eq("id", activeOrgId).single()
+    : { data: null };
 
   if (!org) return null;
 

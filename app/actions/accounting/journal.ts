@@ -6,7 +6,6 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 import { requireActiveOrganization } from "@/lib/organization/server";
 import { assertFeature } from "@/lib/organization/regime";
 import { round2 } from "@/lib/pdv/amounts";
-import { periodFromDateString } from "@/lib/pdv/period";
 import { accountName } from "@/lib/accounting/standard-chart";
 import type {
   JournalEntry,
@@ -15,21 +14,6 @@ import type {
   JournalSourceType,
 } from "@/lib/accounting/types";
 import { ensureChartOfAccounts } from "./accounts";
-
-/** Sljedeći broj naloga za godinu (NAL-YYYY-NNN). */
-export async function nextEntryNumber(
-  supabase: SupabaseClient,
-  orgId: string,
-  year: number
-): Promise<string> {
-  const { count } = await supabase
-    .from("journal_entries")
-    .select("id", { count: "exact", head: true })
-    .eq("organization_id", orgId)
-    .eq("period_year", year);
-  const seq = (count ?? 0) + 1;
-  return `NAL-${year}-${String(seq).padStart(4, "0")}`;
-}
 
 interface PostJournalInput {
   entry_date: string;
@@ -40,15 +24,16 @@ interface PostJournalInput {
 }
 
 /**
- * Interno knjiženje (koristi se i iz automatskih pravila). Ne radi auth provjeru —
- * pozivalac mora osigurati ovlaštenje. Provjerava ravnotežu duguje/potražuje.
+ * Knjiženje kroz atomsku RPC funkciju (jedna transakcija: broj naloga + zaglavlje
+ * + stavke + ravnoteža + idempotencija po source_id). Ne radi auth provjeru na
+ * app nivou — RPC provjerava vlasništvo organizacije.
  */
 export async function postJournalEntry(
   supabase: SupabaseClient,
   orgId: string,
   userId: string | null,
   input: PostJournalInput
-): Promise<{ error?: string; id?: string }> {
+): Promise<{ error?: string; id?: string; skipped?: boolean }> {
   const lines = input.lines.filter(
     (l) => round2(l.debit) !== 0 || round2(l.credit) !== 0
   );
@@ -65,52 +50,27 @@ export async function postJournalEntry(
   }
   if (totalDebit === 0) return { error: "Iznos naloga ne može biti nula." };
 
-  const period = periodFromDateString(input.entry_date);
-  const entryNumber = await nextEntryNumber(supabase, orgId, period.year);
+  const { data, error } = await supabase.rpc("post_journal_entry", {
+    p_org_id: orgId,
+    p_user_id: userId,
+    p_entry_date: input.entry_date,
+    p_description: input.description,
+    p_source_type: input.source_type,
+    p_source_id: input.source_id ?? null,
+    p_lines: lines.map((l, i) => ({
+      account_code: l.account_code,
+      account_name: l.account_name || accountName(l.account_code),
+      description: l.description ?? null,
+      debit: round2(l.debit || 0),
+      credit: round2(l.credit || 0),
+      sort_order: l.sort_order ?? i,
+      partner_id: l.partner_id ?? null,
+    })),
+  });
 
-  const { data: entry, error: entryErr } = await supabase
-    .from("journal_entries")
-    .insert({
-      organization_id: orgId,
-      entry_number: entryNumber,
-      entry_date: input.entry_date,
-      period_year: period.year,
-      period_month: period.month,
-      description: input.description,
-      source_type: input.source_type,
-      source_id: input.source_id ?? null,
-      posted: true,
-      created_by: userId,
-    })
-    .select("id")
-    .single();
-
-  if (entryErr || !entry) {
-    return { error: entryErr?.message ?? "Greška pri kreiranju naloga." };
-  }
-
-  const lineRows = lines.map((l, i) => ({
-    journal_entry_id: entry.id,
-    organization_id: orgId,
-    account_code: l.account_code,
-    account_name: l.account_name || accountName(l.account_code),
-    description: l.description ?? null,
-    debit: round2(l.debit || 0),
-    credit: round2(l.credit || 0),
-    sort_order: l.sort_order ?? i,
-    partner_id: l.partner_id ?? null,
-  }));
-
-  const { error: linesErr } = await supabase
-    .from("journal_lines")
-    .insert(lineRows);
-
-  if (linesErr) {
-    await supabase.from("journal_entries").delete().eq("id", entry.id);
-    return { error: linesErr.message };
-  }
-
-  return { id: entry.id };
+  if (error) return { error: error.message };
+  const res = data as { id: string; entry_number: string; skipped: boolean };
+  return { id: res.id, skipped: res.skipped };
 }
 
 const LineSchema = z.object({
@@ -161,12 +121,32 @@ export async function createJournalEntry(
   return { success: true, id: res.id };
 }
 
+/**
+ * Ručni nalozi se smiju obrisati (ispravka unosa u otvorenom periodu).
+ * Automatski nalozi (PDV, banka, plate, zaključak) se NE brišu — rade se stornom,
+ * čime izvorni nalog i revizijski trag ostaju u dnevniku (ZRR FBiH 15/21).
+ */
 export async function deleteJournalEntry(
   id: string
 ): Promise<{ error?: string; success?: boolean }> {
   const { supabase, org } = await requireActiveOrganization();
   const feature = assertFeature(org.type, "general_ledger");
   if (!feature.ok) return { error: feature.error };
+
+  const { data: entry } = await supabase
+    .from("journal_entries")
+    .select("id, source_type")
+    .eq("id", id)
+    .eq("organization_id", org.id)
+    .single();
+
+  if (!entry) return { error: "Nalog nije pronađen." };
+  if (entry.source_type !== "manual") {
+    return {
+      error:
+        "Automatski nalozi se ne brišu — koristite storno (obrnuti nalog ostaje u dnevniku).",
+    };
+  }
 
   const { error } = await supabase
     .from("journal_entries")
@@ -177,6 +157,27 @@ export async function deleteJournalEntry(
   if (error) return { error: error.message };
   revalidatePath("/knjigovodstvo/dnevnik");
   return { success: true };
+}
+
+/** Storno naloga: kreira obrnuti nalog, izvorni ostaje netaknut. */
+export async function reverseJournalEntry(
+  id: string
+): Promise<{ error?: string; success?: boolean; id?: string }> {
+  const { supabase, user, org } = await requireActiveOrganization();
+  const feature = assertFeature(org.type, "general_ledger");
+  if (!feature.ok) return { error: feature.error };
+
+  const { data, error } = await supabase.rpc("reverse_journal_entry", {
+    p_org_id: org.id,
+    p_user_id: user.id,
+    p_entry_id: id,
+  });
+
+  if (error) return { error: error.message };
+  const res = data as { id: string; skipped: boolean };
+  if (res.skipped) return { error: "Ovaj nalog je već storniran." };
+  revalidatePath("/knjigovodstvo/dnevnik");
+  return { success: true, id: res.id };
 }
 
 export interface JournalEntryWithLines extends JournalEntry {

@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import PageHeader from "@/components/shared/page-header";
 import { formatKM, formatDate } from "@/lib/utils";
 import { requireOrgFeature } from "@/lib/organization/server";
+import { getActiveYear } from "@/lib/year";
 import {
   Table,
   TableBody,
@@ -11,19 +12,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { deleteKpEntry } from "@/app/actions/kp";
 import KpDeleteButton from "./KpDeleteButton";
 
-export default async function KpPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ godina?: string }>;
-}) {
-  const sp = await searchParams;
+export default async function KpPage() {
   const { supabase, org } = await requireOrgFeature("kp");
-
-  const currentYear = new Date().getFullYear();
-  const year = parseInt(sp.godina ?? "") || currentYear;
+  const year = await getActiveYear();
 
   const { data: entries } = await supabase
     .from("kp_entries")
@@ -41,34 +34,23 @@ export default async function KpPage({
     { cash: 0, noncash: 0, total: 0 }
   );
 
-  const years = Array.from({ length: 5 }, (_, i) => currentYear - i);
-
   return (
     <div>
       <PageHeader
         title={`KP-1042 — Knjiga prometa · ${year}`}
         description={`${org.name} · Dnevna evidencija naplaćenog prometa`}
       >
-        <Button asChild>
-          <Link href={`/kp/novi?godina=${year}`}>+ Novi unos</Link>
-        </Button>
+        <div className="flex gap-2">
+          <Button variant="outline" asChild>
+            <a href={`/api/pdf/kp?godina=${year}`} target="_blank" rel="noreferrer">
+              Preuzmi PDF
+            </a>
+          </Button>
+          <Button asChild>
+            <Link href="/kp/novi">+ Novi unos</Link>
+          </Button>
+        </div>
       </PageHeader>
-
-      <div className="flex gap-2 mb-4">
-        {years.map((y) => (
-          <Link
-            key={y}
-            href={`/kp?godina=${y}`}
-            className={`px-3 py-1 rounded-md border text-sm transition-colors ${
-              y === year
-                ? "bg-primary text-primary-foreground"
-                : "bg-background text-muted-foreground hover:bg-muted"
-            }`}
-          >
-            {y}
-          </Link>
-        ))}
-      </div>
 
       {entries && entries.length > 0 && (
         <div className="grid grid-cols-3 gap-4 mb-4">
@@ -139,7 +121,7 @@ export default async function KpPage({
             Knjiga prometa se popunjava ručno ili automatski iz bankovnih transakcija.
           </p>
           <Button asChild>
-            <Link href={`/kp/novi?godina=${year}`}>Dodaj prvi unos</Link>
+            <Link href="/kp/novi">Dodaj prvi unos</Link>
           </Button>
         </div>
       )}

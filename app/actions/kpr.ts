@@ -1,7 +1,5 @@
 "use server";
 
-"use server";
-
 import { revalidatePath } from "next/cache";
 import { assertFeature } from "@/lib/organization/regime";
 import { requireActiveOrganization } from "@/lib/organization/server";
@@ -35,11 +33,18 @@ export async function addKprEntry(input: KprEntryInput): Promise<{ error?: strin
   const check = assertFeature(org.type, "kpr");
   if (!check.ok) return { error: check.error };
 
+  // Godina knjige se IZVODI iz datuma stavke — klijentska vrijednost (cookie/tab)
+  // može biti zastarjela, a stavka mora biti u knjizi godine svog datuma.
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(input.entry_date)) {
+    return { error: "Neispravan datum stavke." };
+  }
+  const year = parseInt(input.entry_date.slice(0, 4), 10);
+
   const { data: last } = await supabase
     .from("kpr_entries")
     .select("entry_number")
     .eq("organization_id", org.id)
-    .eq("year", input.year)
+    .eq("year", year)
     .order("entry_number", { ascending: false })
     .limit(1)
     .single();
@@ -49,7 +54,7 @@ export async function addKprEntry(input: KprEntryInput): Promise<{ error?: strin
   const { error } = await supabase.from("kpr_entries").insert({
     organization_id: org.id,
     entry_number: nextNumber,
-    year: input.year,
+    year,
     entry_date: input.entry_date,
     document_type: input.document_type,
     document_number: input.document_number,

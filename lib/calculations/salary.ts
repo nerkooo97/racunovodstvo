@@ -1,9 +1,4 @@
-import {
-  CONTRIBUTIONS_FROM,
-  CONTRIBUTIONS_ON,
-  PERSONAL_DEDUCTION_MONTHLY,
-  INCOME_TAX_RATE,
-} from "@/lib/constants/tax-rates";
+import { getTaxConfig, getCurrentTaxConfig, totalRate } from "@/lib/constants/tax-config";
 import { getCantonalAccounts, FEDERAL_ACCOUNTS, CantonalAccountInfo } from "@/lib/constants/cantonal-accounts";
 
 function round2(n: number): number {
@@ -73,18 +68,33 @@ export function calculateActiveDaysInMonth(
   return { activeDays: Math.min(totalDays, Math.max(0, activeDays)), totalDays };
 }
 
-// Minimalna neto plata FBiH za 2026 (Sl. novine FBiH br. 100/25)
-export const MIN_NET_WAGE_FBIH = 1027;
+/**
+ * Minimalna neto plata FBiH — VREMENSKI VERZIONIRANA u lib/constants/tax-config.ts.
+ * Ovaj re-export vraća vrijednost za DANAŠNJI datum i služi samo za prikaz;
+ * obračuni koriste vrijednost za datum perioda (vidi computeMinGrossBase).
+ */
+export const MIN_NET_WAGE_FBIH = getCurrentTaxConfig().minNetWage;
 
-// Računa minimalnu bruto osnovicu direktnom algebarskom formulom
-// (isti algoritam kao chunk modul 81912 'fromNet', ali BEZ poziva calculateFromNet
-//  da bi se izbjegla cirkularnu rekurzija: calculateFromGross → ovdje → calculateFromNet → calculateFromGross)
-export function computeMinGrossBase(taxCoefficient: number = 1.0): number {
-  const net = MIN_NET_WAGE_FBIH;
-  const a = CONTRIBUTIONS_FROM.total; // 0.31
-  const deduction = PERSONAL_DEDUCTION_MONTHLY * taxCoefficient;
-  // Direktna algebarska formula iz chunk-a (modul 81912)
-  const candidate = (net - 0.1 * deduction) / ((1 - a) * 0.9);
+/**
+ * Računa minimalnu bruto osnovicu direktnom algebarskom formulom
+ * (bez poziva calculateFromNet — izbjegava cirkularnu rekurziju:
+ * calculateFromGross → ovdje → calculateFromNet → calculateFromGross).
+ *
+ * Sve stope (minimalna plata, doprinosi iz plate, porez, lični odbitak)
+ * dolaze iz centralnog configa ZA DATUM PERIODA — obračun plate za stari
+ * period koristi tada važeće vrijednosti.
+ */
+export function computeMinGrossBase(
+  taxCoefficient: number = 1.0,
+  periodDate?: string | Date
+): number {
+  const cfg = getTaxConfig(periodDate ?? new Date());
+  const net = cfg.minNetWage;
+  const a = totalRate(cfg.contributionsFrom); // npr. 0.31
+  const deduction = cfg.personalDeductionMonthly * taxCoefficient;
+  const t = cfg.incomeTaxRate; // npr. 0.10
+  // Algebarski obrat neto→bruto uz porez: neto = bruto(1-a)(1-t) + t×odbitak
+  const candidate = (net - t * deduction) / ((1 - a) * (1 - t));
   const gross = candidate * (1 - a) - deduction > 0.001
     ? candidate
     : net / (1 - a);
@@ -96,30 +106,41 @@ export function calculateFromGross(
   taxCoefficient: number = 1.0,
   orgType: "obrt" | "doo" = "obrt",
   grossBaseInput?: number,
-  proRateFactorInput?: number
+  proRateFactorInput?: number,
+  periodDate?: string | Date
 ): SalaryCalculation {
-  const minGrossBase = computeMinGrossBase(taxCoefficient);
+  // JEDAN izvor istine za sve stope: centralni config za datum perioda.
+  // Kad se zakon promijeni, dodaje se red u tax-config.ts — ovaj kod se ne dira.
+  const cfg = getTaxConfig(periodDate ?? new Date());
+
+  const minGrossBase = computeMinGrossBase(taxCoefficient, periodDate);
   const gross = round2(grossInput);
   const minBaseApplied = gross < minGrossBase;
 
-  const pension = round2(gross * CONTRIBUTIONS_FROM.pension.rate);
-  const health = round2(gross * CONTRIBUTIONS_FROM.health.rate);
-  const unemployment = round2(gross * CONTRIBUTIONS_FROM.unemployment.rate);
-  const totalFrom = round2(gross * CONTRIBUTIONS_FROM.total);
+  // Doprinosi IZ plate (na teret radnika)
+  const pension = round2(gross * cfg.contributionsFrom.pension);
+  const health = round2(gross * cfg.contributionsFrom.health);
+  const unemployment = round2(gross * cfg.contributionsFrom.unemployment);
+  const totalFrom = round2(gross * totalRate(cfg.contributionsFrom));
+
+  // Porez na dohodak
   const taxBase = round2(gross - totalFrom);
-  const personalDeduction = round2(PERSONAL_DEDUCTION_MONTHLY * taxCoefficient);
+  const personalDeduction = round2(cfg.personalDeductionMonthly * taxCoefficient);
   const taxableBase = round2(Math.max(0, taxBase - personalDeduction));
-  const incomeTax = round2(taxableBase * INCOME_TAX_RATE);
+  const incomeTax = round2(taxableBase * cfg.incomeTaxRate);
   const net = round2(gross - totalFrom - incomeTax);
 
-  const pensionOn = orgType === "obrt" ? round2(gross * 0.025) : round2(gross * CONTRIBUTIONS_ON.pension.rate);
-  const healthOn = orgType === "obrt" ? round2(gross * 0.02) : round2(gross * CONTRIBUTIONS_ON.health.rate);
-  const unemploymentOn = round2(gross * CONTRIBUTIONS_ON.unemployment.rate);
+  // Doprinosi NA platu (na teret poslodavca) — stopa prema datumu perioda
+  // (od 1.7.2025.: 2,5% + 2% + 0,5% za SVE poslodavce)
+  const pensionOn = round2(gross * cfg.contributionsOn.pension);
+  const healthOn = round2(gross * cfg.contributionsOn.health);
+  const unemploymentOn = round2(gross * cfg.contributionsOn.unemployment);
   const totalOn = round2(pensionOn + healthOn + unemploymentOn);
 
-  const water = round2(net * CONTRIBUTIONS_ON.water.rate);      // 0.5% od neto
-  const disaster = round2(net * CONTRIBUTIONS_ON.disaster.rate); // 0.5% od neto
-  const disability = orgType === "doo" ? round2(gross * CONTRIBUTIONS_ON.disability.rate) : 0; // 0.5% od bruto za d.o.o.
+  // Naknade: vodna i nesreće od NETO; OSI fond od BRUTO
+  const water = round2(net * cfg.waterRate);
+  const disaster = round2(net * cfg.disasterRate);
+  const disability = orgType === "doo" ? round2(gross * cfg.disabilityRate) : 0;
   const totalEmployer = round2(gross + totalOn + water + disaster + disability);
 
   return {
@@ -153,16 +174,18 @@ export function calculateFromNet(
   taxCoefficient: number = 1.0,
   orgType: "obrt" | "doo" = "obrt",
   grossBaseInput?: number,
-  proRateFactorInput?: number
+  proRateFactorInput?: number,
+  periodDate?: string | Date
 ): SalaryCalculation {
-  let gross = round2(net / (1 - CONTRIBUTIONS_FROM.total));
+  // Početna procjena za iteraciju — stopa doprinosa iz configa za period
+  let gross = round2(net / (1 - totalRate(getTaxConfig(periodDate ?? new Date()).contributionsFrom)));
   for (let i = 0; i < 15; i++) {
-    const result = calculateFromGross(gross, taxCoefficient, orgType, grossBaseInput, proRateFactorInput);
+    const result = calculateFromGross(gross, taxCoefficient, orgType, grossBaseInput, proRateFactorInput, periodDate);
     const diff = net - result.net_salary;
     if (Math.abs(diff) < 0.005) break;
     gross = round2(gross + diff);
   }
-  return calculateFromGross(gross, taxCoefficient, orgType, grossBaseInput, proRateFactorInput);
+  return calculateFromGross(gross, taxCoefficient, orgType, grossBaseInput, proRateFactorInput, periodDate);
 }
 
 export type SalaryType = "target_net" | "net_contract" | "gross_base";
@@ -177,29 +200,30 @@ export function calculateEmployee(
   totalDays?: number,
   minuliRadYears: number = 0,
   minuliRadRate: number = 0.4,
-  companyCarNet: number = 0
+  companyCarNet: number = 0,
+  periodDate?: string | Date
 ): SalaryCalculation | null {
   const ratio = (activeDays !== undefined && totalDays !== undefined && totalDays > 0)
     ? (activeDays / totalDays)
     : 1;
 
-  // Tačan faktor za preračun neto koristi → bruto je 1/(1-0.31) = 1/0.69 ≈ 1.449
-  // (provjeren prema Porezni Kalkulator BiH, modul computeKorist)
-  const TOTAL_EMP_CONTRIBUTIONS = CONTRIBUTIONS_FROM.total; // 0.31
+  // Faktor za preračun neto koristi (službeno vozilo) → bruto: 1/(1 − doprinosi iz plate)
+  // npr. 1/(1−0.31) ≈ 1.449 (provjeren prema Porezni Kalkulator BiH, modul computeKorist)
+  const TOTAL_EMP_CONTRIBUTIONS = totalRate(getTaxConfig(periodDate ?? new Date()).contributionsFrom);
   const carBruto = round2(companyCarNet / (1 - TOTAL_EMP_CONTRIBUTIONS));
 
   if (salaryType === "gross_base" && grossSalary) {
     const baseGross = round2(grossSalary * ratio);
     const minuliAmount = round2(minuliRadYears * (minuliRadRate / 100) * baseGross);
     const finalGross = round2(baseGross + minuliAmount + carBruto);
-    return calculateFromGross(finalGross, taxCoefficient, orgType, grossSalary, ratio);
+    return calculateFromGross(finalGross, taxCoefficient, orgType, grossSalary, ratio, periodDate);
   }
   if ((salaryType === "net_contract" || salaryType === "target_net") && netSalary) {
     const proRatedNet = round2(netSalary * ratio);
-    const baseCalc = calculateFromNet(proRatedNet, taxCoefficient, orgType, grossSalary ?? undefined, ratio);
+    const baseCalc = calculateFromNet(proRatedNet, taxCoefficient, orgType, grossSalary ?? undefined, ratio, periodDate);
     const minuliAmount = round2(minuliRadYears * (minuliRadRate / 100) * baseCalc.gross_salary);
     const finalGross = round2(baseCalc.gross_salary + minuliAmount + carBruto);
-    return calculateFromGross(finalGross, taxCoefficient, orgType, grossSalary ?? undefined, ratio);
+    return calculateFromGross(finalGross, taxCoefficient, orgType, grossSalary ?? undefined, ratio, periodDate);
   }
   return null;
 }
@@ -489,38 +513,24 @@ export function generateAccountingJournal(
     sumDisability += it.disability_fund;
   });
 
-  const journal: JournalEntry[] = [
-    { konto: "4320", opis: "Bruto plate", duguje: round2(sumGross), potrazuje: 0 },
-    { konto: "2400", opis: "Obaveze prema radnicima (Neto)", duguje: 0, potrazuje: round2(sumNet) },
-    { konto: "4321", opis: "PIO/MIO iz plate", duguje: round2(sumEmpPio), potrazuje: 0 },
-    { konto: "2401", opis: "Obaveze za PIO/MIO iz plate", duguje: 0, potrazuje: round2(sumEmpPio) },
-    { konto: "4322", opis: "Zdravstveno osiguranje iz plate", duguje: round2(sumEmpHealth), potrazuje: 0 },
-    { konto: "2402", opis: "Obaveze za ZDR iz plate", duguje: 0, potrazuje: round2(sumEmpHealth) },
-    { konto: "4323", opis: "Osiguranje od nezaposlenosti iz plate", duguje: round2(sumEmpUnemp), potrazuje: 0 },
-    { konto: "2403", opis: "Obaveze za NEZ iz plate", duguje: 0, potrazuje: round2(sumEmpUnemp) },
-    { konto: "4324", opis: "Porez na dohodak", duguje: round2(sumTax), potrazuje: 0 },
-    { konto: "2404", opis: "Obaveze za porez na dohodak", duguje: 0, potrazuje: round2(sumTax) },
-    { konto: "4331", opis: "PIO/MIO na platu", duguje: round2(sumErpPio), potrazuje: 0 },
-    { konto: "2411", opis: "Obaveze za PIO/MIO na platu", duguje: 0, potrazuje: round2(sumErpPio) },
-    { konto: "4332", opis: "Zdravstveno osiguranje na platu", duguje: round2(sumErpHealth), potrazuje: 0 },
-    { konto: "2412", opis: "Obaveze za ZDR na platu", duguje: 0, potrazuje: round2(sumErpHealth) },
-    { konto: "4333", opis: "Osiguranje od nezaposlenosti na platu", duguje: round2(sumErpUnemp), potrazuje: 0 },
-    { konto: "2413", opis: "Obaveze za NEZ na platu", duguje: 0, potrazuje: round2(sumErpUnemp) },
-    { konto: "4339", opis: "Vodna naknada i zaštita od nesreća", duguje: round2(sumWaterDisaster), potrazuje: 0 },
-    { konto: "2419", opis: "Obaveze za vodnu i nesreće", duguje: 0, potrazuje: round2(sumWaterDisaster) },
-  ];
+  // Konta po FBiH kontnom okviru (SN 81/21) — ISTA konta kao GK knjiženje
+  // (lib/accounting/posting-rules.ts salaryToLines): 5200/5210 troškovi,
+  // 4500 neto, 4800 porez, 4810 doprinosi.
+  const sumEmpContrib = round2(sumEmpPio + sumEmpHealth + sumEmpUnemp);
+  const sumErpContrib = round2(sumErpPio + sumErpHealth + sumErpUnemp + sumWaterDisaster + sumDisability);
 
-  if (sumDisability > 0) {
-    journal.push(
-      { konto: "4340", opis: "Fond za rehabilitaciju OSI", duguje: round2(sumDisability), potrazuje: 0 },
-      { konto: "2415", opis: "Obaveze za Fond OSI", duguje: 0, potrazuje: round2(sumDisability) }
-    );
-  }
+  const journal: JournalEntry[] = [
+    { konto: "5200", opis: "Troškovi bruto plata", duguje: round2(sumGross), potrazuje: 0 },
+    { konto: "5210", opis: "Troškovi doprinosa na teret poslodavca (uklj. vodna, nesreće, OSI)", duguje: sumErpContrib, potrazuje: 0 },
+    { konto: "4500", opis: "Obaveze za neto plate", duguje: 0, potrazuje: round2(sumNet) },
+    { konto: "4800", opis: "Obaveze za porez na dohodak", duguje: 0, potrazuje: round2(sumTax) },
+    { konto: "4810", opis: "Obaveze za doprinose (iz plate + na platu)", duguje: 0, potrazuje: round2(sumEmpContrib + sumErpContrib) },
+  ];
 
   if (mealAllowanceTotal > 0) {
     journal.push(
-      { konto: "4350", opis: "Topli obrok", duguje: round2(mealAllowanceTotal), potrazuje: 0 },
-      { konto: "2200", opis: "Obaveze prema banci za naknade", duguje: 0, potrazuje: round2(mealAllowanceTotal) }
+      { konto: "5210", opis: "Naknade zaposlenima — topli obrok", duguje: round2(mealAllowanceTotal), potrazuje: 0 },
+      { konto: "4500", opis: "Obaveze za naknade zaposlenima", duguje: 0, potrazuje: round2(mealAllowanceTotal) }
     );
   }
 

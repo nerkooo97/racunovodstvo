@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { formatKM } from "@/lib/utils";
+import { getTaxConfig } from "@/lib/constants/tax-config";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -67,9 +68,10 @@ export default function SprPage() {
     const r25 = r16;
     const r26 = r24;
     const r28 = r25 - r26 + n(r27);
-    const r29 = Math.max(0, (r28 * 0.10) / 12);
+    const cfg = getTaxConfig(`${selectedYear}-12-31`);
+    const r29 = Math.max(0, (r28 * cfg.incomeTaxRate) / 12);
     return { r16, r24, r25, r26, r28, r29 };
-  }, [r11,r12,r13,r14,r15,r17,r18,r19,r20,r21,r22,r23,r27]);
+  }, [r11,r12,r13,r14,r15,r17,r18,r19,r20,r21,r22,r23,r27,selectedYear]);
 
   function NumInput({ value, onChange, label, className = "" }: { value: string; onChange: (v: string) => void; label: string; className?: string }) {
     return (

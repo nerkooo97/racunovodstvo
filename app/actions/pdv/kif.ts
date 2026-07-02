@@ -315,13 +315,17 @@ export async function removeInvoiceFromKif(
   supabase: SupabaseClient,
   orgId: string,
   invoiceId: string
-): Promise<void> {
-  await supabase
+): Promise<{ error?: string }> {
+  const { error } = await supabase
     .from("pdv_ledger_entries")
     .delete()
     .eq("organization_id", orgId)
     .eq("source_id", invoiceId)
     .in("source_type", ["invoice_out", "invoice_cn", "advance_close"]);
+  // Zaključan PDV period blokira brisanje na DB nivou — greška se mora vratiti,
+  // inače faktura ostaje "stornirana" a stavka i dalje sjedi u KIF-u
+  if (error) return { error: error.message };
+  return {};
 }
 
 // ─── Ručni / interni KIF unos ────────────────────────────────────────────────

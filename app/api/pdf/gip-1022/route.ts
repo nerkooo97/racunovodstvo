@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
+import { getActiveOrgId } from "@/lib/supabase/get-active-org";
 import { PDFDocument, PDFName } from "pdf-lib";
 import { generateFilledGip1022Pdf, Gip1022FillData, Gip1022MonthItem } from "@/lib/pdf/gip-1022-fill";
 import { calculateFromGross } from "@/lib/calculations/salary";
@@ -13,13 +14,10 @@ export async function GET(req: NextRequest) {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return new NextResponse("Unauthorized", { status: 401 });
 
-  const { data: org } = await supabase
-    .from("organizations")
-    .select("id, name, tax_id, address, type")
-    .eq("owner_id", user.id)
-    .order("created_at", { ascending: true })
-    .limit(1)
-    .single();
+  const activeOrgId = await getActiveOrgId(supabase, user.id);
+  const { data: org } = activeOrgId
+    ? await supabase.from("organizations").select("id, name, tax_id, address, type").eq("id", activeOrgId).single()
+    : { data: null };
 
   if (!org) return new NextResponse("No organization", { status: 404 });
 
@@ -86,7 +84,7 @@ export async function GET(req: NextRequest) {
       const itemMonth = periodInfo?.month ?? period.month;
       const itemPayDate = periodInfo?.paymentDate ?? formattedToday;
 
-      const calc = calculateFromGross(it.gross_salary ?? 0, it.tax_coefficient ?? 1.0, orgType);
+      const calc = calculateFromGross(it.gross_salary ?? 0, it.tax_coefficient ?? 1.0, orgType, undefined, undefined, `${period.year}-${String(itemMonth).padStart(2, "0")}-01`);
       return {
         month: itemMonth,
         year: period.year,

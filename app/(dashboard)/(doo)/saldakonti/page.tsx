@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { getPartnerBalances } from "@/app/actions/accounting/partner-analytics";
-import { YearSelect } from "./YearSelect";
+import { getActiveYear } from "@/lib/year";
 
 function fmt(n: number) {
   return new Intl.NumberFormat("bs-BA", {
@@ -19,10 +19,10 @@ const TYPE_LABELS: Record<string, string> = {
 export default async function SaldakontiPage({
   searchParams,
 }: {
-  searchParams: Promise<{ year?: string; tip?: string }>;
+  searchParams: Promise<{ tip?: string }>;
 }) {
   const params = await searchParams;
-  const year = params.year ? parseInt(params.year, 10) : undefined;
+  const year = await getActiveYear();
   const tip = params.tip ?? "all";
 
   const { data, error } = await getPartnerBalances(year);
@@ -41,7 +41,7 @@ export default async function SaldakontiPage({
       <div>
         <h1 className="text-2xl font-semibold">Saldakonti — analitičke kartice</h1>
         <p className="text-sm text-muted-foreground mt-1">
-          Pregled stanja po partnerima iz glavne knjige (Član 18. ZRR FBiH)
+          Pregled stanja po partnerima iz glavne knjige (Član 18. ZRR FBiH) · {year}.
         </p>
       </div>
 
@@ -51,7 +51,7 @@ export default async function SaldakontiPage({
           {["all", "customer", "supplier"].map((t) => (
             <Link
               key={t}
-              href={`/saldakonti?tip=${t}${year ? `&year=${year}` : ""}`}
+              href={`/saldakonti?tip=${t}`}
               className={`px-3 py-1.5 text-sm rounded-md transition-colors ${
                 tip === t
                   ? "bg-primary text-primary-foreground"
@@ -62,12 +62,6 @@ export default async function SaldakontiPage({
             </Link>
           ))}
         </div>
-
-        <YearSelect
-          value={year?.toString() ?? ""}
-          basePath="/saldakonti"
-          extraParams={tip !== "all" ? { tip } : {}}
-        />
       </div>
 
       {error && (
@@ -142,7 +136,7 @@ export default async function SaldakontiPage({
                 </td>
                 <td className="px-4 py-3 text-right">
                   <Link
-                    href={`/saldakonti/${p.partner_id}${year ? `?year=${year}` : ""}`}
+                    href={`/saldakonti/${p.partner_id}`}
                     className="text-xs text-primary hover:underline"
                   >
                     Kartica →

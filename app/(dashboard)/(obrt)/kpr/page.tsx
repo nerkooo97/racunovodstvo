@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import PageHeader from "@/components/shared/page-header";
 import { formatKM, formatDate } from "@/lib/utils";
 import { requireOrgFeature } from "@/lib/organization/server";
+import { getActiveYear } from "@/lib/year";
 import {
   Table,
   TableBody,
@@ -12,16 +13,9 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-export default async function KprPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ godina?: string }>;
-}) {
-  const sp = await searchParams;
+export default async function KprPage() {
   const { supabase, org } = await requireOrgFeature("kpr");
-
-  const currentYear = new Date().getFullYear();
-  const year = parseInt(sp.godina ?? "") || currentYear;
+  const year = await getActiveYear();
 
   const { data: entries } = await supabase
     .from("kpr_entries")
@@ -40,30 +34,20 @@ export default async function KprPage({
     { income: 0, expense: 0, incomeVat: 0, expenseVat: 0 }
   );
 
-  const years = Array.from({ length: 5 }, (_, i) => currentYear - i);
-
   return (
     <div>
       <PageHeader title={`KPR-1041 — ${year}`} description={org.name}>
-        <Button asChild>
-          <Link href={`/kpr/novi?godina=${year}`}>+ Ručni unos</Link>
-        </Button>
+        <div className="flex gap-2">
+          <Button variant="outline" asChild>
+            <a href={`/api/pdf/kpr?godina=${year}`} target="_blank" rel="noreferrer">
+              Preuzmi PDF
+            </a>
+          </Button>
+          <Button asChild>
+            <Link href="/kpr/novi">+ Ručni unos</Link>
+          </Button>
+        </div>
       </PageHeader>
-
-      {/* Year selector */}
-      <div className="flex gap-2 mb-4">
-        {years.map((y) => (
-          <Link
-            key={y}
-            href={`/kpr?godina=${y}`}
-            className={`px-3 py-1 rounded-md border text-sm transition-colors ${
-              y === year ? "bg-primary text-primary-foreground" : "bg-background text-muted-foreground hover:bg-muted"
-            }`}
-          >
-            {y}
-          </Link>
-        ))}
-      </div>
 
       {/* Kumulativni zbir */}
       {entries && entries.length > 0 && (
@@ -158,7 +142,7 @@ export default async function KprPage({
             KPR se automatski popunjava iz potvrđenih bankovnih transakcija i gotovine.
           </p>
           <Button asChild>
-            <Link href={`/kpr/novi?godina=${year}`}>Dodaj ručni unos</Link>
+            <Link href="/kpr/novi">Dodaj ručni unos</Link>
           </Button>
         </div>
       )}

@@ -4,15 +4,10 @@ import PageHeader from "@/components/shared/page-header";
 import KprEntryForm from "@/components/forms/kpr-entry-form";
 import { ArrowLeft } from "lucide-react";
 import { requireOrgFeature } from "@/lib/organization/server";
+import { getActiveYear } from "@/lib/year";
 
-export default async function KprNoviPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ godina?: string }>;
-}) {
-  const sp = await searchParams;
-  const year = parseInt(sp.godina ?? "") || new Date().getFullYear();
-
+export default async function KprNoviPage() {
+  const year = await getActiveYear();
   const { supabase, org } = await requireOrgFeature("kpr");
 
   const { data: partners } = await supabase
@@ -28,7 +23,7 @@ export default async function KprNoviPage({
         description={`Unos stavke za ${year}. godinu`}
       >
         <Button asChild variant="outline" size="sm" className="gap-1.5">
-          <Link href={`/kpr?godina=${year}`}>
+          <Link href="/kpr">
             <ArrowLeft className="h-4 w-4" />
             Nazad na KPR
           </Link>

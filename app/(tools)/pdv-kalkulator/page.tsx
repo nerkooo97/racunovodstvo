@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { EUR_TO_BAM } from "@/lib/constants/tax-rates";
+import { EUR_TO_BAM, VAT_RATE } from "@/lib/constants/tax-rates";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -41,12 +41,12 @@ export default function PdvKalkulatorPage({ hideHeader = false }: { hideHeader?:
     const val = currency === "EUR" ? raw * EUR_TO_BAM : raw;
     if (direction === "add") {
       const base  = val;
-      const vat   = Math.round(base * 0.17 * 100) / 100;
+      const vat   = Math.round(base * VAT_RATE * 100) / 100; // stopa iz tax-config
       const total = Math.round((base + vat) * 100) / 100;
       return { base, vat, total };
     } else {
       const total = val;
-      const base  = Math.round((total / 1.17) * 100) / 100;
+      const base  = Math.round((total / (1 + VAT_RATE)) * 100) / 100; // stopa iz tax-config
       const vat   = Math.round((total - base) * 100) / 100;
       return { base, vat, total };
     }

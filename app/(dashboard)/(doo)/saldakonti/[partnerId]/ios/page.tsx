@@ -30,18 +30,13 @@ const SOURCE_LABELS: Record<string, string> = {
 
 export default async function IosPage({
   params,
-  searchParams,
 }: {
   params: Promise<{ partnerId: string }>;
-  searchParams: Promise<{ year?: string }>;
 }) {
   const { partnerId } = await params;
-  const sp = await searchParams;
-  const year = sp.year ? parseInt(sp.year, 10) : undefined;
-
-  const asOfDate = year
-    ? `${year}-12-31`
-    : new Date().toISOString().slice(0, 10);
+  const { getActiveYear } = await import("@/lib/year");
+  const year = await getActiveYear();
+  const asOfDate = `${year}-12-31`;
 
   const { partner, items, error } = await getPartnerOpenItems(partnerId, asOfDate);
 

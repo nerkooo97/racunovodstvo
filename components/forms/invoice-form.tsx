@@ -3,7 +3,7 @@
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { createInvoice } from "@/app/actions/invoices";
-import { VAT_RATE } from "@/lib/constants/tax-rates";
+import { getTaxConfig } from "@/lib/constants/tax-config";
 import { formatKM } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/select";
 import FormSection from "@/components/shared/form-section";
 
-const DEFAULT_VAT = VAT_RATE * 100;
+
 
 interface Partner {
   id: string;
@@ -63,14 +63,14 @@ interface InvoiceItem {
   vat_rate: string;
 }
 
-const EMPTY_ITEM: InvoiceItem = {
+const makeEmptyItem = (vatRate: number): InvoiceItem => ({
   description: "",
   unit:        "kom",
   quantity:    "1",
   unit_price:  "0",
   discount:    "0",
-  vat_rate:    String(DEFAULT_VAT),
-};
+  vat_rate:    String(vatRate),
+});
 
 function computeItemTotals(item: InvoiceItem) {
   const qty      = parseFloat(item.quantity)    || 0;
@@ -115,10 +115,15 @@ export default function InvoiceForm({
   const defaultDue = new Date(); defaultDue.setDate(defaultDue.getDate() + 30);
   const [dueDate, setDueDate]     = useState(defaultDue.toISOString().slice(0, 10));
   const [note, setNote]           = useState("");
-  const [items, setItems]         = useState<InvoiceItem[]>([{ ...EMPTY_ITEM }]);
+  const [items, setItems]         = useState<InvoiceItem[]>(() => {
+    const initialDate = new Date().toISOString().slice(0, 10);
+    const initialVatRate = getTaxConfig(initialDate).vatRate * 100;
+    return [makeEmptyItem(initialVatRate)];
+  });
 
   function addItem() {
-    setItems((prev) => [...prev, { ...EMPTY_ITEM }]);
+    const currentVatRate = getTaxConfig(issueDate).vatRate * 100;
+    setItems((prev) => [...prev, makeEmptyItem(currentVatRate)]);
   }
 
   function removeItem(idx: number) {

@@ -7,8 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Download, FileText } from "lucide-react";
-
-const PERSONAL_DEDUCTION_ANNUAL = 3600; // 300 × 12
+import { getTaxConfig } from "@/lib/constants/tax-config";
 
 function n(v: string) { return parseFloat(v.replace(",", ".")) || 0; }
 
@@ -76,9 +75,12 @@ export default function GpdPage() {
 
   const [submitted, setSubmitted] = useState(false);
 
+  const yearFull = yearPrefix + yearSuffix;
+
   const calc = useMemo(() => {
     const coeff = parseFloat(taxCoeff) || 1.0;
-    const r18_personal = PERSONAL_DEDUCTION_ANNUAL * coeff;
+    const cfg = getTaxConfig(`${yearFull}-12-31`);
+    const r18_personal = cfg.personalDeductionAnnual * coeff;
     const r21 = r18_personal + n(r19) + n(r20);
 
     const incomes = n(r8) + n(r9) + n(r10) + n(r11) + n(r12) + n(r13);
@@ -90,15 +92,13 @@ export default function GpdPage() {
     const r23_dohodak = r17_dobit;
     const r24_odbici  = r21;
     const r25_osnovica = Math.max(0, r23_dohodak - r22_gubitak - r24_odbici);
-    const r26_obaveza  = Math.round(r25_osnovica * 0.10 * 100) / 100;
+    const r26_obaveza  = Math.round(r25_osnovica * cfg.incomeTaxRate * 100) / 100;
     const r31_razlika  = r26_obaveza - n(r27) - n(r28) - n(r29) - n(r30);
 
     return { r18_personal, r21, r15_total, r16_gubitak, r17_dobit,
              r22_gubitak, r23_dohodak, r24_odbici, r25_osnovica,
              r26_obaveza, r31_razlika };
-  }, [taxCoeff, r8, r9, r10, r11, r12, r13, r14, r19, r20, r27, r28, r29, r30]);
-
-  const yearFull = yearPrefix + yearSuffix;
+  }, [taxCoeff, r8, r9, r10, r11, r12, r13, r14, r19, r20, r27, r28, r29, r30, yearFull]);
 
   async function generatePdfAction(action: "download" | "preview") {
     const payload = {

@@ -22,10 +22,15 @@ interface ObrtReceivedInvoiceInput {
 }
 
 // ─── DOO: razrez na osnovicu + PDV + vrsta troška ───────────────────────────
+// expense_type:
+//   'inventory' — roba za dalju prodaju → zalihe 1300 (rashod tek pri prodaji,
+//                 razduženjem nakon popisa — MRS 2)
+//   'goods'     — odmah utrošeni materijal → direktan rashod 5000
+//   'services'  — usluge → rashod 5300
 interface DooReceivedInvoiceInput extends ObrtReceivedInvoiceInput {
   amount_base: number;   // bez PDV
   vat_amount: number;    // PDV iznos (može biti 0 ako nema odbitka)
-  expense_type: "goods" | "services";
+  expense_type: "goods" | "services" | "inventory";
   is_foreign: boolean;
 }
 
@@ -73,9 +78,12 @@ export async function addReceivedInvoice(
   if (isDoo(input) && assertFeature(org.type, "general_ledger").ok) {
     await ensureChartOfAccounts(supabase, org.id);
 
-    const expenseAcc = input.expense_type === "services"
-      ? POSTING_ACCOUNTS.servicesExpense   // 5300
-      : POSTING_ACCOUNTS.goodsExpense;     // 5000
+    const expenseAcc =
+      input.expense_type === "services"
+        ? POSTING_ACCOUNTS.servicesExpense    // 5300
+        : input.expense_type === "inventory"
+          ? POSTING_ACCOUNTS.goodsInventory   // 1300 — zalihe, ne rashod
+          : POSTING_ACCOUNTS.goodsExpense;    // 5000
 
     const supplierAcc = input.is_foreign
       ? POSTING_ACCOUNTS.suppliersForeign  // 4330

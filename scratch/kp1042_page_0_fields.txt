@@ -1,0 +1,93 @@
+Obrazac KP1042 Knjiga prometa
+odObrazac KP1042 Knjiga prometa
+undefined
+undefined_2
+2 Prezime i ime
+5 Naziv
+3 Adresa
+6 Adresa
+7 Vrsta djelatnosti šifra naziv
+8 Red brRow1
+fill_3
+8 Red brRow2
+fill_5
+8 Red brRow3
+fill_7
+8 Red brRow4
+fill_9
+8 Red brRow5
+fill_11
+8 Red brRow6
+fill_13
+8 Red brRow7
+fill_15
+8 Red brRow8
+fill_17
+8 Red brRow9
+fill_19
+8 Red brRow10
+fill_21
+8 Red brRow11
+fill_23
+8 Red brRow12
+fill_25
+Text1.0
+Text1.1
+Text1.2
+Text1.3
+Text1.4
+Text1.5
+Text1.6
+Text1.7
+Text1.8
+Text1.9
+Text1.10
+Text1.11
+Text2.0
+Text2.1
+Text2.2
+Text2.3
+Text2.4
+Text2.5
+Text2.6
+Text2.7
+Text2.8
+Text2.9
+Text2.10
+Text2.11
+Text3.0
+Text3.1
+Text3.2
+Text3.3
+Text3.4
+Text3.5
+Text3.6
+Text3.7
+Text3.8
+Text3.9
+Text3.10
+Text3.11
+Text4.0
+Text4.1
+Text4.2
+Text4.3
+Text4.4
+Text4.5
+Text4.6
+Text4.7
+Text4.8
+Text4.9
+Text4.10
+Text4.11
+Text5.0
+Text5.1
+Text5.2
+Text5.3
+Text5.4
+Text5.5
+Text5.6
+Text5.7
+Text5.8
+Text5.9
+Text5.10
+Text5.11

@@ -37,7 +37,11 @@ export function OrganizationProvider({
 
   const switchOrganization = useCallback(
     async (id: string) => {
-      await setActiveOrg(id);
+      const res = await setActiveOrg(id);
+      if (res && "error" in res) {
+        alert("Greška pri prebacivanju firme: " + res.error);
+        return;
+      }
       router.refresh();
     },
     [router]

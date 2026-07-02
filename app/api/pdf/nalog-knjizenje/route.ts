@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { renderToBuffer } from "@react-pdf/renderer";
 import { createElement } from "react";
 import { createClient } from "@/lib/supabase/server";
+import { getActiveOrgId } from "@/lib/supabase/get-active-org";
 import { NalogKnjizenjePdf } from "@/lib/pdf/nalog-knjizenje";
 import { generateAccountingJournal, calculateFromGross, SalaryCalculation } from "@/lib/calculations/salary";
 
@@ -15,13 +16,10 @@ export async function GET(req: NextRequest) {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return new NextResponse("Unauthorized", { status: 401 });
 
-  const { data: org } = await supabase
-    .from("organizations")
-    .select("id, name, type")
-    .eq("owner_id", user.id)
-    .order("created_at", { ascending: true })
-    .limit(1)
-    .single();
+  const activeOrgId = await getActiveOrgId(supabase, user.id);
+  const { data: org } = activeOrgId
+    ? await supabase.from("organizations").select("id, name, type").eq("id", activeOrgId).single()
+    : { data: null };
 
   if (!org) return new NextResponse("No organization", { status: 404 });
 
@@ -42,7 +40,7 @@ export async function GET(req: NextRequest) {
   let mealTotal = 0;
   const calcs: SalaryCalculation[] = (items ?? []).map((it) => {
     mealTotal += (it.meal_allowance ?? 0);
-    return calculateFromGross(it.gross_salary ?? 0, it.tax_coefficient ?? 1.0, orgType);
+    return calculateFromGross(it.gross_salary ?? 0, it.tax_coefficient ?? 1.0, orgType, undefined, undefined, `${period.year}-${String(period.month).padStart(2, "0")}-01`);
   });
 
   const entries = generateAccountingJournal(calcs, mealTotal);

@@ -20,8 +20,8 @@ import {
   KUF_DOCUMENT_TYPES,
   MVP_DOCUMENT_CODES,
   NON_DEDUCTIBLE_REASONS,
-  VAT_RATE,
 } from "@/lib/pdv/constants";
+import { getTaxConfig } from "@/lib/constants/tax-config";
 import { round2 } from "@/lib/pdv/amounts";
 
 interface Partner {
@@ -84,6 +84,10 @@ export default function KufForm({
 
   const isImport = docType === "04";
 
+  const vatRate = useMemo(() => {
+    return getTaxConfig(invoiceDate || `${year}-${month}-01`).vatRate * 100;
+  }, [invoiceDate, year, month]);
+
   const withVat = useMemo(() => {
     const b = parseFloat(baseAmount) || 0;
     const v = parseFloat(vatAmount) || 0;
@@ -92,7 +96,7 @@ export default function KufForm({
 
   function applyVatFromBase() {
     const b = parseFloat(baseAmount) || 0;
-    setVatAmount(round2(b * (VAT_RATE / 100)).toFixed(2));
+    setVatAmount(round2(b * (vatRate / 100)).toFixed(2));
   }
 
   function onSelectPartner(value: string) {

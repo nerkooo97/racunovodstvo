@@ -13,14 +13,10 @@ export default async function DashboardLayout({
   children: React.ReactNode;
 }) {
   await connection();
-  console.log("DashboardLayout - Učitavanje...");
   const supabase = await createClient();
   const { data, error } = await supabase.auth.getUser();
-  
-  console.log("DashboardLayout - getUser rezultat:", { user: data?.user?.id, error });
-  
+
   if (error || !data.user) {
-    console.log("DashboardLayout - Nema korisnika, redirect na /login");
     redirect("/login");
   }
 
@@ -30,17 +26,13 @@ export default async function DashboardLayout({
     .eq("owner_id", data.user.id)
     .order("created_at", { ascending: true });
 
-  console.log("DashboardLayout - Dobavljene organizacije iz baze:", { 
-    count: orgs?.length, 
-    orgs, 
-    orgsError 
-  });
+  if (orgsError) {
+    console.error("DashboardLayout - greška pri dohvatu organizacija:", orgsError.message);
+  }
 
   const cookieStore = await cookies();
   const activeOrgId = cookieStore.get("active_org_id")?.value;
   const sidebarState = cookieStore.get("sidebar_state")?.value;
-
-  console.log("DashboardLayout - Cookie active_org_id:", activeOrgId);
 
   const rawActive =
     (activeOrgId ? orgs?.find((o) => o.id === activeOrgId) : null) ??
@@ -65,10 +57,7 @@ export default async function DashboardLayout({
   const activeOrg = toOrgData(rawActive);
   const allOrgs: OrgData[] = (orgs ?? []).map((o) => toOrgData(o)!);
 
-  console.log("DashboardLayout - Odabrana aktivna organizacija:", activeOrg);
-
   if (!activeOrg && orgs?.length === 0) {
-    console.log("DashboardLayout - Nema organizacija, redirect na /nova-djelatnost");
     redirect("/nova-djelatnost");
   }
 

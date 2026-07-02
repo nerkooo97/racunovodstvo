@@ -16,13 +16,14 @@ import { getPdvGlReconciliation } from "@/app/actions/accounting/reports";
 export default async function UskladjivanjePage({
   searchParams,
 }: {
-  searchParams: Promise<{ godina?: string; mjesec?: string }>;
+  searchParams: Promise<{ mjesec?: string }>;
 }) {
   await requireOrgFeature("general_ledger");
+  const { getActiveYear } = await import("@/lib/year");
 
   const now = new Date();
-  const { godina, mjesec } = await searchParams;
-  const year = parseInt(godina ?? "", 10) || now.getFullYear();
+  const { mjesec } = await searchParams;
+  const year = await getActiveYear();
   const month = parseInt(mjesec ?? "", 10) || now.getMonth() + 1;
 
   const res = await getPdvGlReconciliation(year, month);

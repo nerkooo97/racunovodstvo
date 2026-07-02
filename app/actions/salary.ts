@@ -1,6 +1,7 @@
 "use server";
 
 import { createClient } from "@/lib/supabase/server";
+import { getActiveOrgId } from "@/lib/supabase/get-active-org";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { calculateEmployee, calculateActiveDaysInMonth } from "@/lib/calculations/salary";
@@ -8,12 +9,13 @@ import { computeMinuliRadYears } from "@/lib/calculations/minuli-rad";
 import { PAYROLL_ELIGIBLE_STATUSES } from "@/lib/employees/form-utils";
 
 async function getOrgByUser(supabase: Awaited<ReturnType<typeof createClient>>, userId: string) {
+  // Aktivna organizacija iz cookie-a — NE prva kreirana (korisnik može imati i obrt i d.o.o.)
+  const orgId = await getActiveOrgId(supabase, userId);
+  if (!orgId) return null;
   const { data } = await supabase
     .from("organizations")
     .select("id, type")
-    .eq("owner_id", userId)
-    .order("created_at", { ascending: true })
-    .limit(1)
+    .eq("id", orgId)
     .single();
   return data;
 }
@@ -96,7 +98,9 @@ export async function calculatePeriod(
         activeDays,
         totalDays,
         minuliYears,
-        minuliRate
+        minuliRate,
+        0,
+        `${year}-${String(month).padStart(2, "0")}-01`
       );
       if (!calc) return null;
 
@@ -232,7 +236,9 @@ export async function saveEmployeePeriodItem(
     activeDays,
     totalDays,
     minuliYears,
-    minuliRate
+    minuliRate,
+    0,
+    `${year}-${String(month).padStart(2, "0")}-01`
   );
 
   if (!salaryCalc) return { error: "Radnik nema postavljenu plaću." };

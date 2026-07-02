@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
+import { getActiveOrgId } from "@/lib/supabase/get-active-org";
 
 const STORAGE_BUCKET = "org-documents";
 
@@ -15,13 +16,10 @@ export async function GET(
     } = await supabase.auth.getUser();
     if (!user) return new NextResponse("Unauthorized", { status: 401 });
 
-    const { data: org } = await supabase
-      .from("organizations")
-      .select("id")
-      .eq("owner_id", user.id)
-      .order("created_at", { ascending: true })
-      .limit(1)
-      .single();
+    const activeOrgId = await getActiveOrgId(supabase, user.id);
+  const { data: org } = activeOrgId
+    ? await supabase.from("organizations").select("id").eq("id", activeOrgId).single()
+    : { data: null };
 
     if (!org) return new NextResponse("Unauthorized", { status: 401 });
 

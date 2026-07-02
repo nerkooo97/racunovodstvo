@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { generateFilledSpr1053Pdf, type Spr1053FillData } from "@/lib/pdf/spr-1053-fill";
+import { getTaxConfig } from "@/lib/constants/tax-config";
 
 export async function POST(req: NextRequest) {
   try {
@@ -32,7 +33,10 @@ export async function POST(req: NextRequest) {
     const r26 = r24;
     const r27 = n(body.r27);
     const r28 = r25 - r26 + r27;
-    const r29 = Math.max(0, (r28 * 0.10) / 12);
+
+    const yearVal = String(body.year || new Date().getFullYear() - 1);
+    const cfg = getTaxConfig(`${yearVal}-12-31`);
+    const r29 = Math.max(0, (r28 * cfg.incomeTaxRate) / 12);
 
     const data: Spr1053FillData = {
       jmb: String(body.jmb || ""),

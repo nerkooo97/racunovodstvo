@@ -1,0 +1,227 @@
+Obrazac KP1042 Knjiga prometa | type: PDFTextField | val: "" | rect: {"x":774.84,"y":533.88,"width":33.360000000000014,"height":12.120000000000005}
+odObrazac KP1042 Knjiga prometa | type: PDFTextField | val: "" | rect: {"x":774.96,"y":503.76,"width":33.120000000000005,"height":15.480000000000018}
+undefined | type: PDFTextField | val: "" | rect: {"x":41.28,"y":440.52,"width":209.16,"height":13.080000000000041}
+undefined_2 | type: PDFTextField | val: "" | rect: {"x":426.36,"y":440.52,"width":209.15999999999997,"height":13.080000000000041}
+2 Prezime i ime | type: PDFTextField | val: "" | rect: {"x":108.12,"y":410.64,"width":312.24,"height":19.920000000000016}
+5 Naziv | type: PDFTextField | val: "" | rect: {"x":461.04,"y":410.64,"width":347.99999999999994,"height":19.920000000000016}
+3 Adresa | type: PDFTextField | val: "" | rect: {"x":82.2,"y":389.64,"width":338.16,"height":20.04000000000002}
+6 Adresa | type: PDFTextField | val: "" | rect: {"x":467.16,"y":389.64,"width":162.23999999999995,"height":20.04000000000002}
+7 Vrsta djelatnosti šifra naziv | type: PDFTextField | val: "" | rect: {"x":630.84,"y":389.64,"width":178.43999999999994,"height":12.480000000000018}
+8 Red brRow1 | type: PDFTextField | val: "" | rect: {"x":37.32,"y":315.48,"width":21.36,"height":15.359999999999957}
+fill_3 | type: PDFTextField | val: "" | rect: {"x":495.96,"y":315.48,"width":108.71999999999997,"height":15.359999999999957}
+8 Red brRow2 | type: PDFTextField | val: "" | rect: {"x":37.32,"y":297.72,"width":21.36,"height":15.479999999999961}
+fill_5 | type: PDFTextField | val: "" | rect: {"x":495.96,"y":297.72,"width":108.71999999999997,"height":15.479999999999961}
+8 Red brRow3 | type: PDFTextField | val: "" | rect: {"x":37.32,"y":280.08,"width":21.36,"height":15.360000000000014}
+fill_7 | type: PDFTextField | val: "" | rect: {"x":495.96,"y":280.08,"width":108.71999999999997,"height":15.360000000000014}
+8 Red brRow4 | type: PDFTextField | val: "" | rect: {"x":37.32,"y":262.56,"width":21.36,"height":15.240000000000009}
+fill_9 | type: PDFTextField | val: "" | rect: {"x":495.96,"y":262.56,"width":108.71999999999997,"height":15.240000000000009}
+8 Red brRow5 | type: PDFTextField | val: "" | rect: {"x":37.32,"y":244.92,"width":21.36,"height":15.359999999999985}
+fill_11 | type: PDFTextField | val: "" | rect: {"x":495.96,"y":244.92,"width":108.71999999999997,"height":15.359999999999985}
+8 Red brRow6 | type: PDFTextField | val: "" | rect: {"x":37.32,"y":227.4,"width":21.36,"height":15.23999999999998}
+fill_13 | type: PDFTextField | val: "" | rect: {"x":495.96,"y":227.4,"width":108.71999999999997,"height":15.23999999999998}
+8 Red brRow7 | type: PDFTextField | val: "" | rect: {"x":37.32,"y":209.76,"width":21.36,"height":15.360000000000014}
+fill_15 | type: PDFTextField | val: "" | rect: {"x":495.96,"y":209.76,"width":108.71999999999997,"height":15.360000000000014}
+8 Red brRow8 | type: PDFTextField | val: "" | rect: {"x":37.32,"y":192.12,"width":21.36,"height":15.359999999999985}
+fill_17 | type: PDFTextField | val: "" | rect: {"x":495.96,"y":192.12,"width":108.71999999999997,"height":15.359999999999985}
+8 Red brRow9 | type: PDFTextField | val: "" | rect: {"x":37.32,"y":174.6,"width":21.36,"height":15.240000000000009}
+fill_19 | type: PDFTextField | val: "" | rect: {"x":495.96,"y":174.6,"width":108.71999999999997,"height":15.240000000000009}
+8 Red brRow10 | type: PDFTextField | val: "" | rect: {"x":37.32,"y":156.96,"width":21.36,"height":15.359999999999985}
+fill_21 | type: PDFTextField | val: "" | rect: {"x":495.96,"y":156.96,"width":108.71999999999997,"height":15.359999999999985}
+8 Red brRow11 | type: PDFTextField | val: "" | rect: {"x":37.32,"y":139.32,"width":21.36,"height":15.360000000000014}
+fill_23 | type: PDFTextField | val: "" | rect: {"x":495.96,"y":139.32,"width":108.71999999999997,"height":15.360000000000014}
+8 Red brRow12 | type: PDFTextField | val: "" | rect: {"x":37.32,"y":121.8,"width":21.36,"height":15.239999999999995}
+fill_25 | type: PDFTextField | val: "" | rect: {"x":495.96,"y":121.8,"width":108.71999999999997,"height":15.239999999999995}
+Obrazac KP1042 Knjiga prometa nastavak | type: PDFTextField | val: "" | rect: {"x":774.84,"y":514.32,"width":33.360000000000014,"height":13.199999999999932}
+odObrazac KP1042 Knjiga prometa nastavak | type: PDFTextField | val: "" | rect: {"x":774.96,"y":484.2,"width":33.120000000000005,"height":15.480000000000018}
+Donos  ukupan zbir sa prethodne straniceRow1 | type: PDFTextField | val: "" | rect: {"x":37.32,"y":392.4,"width":21.36,"height":15.480000000000018}
+Donos  ukupan zbir sa prethodne straniceRow1_2 | type: PDFTextField | val: "" | rect: {"x":61.2,"y":392.4,"width":51.72,"height":15.480000000000018}
+Donos  ukupan zbir sa prethodne straniceRow1_3 | type: PDFTextField | val: "" | rect: {"x":115.44,"y":392.4,"width":78.96000000000001,"height":15.480000000000018}
+Donos  ukupan zbir sa prethodne straniceRow1_4 | type: PDFTextField | val: "" | rect: {"x":196.92,"y":392.4,"width":296.52,"height":15.480000000000018}
+Donos  ukupan zbir sa prethodne straniceRow2 | type: PDFTextField | val: "" | rect: {"x":37.32,"y":374.88,"width":21.36,"height":15.240000000000009}
+Donos  ukupan zbir sa prethodne straniceRow2_2 | type: PDFTextField | val: "" | rect: {"x":61.2,"y":374.88,"width":51.72,"height":15.240000000000009}
+Donos  ukupan zbir sa prethodne straniceRow2_3 | type: PDFTextField | val: "" | rect: {"x":115.44,"y":374.88,"width":78.96000000000001,"height":15.240000000000009}
+Donos  ukupan zbir sa prethodne straniceRow2_4 | type: PDFTextField | val: "" | rect: {"x":196.92,"y":374.88,"width":296.52,"height":15.240000000000009}
+Donos  ukupan zbir sa prethodne straniceRow3 | type: PDFTextField | val: "" | rect: {"x":37.32,"y":357.24,"width":21.36,"height":15.360000000000014}
+Donos  ukupan zbir sa prethodne straniceRow3_2 | type: PDFTextField | val: "" | rect: {"x":61.2,"y":357.24,"width":51.72,"height":15.360000000000014}
+Donos  ukupan zbir sa prethodne straniceRow3_3 | type: PDFTextField | val: "" | rect: {"x":115.44,"y":357.24,"width":78.96000000000001,"height":15.360000000000014}
+Donos  ukupan zbir sa prethodne straniceRow3_4 | type: PDFTextField | val: "" | rect: {"x":196.92,"y":357.24,"width":296.52,"height":15.360000000000014}
+Donos  ukupan zbir sa prethodne straniceRow4 | type: PDFTextField | val: "" | rect: {"x":37.32,"y":339.6,"width":21.36,"height":15.359999999999957}
+Donos  ukupan zbir sa prethodne straniceRow4_2 | type: PDFTextField | val: "" | rect: {"x":61.2,"y":339.6,"width":51.72,"height":15.359999999999957}
+Donos  ukupan zbir sa prethodne straniceRow4_3 | type: PDFTextField | val: "" | rect: {"x":115.44,"y":339.6,"width":78.96000000000001,"height":15.359999999999957}
+Donos  ukupan zbir sa prethodne straniceRow4_4 | type: PDFTextField | val: "" | rect: {"x":196.92,"y":339.6,"width":296.52,"height":15.359999999999957}
+Donos  ukupan zbir sa prethodne straniceRow5 | type: PDFTextField | val: "" | rect: {"x":37.32,"y":322.08,"width":21.36,"height":15.240000000000009}
+Donos  ukupan zbir sa prethodne straniceRow5_2 | type: PDFTextField | val: "" | rect: {"x":61.2,"y":322.08,"width":51.72,"height":15.240000000000009}
+Donos  ukupan zbir sa prethodne straniceRow5_3 | type: PDFTextField | val: "" | rect: {"x":115.44,"y":322.08,"width":78.96000000000001,"height":15.240000000000009}
+Donos  ukupan zbir sa prethodne straniceRow5_4 | type: PDFTextField | val: "" | rect: {"x":196.92,"y":322.08,"width":296.52,"height":15.240000000000009}
+Donos  ukupan zbir sa prethodne straniceRow6 | type: PDFTextField | val: "" | rect: {"x":37.32,"y":304.44,"width":21.36,"height":15.360000000000014}
+Donos  ukupan zbir sa prethodne straniceRow6_2 | type: PDFTextField | val: "" | rect: {"x":61.2,"y":304.44,"width":51.72,"height":15.360000000000014}
+Donos  ukupan zbir sa prethodne straniceRow6_3 | type: PDFTextField | val: "" | rect: {"x":115.44,"y":304.44,"width":78.96000000000001,"height":15.360000000000014}
+Donos  ukupan zbir sa prethodne straniceRow6_4 | type: PDFTextField | val: "" | rect: {"x":196.92,"y":304.44,"width":296.52,"height":15.360000000000014}
+Donos  ukupan zbir sa prethodne straniceRow7 | type: PDFTextField | val: "" | rect: {"x":37.32,"y":286.68,"width":21.36,"height":15.480000000000018}
+Donos  ukupan zbir sa prethodne straniceRow7_2 | type: PDFTextField | val: "" | rect: {"x":61.2,"y":286.68,"width":51.72,"height":15.480000000000018}
+Donos  ukupan zbir sa prethodne straniceRow7_3 | type: PDFTextField | val: "" | rect: {"x":115.44,"y":286.68,"width":78.96000000000001,"height":15.480000000000018}
+Donos  ukupan zbir sa prethodne straniceRow7_4 | type: PDFTextField | val: "" | rect: {"x":196.92,"y":286.68,"width":296.52,"height":15.480000000000018}
+Donos  ukupan zbir sa prethodne straniceRow8 | type: PDFTextField | val: "" | rect: {"x":37.32,"y":269.16,"width":21.36,"height":15.239999999999952}
+Donos  ukupan zbir sa prethodne straniceRow8_2 | type: PDFTextField | val: "" | rect: {"x":61.2,"y":269.16,"width":51.72,"height":15.239999999999952}
+Donos  ukupan zbir sa prethodne straniceRow8_3 | type: PDFTextField | val: "" | rect: {"x":115.44,"y":269.16,"width":78.96000000000001,"height":15.239999999999952}
+Donos  ukupan zbir sa prethodne straniceRow8_4 | type: PDFTextField | val: "" | rect: {"x":196.92,"y":269.16,"width":296.52,"height":15.239999999999952}
+Donos  ukupan zbir sa prethodne straniceRow9 | type: PDFTextField | val: "" | rect: {"x":37.32,"y":251.52,"width":21.36,"height":15.359999999999985}
+Donos  ukupan zbir sa prethodne straniceRow9_2 | type: PDFTextField | val: "" | rect: {"x":61.2,"y":251.52,"width":51.72,"height":15.359999999999985}
+Donos  ukupan zbir sa prethodne straniceRow9_3 | type: PDFTextField | val: "" | rect: {"x":115.44,"y":251.52,"width":78.96000000000001,"height":15.359999999999985}
+Donos  ukupan zbir sa prethodne straniceRow9_4 | type: PDFTextField | val: "" | rect: {"x":196.92,"y":251.52,"width":296.52,"height":15.359999999999985}
+Donos  ukupan zbir sa prethodne straniceRow10 | type: PDFTextField | val: "" | rect: {"x":37.32,"y":234,"width":21.36,"height":15.240000000000009}
+Donos  ukupan zbir sa prethodne straniceRow10_2 | type: PDFTextField | val: "" | rect: {"x":61.2,"y":234,"width":51.72,"height":15.240000000000009}
+Donos  ukupan zbir sa prethodne straniceRow10_3 | type: PDFTextField | val: "" | rect: {"x":115.44,"y":234,"width":78.96000000000001,"height":15.240000000000009}
+Donos  ukupan zbir sa prethodne straniceRow10_4 | type: PDFTextField | val: "" | rect: {"x":196.92,"y":234,"width":296.52,"height":15.240000000000009}
+Donos  ukupan zbir sa prethodne straniceRow11 | type: PDFTextField | val: "" | rect: {"x":37.32,"y":216.36,"width":21.36,"height":15.359999999999985}
+Donos  ukupan zbir sa prethodne straniceRow11_2 | type: PDFTextField | val: "" | rect: {"x":61.2,"y":216.36,"width":51.72,"height":15.359999999999985}
+Donos  ukupan zbir sa prethodne straniceRow11_3 | type: PDFTextField | val: "" | rect: {"x":115.44,"y":216.36,"width":78.96000000000001,"height":15.359999999999985}
+Donos  ukupan zbir sa prethodne straniceRow11_4 | type: PDFTextField | val: "" | rect: {"x":196.92,"y":216.36,"width":296.52,"height":15.359999999999985}
+Donos  ukupan zbir sa prethodne straniceRow12 | type: PDFTextField | val: "" | rect: {"x":37.32,"y":198.72,"width":21.36,"height":15.360000000000014}
+Donos  ukupan zbir sa prethodne straniceRow12_2 | type: PDFTextField | val: "" | rect: {"x":61.2,"y":198.72,"width":51.72,"height":15.360000000000014}
+Donos  ukupan zbir sa prethodne straniceRow12_3 | type: PDFTextField | val: "" | rect: {"x":115.44,"y":198.72,"width":78.96000000000001,"height":15.360000000000014}
+Donos  ukupan zbir sa prethodne straniceRow12_4 | type: PDFTextField | val: "" | rect: {"x":196.92,"y":198.72,"width":296.52,"height":15.360000000000014}
+Donos  ukupan zbir sa prethodne straniceRow13 | type: PDFTextField | val: "" | rect: {"x":37.32,"y":181.2,"width":21.36,"height":15.240000000000009}
+Donos  ukupan zbir sa prethodne straniceRow13_2 | type: PDFTextField | val: "" | rect: {"x":61.2,"y":181.2,"width":51.72,"height":15.240000000000009}
+Donos  ukupan zbir sa prethodne straniceRow13_3 | type: PDFTextField | val: "" | rect: {"x":115.44,"y":181.2,"width":78.96000000000001,"height":15.240000000000009}
+Donos  ukupan zbir sa prethodne straniceRow13_4 | type: PDFTextField | val: "" | rect: {"x":196.92,"y":181.2,"width":296.52,"height":15.240000000000009}
+Donos  ukupan zbir sa prethodne straniceRow14 | type: PDFTextField | val: "" | rect: {"x":37.32,"y":163.56,"width":21.36,"height":15.359999999999985}
+Donos  ukupan zbir sa prethodne straniceRow14_2 | type: PDFTextField | val: "" | rect: {"x":61.2,"y":163.56,"width":51.72,"height":15.359999999999985}
+Donos  ukupan zbir sa prethodne straniceRow14_3 | type: PDFTextField | val: "" | rect: {"x":115.44,"y":163.56,"width":78.96000000000001,"height":15.359999999999985}
+Donos  ukupan zbir sa prethodne straniceRow14_4 | type: PDFTextField | val: "" | rect: {"x":196.92,"y":163.56,"width":296.52,"height":15.359999999999985}
+Donos  ukupan zbir sa prethodne straniceRow15 | type: PDFTextField | val: "" | rect: {"x":37.32,"y":145.92,"width":21.36,"height":15.360000000000014}
+Donos  ukupan zbir sa prethodne straniceRow15_2 | type: PDFTextField | val: "" | rect: {"x":61.2,"y":145.92,"width":51.72,"height":15.360000000000014}
+Donos  ukupan zbir sa prethodne straniceRow15_3 | type: PDFTextField | val: "" | rect: {"x":115.44,"y":145.92,"width":78.96000000000001,"height":15.360000000000014}
+Donos  ukupan zbir sa prethodne straniceRow15_4 | type: PDFTextField | val: "" | rect: {"x":196.92,"y":145.92,"width":296.52,"height":15.360000000000014}
+Donos  ukupan zbir sa prethodne straniceRow16 | type: PDFTextField | val: "" | rect: {"x":37.32,"y":128.4,"width":21.36,"height":15.23999999999998}
+Donos  ukupan zbir sa prethodne straniceRow16_2 | type: PDFTextField | val: "" | rect: {"x":61.2,"y":128.4,"width":51.72,"height":15.23999999999998}
+Donos  ukupan zbir sa prethodne straniceRow16_3 | type: PDFTextField | val: "" | rect: {"x":115.44,"y":128.4,"width":78.96000000000001,"height":15.23999999999998}
+Donos  ukupan zbir sa prethodne straniceRow16_4 | type: PDFTextField | val: "" | rect: {"x":196.92,"y":128.4,"width":296.52,"height":15.23999999999998}
+Donos  ukupan zbir sa prethodne straniceRow17 | type: PDFTextField | val: "" | rect: {"x":37.32,"y":110.76,"width":21.36,"height":15.36}
+Donos  ukupan zbir sa prethodne straniceRow17_2 | type: PDFTextField | val: "" | rect: {"x":61.2,"y":110.76,"width":51.72,"height":15.36}
+Donos  ukupan zbir sa prethodne straniceRow17_3 | type: PDFTextField | val: "" | rect: {"x":115.44,"y":110.76,"width":78.96000000000001,"height":15.36}
+Donos  ukupan zbir sa prethodne straniceRow17_4 | type: PDFTextField | val: "" | rect: {"x":196.92,"y":110.76,"width":296.52,"height":15.36}
+Donos  ukupan zbir sa prethodne straniceRow18 | type: PDFTextField | val: "" | rect: {"x":37.32,"y":93.12,"width":21.36,"height":15.36}
+Donos  ukupan zbir sa prethodne straniceRow18_2 | type: PDFTextField | val: "" | rect: {"x":61.2,"y":93.12,"width":51.72,"height":15.36}
+Donos  ukupan zbir sa prethodne straniceRow18_3 | type: PDFTextField | val: "" | rect: {"x":115.44,"y":93.12,"width":78.96000000000001,"height":15.36}
+Donos  ukupan zbir sa prethodne straniceRow18_4 | type: PDFTextField | val: "" | rect: {"x":196.92,"y":93.12,"width":296.52,"height":15.36}
+Text1.0 | type: PDFTextField | val: "" | rect: {"x":60.888,"y":315.048,"width":53.213,"height":16.37299999999999}
+Text1.1 | type: PDFTextField | val: "" | rect: {"x":60.888,"y":297.651,"width":53.213,"height":16.373999999999967}
+Text1.2 | type: PDFTextField | val: "" | rect: {"x":60.888,"y":280.255,"width":53.213,"height":16.37299999999999}
+Text1.3 | type: PDFTextField | val: "" | rect: {"x":60.888,"y":262.858,"width":53.213,"height":16.374000000000024}
+Text1.4 | type: PDFTextField | val: "" | rect: {"x":60.888,"y":245.462,"width":53.213,"height":16.37299999999999}
+Text1.5 | type: PDFTextField | val: "" | rect: {"x":60.888,"y":227.065,"width":53.213,"height":16.37299999999999}
+Text1.6 | type: PDFTextField | val: "" | rect: {"x":60.888,"y":209.669,"width":53.213,"height":16.37299999999999}
+Text1.7 | type: PDFTextField | val: "" | rect: {"x":60.888,"y":192.272,"width":53.213,"height":16.37300000000002}
+Text1.8 | type: PDFTextField | val: "" | rect: {"x":60.888,"y":174.875,"width":53.213,"height":16.373999999999995}
+Text1.9 | type: PDFTextField | val: "" | rect: {"x":60.888,"y":156.479,"width":53.213,"height":16.37299999999999}
+Text1.10 | type: PDFTextField | val: "" | rect: {"x":60.888,"y":139.082,"width":53.213,"height":16.37300000000002}
+Text1.11 | type: PDFTextField | val: "" | rect: {"x":60.888,"y":121.686,"width":53.213,"height":16.37299999999999}
+Text2.0 | type: PDFTextField | val: "" | rect: {"x":114.613,"y":313.513,"width":79.81899999999999,"height":18.420000000000016}
+Text2.1 | type: PDFTextField | val: "" | rect: {"x":114.613,"y":297.628,"width":79.81899999999999,"height":16.88499999999999}
+Text2.2 | type: PDFTextField | val: "" | rect: {"x":114.613,"y":278.673,"width":79.81899999999999,"height":18.420000000000016}
+Text2.3 | type: PDFTextField | val: "" | rect: {"x":114.613,"y":261.253,"width":79.81899999999999,"height":18.420000000000016}
+Text2.4 | type: PDFTextField | val: "" | rect: {"x":114.613,"y":243.833,"width":79.81899999999999,"height":18.419999999999987}
+Text2.5 | type: PDFTextField | val: "" | rect: {"x":114.613,"y":225.413,"width":79.81899999999999,"height":18.419999999999987}
+Text2.6 | type: PDFTextField | val: "" | rect: {"x":114.613,"y":209.04,"width":79.81899999999999,"height":16.37300000000002}
+Text2.7 | type: PDFTextField | val: "" | rect: {"x":114.613,"y":190.574,"width":79.81899999999999,"height":18.419999999999987}
+Text2.8 | type: PDFTextField | val: "" | rect: {"x":114.613,"y":173.154,"width":79.81899999999999,"height":18.420000000000016}
+Text2.9 | type: PDFTextField | val: "" | rect: {"x":114.613,"y":155.734,"width":79.81899999999999,"height":18.419999999999987}
+Text2.10 | type: PDFTextField | val: "" | rect: {"x":114.613,"y":137.314,"width":79.81899999999999,"height":18.420000000000016}
+Text2.11 | type: PDFTextField | val: "" | rect: {"x":114.613,"y":119.894,"width":79.81899999999999,"height":18.419999999999987}
+Text3.0 | type: PDFTextField | val: "" | rect: {"x":195.456,"y":314.025,"width":298.29999999999995,"height":16.885000000000048}
+Text3.1 | type: PDFTextField | val: "" | rect: {"x":195.456,"y":296.628,"width":298.29999999999995,"height":16.88499999999999}
+Text3.2 | type: PDFTextField | val: "" | rect: {"x":195.456,"y":279.232,"width":298.29999999999995,"height":16.883999999999958}
+Text3.3 | type: PDFTextField | val: "" | rect: {"x":195.456,"y":261.835,"width":298.29999999999995,"height":16.885000000000048}
+Text3.4 | type: PDFTextField | val: "" | rect: {"x":195.456,"y":244.438,"width":298.29999999999995,"height":16.88499999999999}
+Text3.5 | type: PDFTextField | val: "" | rect: {"x":195.456,"y":227.042,"width":298.29999999999995,"height":16.88499999999999}
+Text3.6 | type: PDFTextField | val: "" | rect: {"x":195.456,"y":209.645,"width":298.29999999999995,"height":16.88499999999999}
+Text3.7 | type: PDFTextField | val: "" | rect: {"x":195.456,"y":192.249,"width":298.29999999999995,"height":16.88499999999999}
+Text3.8 | type: PDFTextField | val: "" | rect: {"x":195.456,"y":174.852,"width":298.29999999999995,"height":16.88499999999999}
+Text3.9 | type: PDFTextField | val: "" | rect: {"x":195.456,"y":157.455,"width":298.29999999999995,"height":16.88499999999999}
+Text3.10 | type: PDFTextField | val: "" | rect: {"x":195.456,"y":139.059,"width":298.29999999999995,"height":16.88499999999999}
+Text3.11 | type: PDFTextField | val: "" | rect: {"x":195.456,"y":121.662,"width":298.29999999999995,"height":16.88499999999999}
+Text4.0 | type: PDFTextField | val: "" | rect: {"x":606.322,"y":314.025,"width":110.51999999999998,"height":16.373000000000047}
+Text4.1 | type: PDFTextField | val: "" | rect: {"x":606.322,"y":296.628,"width":110.51999999999998,"height":16.37299999999999}
+Text4.2 | type: PDFTextField | val: "" | rect: {"x":606.322,"y":279.232,"width":110.51999999999998,"height":16.37299999999999}
+Text4.3 | type: PDFTextField | val: "" | rect: {"x":606.322,"y":261.835,"width":110.51999999999998,"height":16.373000000000047}
+Text4.4 | type: PDFTextField | val: "" | rect: {"x":606.322,"y":244.438,"width":110.51999999999998,"height":16.374000000000024}
+Text4.5 | type: PDFTextField | val: "" | rect: {"x":606.322,"y":227.042,"width":110.51999999999998,"height":16.37299999999999}
+Text4.6 | type: PDFTextField | val: "" | rect: {"x":606.322,"y":209.645,"width":110.51999999999998,"height":16.37299999999999}
+Text4.7 | type: PDFTextField | val: "" | rect: {"x":606.322,"y":192.249,"width":110.51999999999998,"height":16.37300000000002}
+Text4.8 | type: PDFTextField | val: "" | rect: {"x":606.322,"y":174.852,"width":110.51999999999998,"height":16.37299999999999}
+Text4.9 | type: PDFTextField | val: "" | rect: {"x":606.322,"y":157.455,"width":110.51999999999998,"height":16.373999999999995}
+Text4.10 | type: PDFTextField | val: "" | rect: {"x":606.322,"y":140.059,"width":110.51999999999998,"height":16.37299999999999}
+Text4.11 | type: PDFTextField | val: "" | rect: {"x":606.322,"y":122.662,"width":110.51999999999998,"height":16.373999999999995}
+Text5.0 | type: PDFTextField | val: "" | rect: {"x":717.865,"y":314.536,"width":92.09900000000005,"height":16.374000000000024}
+Text5.1 | type: PDFTextField | val: "" | rect: {"x":717.865,"y":297.14,"width":92.09900000000005,"height":16.37299999999999}
+Text5.2 | type: PDFTextField | val: "" | rect: {"x":717.865,"y":279.743,"width":92.09900000000005,"height":16.37299999999999}
+Text5.3 | type: PDFTextField | val: "" | rect: {"x":717.865,"y":262.347,"width":92.09900000000005,"height":16.373000000000047}
+Text5.4 | type: PDFTextField | val: "" | rect: {"x":717.865,"y":244.95,"width":92.09900000000005,"height":16.37299999999999}
+Text5.5 | type: PDFTextField | val: "" | rect: {"x":717.865,"y":227.553,"width":92.09900000000005,"height":16.373999999999995}
+Text5.6 | type: PDFTextField | val: "" | rect: {"x":717.865,"y":210.157,"width":92.09900000000005,"height":16.37299999999999}
+Text5.7 | type: PDFTextField | val: "" | rect: {"x":717.865,"y":192.76,"width":92.09900000000005,"height":16.373999999999995}
+Text5.8 | type: PDFTextField | val: "" | rect: {"x":717.865,"y":174.364,"width":92.09900000000005,"height":16.37299999999999}
+Text5.9 | type: PDFTextField | val: "" | rect: {"x":717.865,"y":156.967,"width":92.09900000000005,"height":16.37299999999999}
+Text5.10 | type: PDFTextField | val: "" | rect: {"x":717.865,"y":139.571,"width":92.09900000000005,"height":16.37299999999999}
+Text5.11 | type: PDFTextField | val: "" | rect: {"x":717.865,"y":122.174,"width":92.09900000000005,"height":16.37299999999999}
+fill_2.0 | type: PDFTextField | val: "" | rect: {"x":495.291,"y":410.218,"width":110.00799999999998,"height":15.34899999999999}
+fill_2.1.0 | type: PDFTextField | val: "" | rect: {"x":606.322,"y":410.218,"width":110.00800000000004,"height":15.34899999999999}
+fill_2.1.1 | type: PDFTextField | val: "" | rect: {"x":717.353,"y":425.567,"width":92.6110000000001,"height":-15.34899999999999}
+fill_7_2.0 | type: PDFTextField | val: "" | rect: {"x":495.803,"y":392.309,"width":108.98400000000004,"height":15.349999999999966}
+fill_7_2.1.0 | type: PDFTextField | val: "" | rect: {"x":606.834,"y":392.309,"width":108.98400000000004,"height":15.349999999999966}
+fill_7_2.1.1 | type: PDFTextField | val: "" | rect: {"x":717.865,"y":407.659,"width":92.61099999999999,"height":-15.349999999999966}
+fill_12.0 | type: PDFTextField | val: "" | rect: {"x":495.803,"y":374.913,"width":108.98400000000004,"height":15.349999999999966}
+fill_12.1.0 | type: PDFTextField | val: "" | rect: {"x":606.834,"y":374.913,"width":108.98400000000004,"height":15.349999999999966}
+fill_12.1.1 | type: PDFTextField | val: "" | rect: {"x":717.865,"y":390.263,"width":92.61099999999999,"height":-15.349999999999966}
+fill_17_2.0 | type: PDFTextField | val: "" | rect: {"x":495.803,"y":357.004,"width":108.98400000000004,"height":15.349999999999966}
+fill_17_2.1.0 | type: PDFTextField | val: "" | rect: {"x":606.834,"y":357.004,"width":108.98400000000004,"height":15.349999999999966}
+fill_17_2.1.1 | type: PDFTextField | val: "" | rect: {"x":717.865,"y":357.004,"width":92.61099999999999,"height":15.349999999999966}
+fill_22.0 | type: PDFTextField | val: "" | rect: {"x":495.803,"y":339.608,"width":108.98400000000004,"height":15.350000000000023}
+fill_22.1.0 | type: PDFTextField | val: "" | rect: {"x":606.834,"y":339.608,"width":108.98400000000004,"height":15.350000000000023}
+fill_22.1.1 | type: PDFTextField | val: "" | rect: {"x":717.865,"y":354.958,"width":92.61099999999999,"height":-15.350000000000023}
+fill_27.0 | type: PDFTextField | val: "" | rect: {"x":495.803,"y":322.211,"width":108.98400000000004,"height":15.349999999999966}
+fill_27.1.0 | type: PDFTextField | val: "" | rect: {"x":606.834,"y":322.211,"width":108.98400000000004,"height":15.349999999999966}
+fill_27.1.1 | type: PDFTextField | val: "" | rect: {"x":717.865,"y":337.561,"width":92.61099999999999,"height":-15.349999999999966}
+fill_32.0 | type: PDFTextField | val: "" | rect: {"x":495.803,"y":304.303,"width":108.98400000000004,"height":15.350000000000023}
+fill_32.1.0 | type: PDFTextField | val: "" | rect: {"x":606.834,"y":304.303,"width":108.98400000000004,"height":15.350000000000023}
+fill_32.1.1 | type: PDFTextField | val: "" | rect: {"x":717.865,"y":319.653,"width":92.61099999999999,"height":-15.350000000000023}
+fill_37.0 | type: PDFTextField | val: "" | rect: {"x":495.803,"y":286.906,"width":108.98400000000004,"height":15.349999999999966}
+fill_37.1.0 | type: PDFTextField | val: "" | rect: {"x":606.834,"y":286.906,"width":108.98400000000004,"height":15.349999999999966}
+fill_37.1.1 | type: PDFTextField | val: "" | rect: {"x":717.865,"y":302.256,"width":92.61099999999999,"height":-15.349999999999966}
+fill_42.0 | type: PDFTextField | val: "" | rect: {"x":495.803,"y":268.998,"width":108.98400000000004,"height":15.350000000000023}
+fill_42.1.0 | type: PDFTextField | val: "" | rect: {"x":606.834,"y":268.998,"width":108.98400000000004,"height":15.350000000000023}
+fill_42.1.1 | type: PDFTextField | val: "" | rect: {"x":717.865,"y":284.348,"width":92.61099999999999,"height":-15.350000000000023}
+fill_47.0 | type: PDFTextField | val: "" | rect: {"x":495.803,"y":251.602,"width":108.98400000000004,"height":15.349999999999994}
+fill_47.1.0 | type: PDFTextField | val: "" | rect: {"x":606.834,"y":251.602,"width":108.98400000000004,"height":15.349999999999994}
+fill_47.1.1 | type: PDFTextField | val: "" | rect: {"x":717.865,"y":266.952,"width":92.61099999999999,"height":-15.349999999999994}
+fill_52.0 | type: PDFTextField | val: "" | rect: {"x":495.803,"y":234.205,"width":108.98400000000004,"height":14.837999999999994}
+fill_52.1.0 | type: PDFTextField | val: "" | rect: {"x":606.834,"y":234.205,"width":108.98400000000004,"height":14.837999999999994}
+fill_52.1.1 | type: PDFTextField | val: "" | rect: {"x":717.865,"y":249.043,"width":92.61099999999999,"height":-14.837999999999994}
+fill_57.0 | type: PDFTextField | val: "" | rect: {"x":495.803,"y":216.297,"width":108.98400000000004,"height":15.349999999999994}
+fill_57.1.0 | type: PDFTextField | val: "" | rect: {"x":606.834,"y":216.297,"width":108.98400000000004,"height":15.349999999999994}
+fill_57.1.1 | type: PDFTextField | val: "" | rect: {"x":717.865,"y":231.647,"width":92.61099999999999,"height":-15.349999999999994}
+fill_62.0 | type: PDFTextField | val: "" | rect: {"x":495.803,"y":198.9,"width":108.98400000000004,"height":15.349999999999994}
+fill_62.1.0 | type: PDFTextField | val: "" | rect: {"x":606.834,"y":198.9,"width":108.98400000000004,"height":15.349999999999994}
+fill_62.1.1 | type: PDFTextField | val: "" | rect: {"x":717.865,"y":214.25,"width":92.61099999999999,"height":-15.349999999999994}
+fill_67.0 | type: PDFTextField | val: "" | rect: {"x":495.803,"y":180.992,"width":108.98400000000004,"height":15.350000000000023}
+fill_67.1.0 | type: PDFTextField | val: "" | rect: {"x":606.834,"y":180.992,"width":108.98400000000004,"height":15.350000000000023}
+fill_67.1.1 | type: PDFTextField | val: "" | rect: {"x":717.865,"y":196.342,"width":92.61099999999999,"height":-15.350000000000023}
+fill_72.0 | type: PDFTextField | val: "" | rect: {"x":495.803,"y":163.595,"width":108.98400000000004,"height":15.349999999999994}
+fill_72.1.0 | type: PDFTextField | val: "" | rect: {"x":606.834,"y":163.595,"width":108.98400000000004,"height":15.349999999999994}
+fill_72.1.1 | type: PDFTextField | val: "" | rect: {"x":717.865,"y":178.945,"width":92.61099999999999,"height":-15.349999999999994}
+fill_77.0 | type: PDFTextField | val: "" | rect: {"x":495.803,"y":145.687,"width":108.98400000000004,"height":15.349999999999994}
+fill_77.1.0 | type: PDFTextField | val: "" | rect: {"x":606.834,"y":145.687,"width":108.98400000000004,"height":15.349999999999994}
+fill_77.1.1 | type: PDFTextField | val: "" | rect: {"x":717.865,"y":161.037,"width":92.61099999999999,"height":-15.349999999999994}
+fill_82.0 | type: PDFTextField | val: "" | rect: {"x":495.803,"y":128.291,"width":108.98400000000004,"height":15.349999999999994}
+fill_82.1.0 | type: PDFTextField | val: "" | rect: {"x":606.834,"y":128.291,"width":108.98400000000004,"height":15.349999999999994}
+fill_82.1.1 | type: PDFTextField | val: "" | rect: {"x":717.865,"y":143.641,"width":92.61099999999999,"height":-15.349999999999994}
+fill_87.0 | type: PDFTextField | val: "" | rect: {"x":495.803,"y":110.894,"width":108.98400000000004,"height":15.349999999999994}
+fill_87.1.0 | type: PDFTextField | val: "" | rect: {"x":606.834,"y":110.894,"width":108.98400000000004,"height":15.349999999999994}
+fill_87.1.1 | type: PDFTextField | val: "" | rect: {"x":717.865,"y":126.244,"width":92.61099999999999,"height":-15.349999999999994}
+fill_92.0 | type: PDFTextField | val: "" | rect: {"x":495.803,"y":92.9857,"width":108.98400000000004,"height":15.350300000000004}
+fill_92.1.0 | type: PDFTextField | val: "" | rect: {"x":606.834,"y":92.9857,"width":108.98400000000004,"height":15.350300000000004}
+fill_92.1.1 | type: PDFTextField | val: "" | rect: {"x":717.865,"y":108.336,"width":92.61099999999999,"height":-15.350300000000004}
+fill_93.0 | type: PDFTextField | val: "" | rect: {"x":495.803,"y":75.5892,"width":108.98400000000004,"height":15.349899999999991}
+fill_93.1.0 | type: PDFTextField | val: "" | rect: {"x":606.834,"y":75.5892,"width":108.98400000000004,"height":15.349899999999991}
+fill_93.1.1 | type: PDFTextField | val: "" | rect: {"x":717.865,"y":90.9391,"width":92.61099999999999,"height":-15.349899999999991}

@@ -1,19 +1,14 @@
 "use server";
 
 import { createClient } from "@/lib/supabase/server";
+import { getActiveOrgId } from "@/lib/supabase/get-active-org";
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { syncInvoiceToKif, removeInvoiceFromKif } from "@/app/actions/pdv/kif";
 
+// Aktivna organizacija iz cookie-a — NE prva kreirana (korisnik može imati više org-ova)
 async function getOrgId(supabase: Awaited<ReturnType<typeof createClient>>, userId: string) {
-  const { data } = await supabase
-    .from("organizations")
-    .select("id")
-    .eq("owner_id", userId)
-    .order("created_at", { ascending: true })
-    .limit(1)
-    .single();
-  return data?.id ?? null;
+  return getActiveOrgId(supabase, userId);
 }
 
 // ─── Partners ────────────────────────────────────────────────────────────────
@@ -133,10 +128,17 @@ const InvoiceSchema = z.object({
   note:          z.string().optional(),
 });
 
+function round2(n: number): number {
+  return Math.round((n + Number.EPSILON) * 100) / 100;
+}
+
+// Zaokruživanje NA NIVOU STAVKE: totali fakture = suma zaokruženih stavki,
+// inače faktura, KIF i GK mogu odstupati za fening (Postgres zaokružuje
+// svaku kolonu nezavisno).
 function computeItem(raw: z.infer<typeof InvoiceItemSchema>) {
-  const subtotal  = raw.quantity * raw.unit_price * (1 - raw.discount / 100);
-  const vat       = subtotal * (raw.vat_rate / 100);
-  return { ...raw, subtotal, vat_amount: vat, total: subtotal + vat };
+  const subtotal  = round2(raw.quantity * raw.unit_price * (1 - raw.discount / 100));
+  const vat       = round2(subtotal * (raw.vat_rate / 100));
+  return { ...raw, subtotal, vat_amount: vat, total: round2(subtotal + vat) };
 }
 
 export async function createInvoice(
@@ -172,13 +174,13 @@ export async function createInvoice(
   const invoiceNumber  = `${year}-${String(sequenceNumber).padStart(3, "0")}`;
 
   const computedItems = items.map((it) => computeItem(InvoiceItemSchema.parse(it)));
-  const subtotal = computedItems.reduce((s, it) => s + it.subtotal, 0);
+  const subtotal = round2(computedItems.reduce((s, it) => s + it.subtotal, 0));
   const vat17Items = computedItems.filter((it) => it.vat_rate === 17);
   const vat0Items  = computedItems.filter((it) => it.vat_rate === 0);
-  const vatBase17  = vat17Items.reduce((s, it) => s + it.subtotal, 0);
-  const vatAmt17   = vat17Items.reduce((s, it) => s + it.vat_amount, 0);
-  const vatBase0   = vat0Items.reduce((s, it) => s + it.subtotal, 0);
-  const total      = computedItems.reduce((s, it) => s + it.total, 0);
+  const vatBase17  = round2(vat17Items.reduce((s, it) => s + it.subtotal, 0));
+  const vatAmt17   = round2(vat17Items.reduce((s, it) => s + it.vat_amount, 0));
+  const vatBase0   = round2(vat0Items.reduce((s, it) => s + it.subtotal, 0));
+  const total      = round2(computedItems.reduce((s, it) => s + it.total, 0));
 
   const { data: invoice, error: invErr } = await supabase
     .from("invoices")
@@ -227,7 +229,11 @@ export async function createInvoice(
   }));
 
   const { error: itemErr } = await supabase.from("invoice_items").insert(itemRows);
-  if (itemErr) return { error: itemErr.message };
+  if (itemErr) {
+    // Faktura bez stavki je nevažeća — ukloni zaglavlje da ne ostane rupa u numeraciji
+    await supabase.from("invoices").delete().eq("id", invoice!.id);
+    return { error: itemErr.message };
+  }
 
   revalidatePath("/fakture");
   return { success: true, invoiceId: invoice!.id };
@@ -268,12 +274,24 @@ export async function updateInvoiceStatus(
     .eq("id", orgId)
     .single();
 
+  // Greška u KIF sinhronizaciji je PDV-kritična (faktura van KIF-a = manje
+  // prijavljen PDV) — mora se vratiti korisniku, ne progutati.
   const countsForKif = inv.type === "invoice" || inv.type === "credit_note" || inv.type === "advance";
   if (countsForKif) {
     if (status === "open" || status === "paid" || status === "overdue") {
-      await syncInvoiceToKif(supabase, orgId, orgRow?.type ?? "obrt", invoiceId, user.id);
+      const kifRes = await syncInvoiceToKif(supabase, orgId, orgRow?.type ?? "obrt", invoiceId, user.id);
+      if (kifRes?.error) {
+        return {
+          error: `Status je promijenjen, ali faktura NIJE upisana u KIF: ${kifRes.error}`,
+        };
+      }
     } else if (status === "draft" || status === "cancelled") {
-      await removeInvoiceFromKif(supabase, orgId, invoiceId);
+      const kifRes = await removeInvoiceFromKif(supabase, orgId, invoiceId);
+      if (kifRes?.error) {
+        return {
+          error: `Status je promijenjen, ali faktura NIJE uklonjena iz KIF-a: ${kifRes.error}`,
+        };
+      }
     }
   }
 

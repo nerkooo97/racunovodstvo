@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import PageHeader from "@/components/shared/page-header";
 import { formatKM, formatDate } from "@/lib/utils";
 import { requireOrgFeature } from "@/lib/organization/server";
+import { getActiveYear } from "@/lib/year";
 import DepreciationPostButton from "./DepreciationPostButton";
 import {
   Table,
@@ -14,24 +15,15 @@ import {
 } from "@/components/ui/table";
 import FixedAssetDeleteButton from "./FixedAssetDeleteButton";
 
-export default async function DugotrajnaImovinaPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ godina?: string }>;
-}) {
-  const sp = await searchParams;
+export default async function DugotrajnaImovinaPage() {
   const { supabase, org } = await requireOrgFeature("fixed_assets");
-
-  const currentYear = new Date().getFullYear();
-  const year = parseInt(sp.godina ?? "") || currentYear;
+  const year = await getActiveYear();
 
   const { data: assets } = await supabase
     .from("fixed_assets")
     .select("*, fixed_asset_years(*)")
     .eq("organization_id", org.id)
     .order("acquisition_date", { ascending: true });
-
-  const years = Array.from({ length: 5 }, (_, i) => currentYear - i);
 
   const enriched = (assets ?? []).map((a) => {
     const yearRow = (a.fixed_asset_years ?? []).find(
@@ -69,22 +61,6 @@ export default async function DugotrajnaImovinaPage({
           </Button>
         </div>
       </PageHeader>
-
-      <div className="flex gap-2 mb-4">
-        {years.map((y) => (
-          <Link
-            key={y}
-            href={`/dugotrajnaimovina?godina=${y}`}
-            className={`px-3 py-1 rounded-md border text-sm transition-colors ${
-              y === year
-                ? "bg-primary text-primary-foreground"
-                : "bg-background text-muted-foreground hover:bg-muted"
-            }`}
-          >
-            {y}
-          </Link>
-        ))}
-      </div>
 
       {enriched.length > 0 && (
         <div className="grid grid-cols-3 gap-4 mb-4">

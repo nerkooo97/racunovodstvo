@@ -53,7 +53,7 @@ export default function ReceivedInvoiceForm({ partners, orgType, isVatRegistered
   // DOO: razrez
   const [amountBase, setAmountBase] = useState("");
   const [vatAmount, setVatAmount] = useState("");
-  const [expenseType, setExpenseType] = useState<"goods" | "services">("goods");
+  const [expenseType, setExpenseType] = useState<"goods" | "services" | "inventory">("goods");
   const [isForeign, setIsForeign] = useState(false);
 
   // Automatski izračun ukupnog iznosa za DOO
@@ -282,13 +282,14 @@ export default function ReceivedInvoiceForm({ partners, orgType, isVatRegistered
                 <Label>Vrsta troška</Label>
                 <Select
                   value={expenseType}
-                  onValueChange={(v) => setExpenseType(v as "goods" | "services")}
+                  onValueChange={(v) => setExpenseType(v as "goods" | "services" | "inventory")}
                 >
                   <SelectTrigger>
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="goods">Roba / materijal (konto 5000)</SelectItem>
+                    <SelectItem value="inventory">Roba za dalju prodaju — zalihe (konto 1300)</SelectItem>
+                    <SelectItem value="goods">Materijal / odmah utrošeno (konto 5000)</SelectItem>
                     <SelectItem value="services">Usluge (konto 5300)</SelectItem>
                   </SelectContent>
                 </Select>

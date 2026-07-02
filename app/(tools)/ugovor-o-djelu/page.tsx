@@ -82,10 +82,11 @@ export default function UgovorODjeluPage() {
 
   const result = useMemo(() => {
     if (!isValid) return null;
+    const dateArg = datumZakl || new Date();
     return direction === "neto"
-      ? calculateUodFromNeto(val, expenseType)
-      : calculateUodFromBruto(val, expenseType);
-  }, [val, direction, expenseType, isValid]);
+      ? calculateUodFromNeto(val, expenseType, dateArg)
+      : calculateUodFromBruto(val, expenseType, dateArg);
+  }, [val, direction, expenseType, isValid, datumZakl]);
 
   const uplatnice = result
     ? [

@@ -1,37 +1,34 @@
 import Link from "next/link";
 import { requireOrgFeature } from "@/lib/organization/server";
 import { getYearEndSummary } from "@/app/actions/accounting/year-end";
+import { getInventoryStatus } from "@/app/actions/accounting/inventory";
+import { getActiveYear } from "@/lib/year";
 import YearEndActions from "./YearEndActions";
-import { YearSelect } from "@/app/(dashboard)/(doo)/saldakonti/YearSelect";
-
-const CURRENT_YEAR = new Date().getFullYear();
 
 function fmt(n: number) {
   return new Intl.NumberFormat("bs-BA", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(n);
 }
 
-export default async function ZakljucakGodinePage({
-  searchParams,
-}: {
-  searchParams: Promise<{ year?: string }>;
-}) {
-  const sp = await searchParams;
-  const year = sp.year ? parseInt(sp.year, 10) : CURRENT_YEAR - 1;
-
+export default async function ZakljucakGodinePage() {
+  const year = await getActiveYear();
   await requireOrgFeature("general_ledger");
 
-  const { data, error } = await getYearEndSummary(year);
+  const [{ data, error }, inventoryRes] = await Promise.all([
+    getYearEndSummary(year),
+    getInventoryStatus(year),
+  ]);
+
+  // Korak razduženja zaliha prikazujemo samo ako konto 1300 ima promet
+  const inv = inventoryRes.data;
+  const showInventory = !!inv && (inv.bookBalance !== 0 || inv.alreadyAdjusted);
 
   return (
     <div className="p-6 space-y-6 max-w-2xl">
-      <div className="flex items-start justify-between gap-4">
-        <div>
-          <h1 className="text-2xl font-semibold">Zaključak poslovne godine</h1>
-          <p className="text-sm text-muted-foreground mt-1">
-            Godišnji zaključni nalozi po FBiH kontnom okviru (SN 81/21)
-          </p>
-        </div>
-        <YearSelect value={String(year)} basePath="/zakljucak-godine" />
+      <div>
+        <h1 className="text-2xl font-semibold">Zaključak poslovne godine</h1>
+        <p className="text-sm text-muted-foreground mt-1">
+          Godišnji zaključni nalozi po FBiH kontnom okviru (SN 81/21) · {year}.
+        </p>
       </div>
 
       {error && (
@@ -64,6 +61,7 @@ export default async function ZakljucakGodinePage({
             <p className="font-medium">Redoslijed koraka (zakonska obaveza):</p>
             <ol className="list-decimal list-inside space-y-0.5 text-xs">
               <li>Proknjiži amortizaciju stalnih sredstava (D 5400 / P 0290)</li>
+              <li>Razduži zalihe po popisu — inventura (D 5010 / P 1300)</li>
               <li>Izračunaj porezni bilans i porez na dobit (10%)</li>
               <li>Zatvori godinu (5 automatskih naloga)</li>
               <li>Otvori novu godinu (prenos bilansnih konta)</li>
@@ -74,6 +72,8 @@ export default async function ZakljucakGodinePage({
             year={year}
             accountingProfit={data.accountingProfit}
             alreadyClosed={data.alreadyClosed}
+            inventoryBookBalance={showInventory ? inv!.bookBalance : null}
+            inventoryAdjusted={inv?.alreadyAdjusted ?? false}
           />
         </>
       )}

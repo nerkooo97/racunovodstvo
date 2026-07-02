@@ -1,4 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
+import { getActiveOrgId } from "@/lib/supabase/get-active-org";
+import { getActiveYear } from "@/lib/year";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import PageHeader from "@/components/shared/page-header";
@@ -11,13 +13,10 @@ export default async function SihtenicaPage() {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
-  const { data: org } = await supabase
-    .from("organizations")
-    .select("id, name")
-    .eq("owner_id", user.id)
-    .order("created_at", { ascending: true })
-    .limit(1)
-    .single();
+  const activeOrgId = await getActiveOrgId(supabase, user.id);
+  const { data: org } = activeOrgId
+    ? await supabase.from("organizations").select("id, name").eq("id", activeOrgId).single()
+    : { data: null };
 
   if (!org) redirect("/nova-djelatnost");
 
@@ -42,7 +41,7 @@ export default async function SihtenicaPage() {
   }
 
   const now = new Date();
-  const currentYear  = now.getFullYear();
+  const currentYear  = await getActiveYear();
   const currentMonth = now.getMonth() + 1;
 
   const { data: timesheetSettings } = await supabase

@@ -1,6 +1,7 @@
 "use server";
 
 import { createClient } from "@/lib/supabase/server";
+import { getActiveOrgId } from "@/lib/supabase/get-active-org";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
@@ -88,15 +89,9 @@ const employeeSchema = z.object({
 
 type EmployeeResult = { error: string } | { success: true; id: string };
 
+// Aktivna organizacija iz cookie-a — NE prva kreirana (korisnik može imati više org-ova)
 async function getOrganizationId(supabase: Awaited<ReturnType<typeof createClient>>, userId: string): Promise<string | null> {
-  const { data } = await supabase
-    .from("organizations")
-    .select("id")
-    .eq("owner_id", userId)
-    .order("created_at", { ascending: true })
-    .limit(1)
-    .single();
-  return data?.id ?? null;
+  return getActiveOrgId(supabase, userId);
 }
 
 function parseEmployeeFormData(raw: Record<string, FormDataEntryValue>) {

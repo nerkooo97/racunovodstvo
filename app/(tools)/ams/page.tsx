@@ -5,6 +5,7 @@ import { EUR_TO_BAM, HEALTH_SPLIT } from "@/lib/constants/tax-rates";
 import { formatKM } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { calculateAms } from "@/lib/calculations/ams";
 import {
   Select,
   SelectContent,
@@ -47,25 +48,35 @@ export default function AmsPage() {
     const raw = parseFloat(amount.replace(",", "."));
     if (isNaN(raw) || raw <= 0) return null;
 
+    // Fallback date string
+    const dateArg = paymentDate || `${year}-${String(month || 1).padStart(2, "0")}-01`;
     const iznos_bam = currency === "EUR" ? Math.round(raw * EUR_TO_BAM * 100) / 100 : raw;
-    const expRate   = expenseType === "standard" ? 0.20 : expenseType === "author" ? 0.30 : 0;
-    const rashodi   = Math.round(iznos_bam * expRate * 100) / 100;
-    const osnovica  = Math.round((iznos_bam - rashodi) * 100) / 100;
-    const zdravstvo = Math.round(osnovica * 0.04 * 100) / 100;
-    const por_osn   = Math.round((osnovica - zdravstvo) * 100) / 100;
-    const porez     = Math.round(por_osn * 0.10 * 100) / 100;
-    const kredit    = Math.max(0, parseFloat(foreignCredit.replace(",", ".")) || 0);
-    const porez_za_uplatu = Math.max(0, Math.round((porez - kredit) * 100) / 100);
-    const zdravstvo_kanton = Math.round(zdravstvo * HEALTH_SPLIT.cantonal_rate * 100) / 100;
-    const zdravstvo_fbih   = Math.round(zdravstvo * HEALTH_SPLIT.federal_rate * 100) / 100;
-    const neto = Math.round((iznos_bam - zdravstvo - porez_za_uplatu) * 100) / 100;
+    
+    // Call centralized calculation
+    const calc = calculateAms(iznos_bam, expenseType, dateArg);
+
+    const r2 = (n: number) => Math.round(n * 100) / 100;
+    const kredit = Math.max(0, parseFloat(foreignCredit.replace(",", ".")) || 0);
+    const porez_za_uplatu = Math.max(0, r2(calc.incomeTax - kredit));
+    const zdravstvo_kanton = r2(calc.healthContribution * HEALTH_SPLIT.cantonal_rate);
+    const zdravstvo_fbih   = r2(calc.healthContribution * HEALTH_SPLIT.federal_rate);
+    const neto = r2(iznos_bam - calc.healthContribution - porez_za_uplatu);
 
     return {
-      iznos_bam, rashodi, osnovica, zdravstvo, por_osn, porez,
-      kredit, porez_za_uplatu, zdravstvo_kanton, zdravstvo_fbih, neto,
-      expRate,
+      iznos_bam,
+      rashodi: calc.expenseAmount,
+      osnovica: calc.taxableBase,
+      zdravstvo: calc.healthContribution,
+      por_osn: r2(calc.taxableBase - calc.healthContribution),
+      porez: calc.incomeTax,
+      kredit,
+      porez_za_uplatu,
+      zdravstvo_kanton,
+      zdravstvo_fbih,
+      neto,
+      expRate: calc.expenseRate,
     };
-  }, [amount, currency, expenseType, foreignCredit]);
+  }, [amount, currency, expenseType, foreignCredit, paymentDate, year, month]);
 
   return (
     <div className="max-w-2xl">

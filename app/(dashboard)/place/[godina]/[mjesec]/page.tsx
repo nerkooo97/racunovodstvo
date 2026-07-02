@@ -74,7 +74,7 @@ export default async function PeriodPage({
   }).filter(Boolean);
 
   const salaryItemsForVouchers: SalaryItemForVoucher[] = (items ?? []).map((it) => ({
-    calc: calculateFromGross(it.gross_salary ?? 0, it.tax_coefficient ?? 1.0, orgType),
+    calc: calculateFromGross(it.gross_salary ?? 0, it.tax_coefficient ?? 1.0, orgType, undefined, undefined, `${year}-${String(month).padStart(2, "0")}-01`),
     canton: it.canton ?? null,
     municipalityCode: it.municipality_code ?? null,
     municipalityName: it.municipality_name ?? null,

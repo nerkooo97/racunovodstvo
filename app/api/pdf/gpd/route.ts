@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { generateFilledGpd1051Pdf, type Gpd1051FillData } from "@/lib/pdf/gpd-1051-fill";
+import { getTaxConfig } from "@/lib/constants/tax-config";
 
 export async function POST(req: NextRequest) {
   try {
@@ -10,8 +11,11 @@ export async function POST(req: NextRequest) {
 
     const body = await req.json();
 
+    const yearVal = String(body.year || new Date().getFullYear() - 1);
+    const cfg = getTaxConfig(`${yearVal}-12-31`);
+
     const taxCoeff = parseFloat(body.taxCoeff) || 1.0;
-    const personalDeduction = 3600 * taxCoeff;
+    const personalDeduction = cfg.personalDeductionAnnual * taxCoeff;
     const healthExp = parseFloat(body.r19) || 0;
     const loanInterest = parseFloat(body.r20) || 0;
     const totalDeductions = personalDeduction + healthExp + loanInterest;
@@ -36,7 +40,7 @@ export async function POST(req: NextRequest) {
     const r23_dohodak = Math.max(0, r15_total);
 
     const r25_osnovica = Math.max(0, r23_dohodak - r22_gubitak - totalDeductions);
-    const r26_obaveza = Math.round(r25_osnovica * 0.10 * 100) / 100;
+    const r26_obaveza = Math.round(r25_osnovica * cfg.incomeTaxRate * 100) / 100;
 
     const r27 = parseFloat(body.r27) || 0;
     const r28 = parseFloat(body.r28) || 0;

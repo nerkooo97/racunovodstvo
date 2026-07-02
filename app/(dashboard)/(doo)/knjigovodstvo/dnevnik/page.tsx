@@ -2,6 +2,7 @@ import PageHeader from "@/components/shared/page-header";
 import { formatKM, formatDate } from "@/lib/utils";
 import { requireOrgFeature } from "@/lib/organization/server";
 import { listJournalEntries } from "@/app/actions/accounting/journal";
+import { getActiveYear } from "@/lib/year";
 import ManualJournalForm from "./ManualJournalForm";
 import JournalEntryActions from "./JournalEntryActions";
 
@@ -16,15 +17,9 @@ const SOURCE_LABEL: Record<string, string> = {
   retail: "Maloprodaja",
 };
 
-export default async function DnevnikPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ godina?: string }>;
-}) {
+export default async function DnevnikPage() {
   await requireOrgFeature("general_ledger");
-
-  const { godina } = await searchParams;
-  const year = parseInt(godina ?? "", 10) || new Date().getFullYear();
+  const year = await getActiveYear();
 
   const res = await listJournalEntries(year);
   const entries = res.entries ?? [];

@@ -151,8 +151,8 @@ interface Props {
 export function UgovorODjeluDocument({ data }: Props) {
   // Reconstruct calculation
   const result = data.direction === "neto"
-    ? calculateUodFromNeto(data.amount, data.expenseType)
-    : calculateUodFromBruto(data.amount, data.expenseType);
+    ? calculateUodFromNeto(data.amount, data.expenseType, data.datumZakl)
+    : calculateUodFromBruto(data.amount, data.expenseType, data.datumZakl);
 
   const formattedNet = formatKM(result.netPayment);
   const netWords = formatAmountInWords(result.netPayment);

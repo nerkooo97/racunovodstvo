@@ -1,6 +1,7 @@
 "use server";
 
 import { createClient } from "@/lib/supabase/server";
+import { getActiveOrgId } from "@/lib/supabase/get-active-org";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { localDateKey } from "@/lib/utils";
@@ -63,13 +64,8 @@ export async function saveTimesheetDays(
   } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
-  const { data: org } = await supabase
-    .from("organizations")
-    .select("id")
-    .eq("owner_id", user.id)
-    .order("created_at", { ascending: true })
-    .limit(1)
-    .single();
+  const activeOrgId = await getActiveOrgId(supabase, user.id);
+  const org = activeOrgId ? { id: activeOrgId } : null;
 
   if (!org) return { error: "Organizacija nije pronađena." };
 
@@ -124,13 +120,8 @@ export async function bulkFillTimesheet(
   } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
-  const { data: org } = await supabase
-    .from("organizations")
-    .select("id")
-    .eq("owner_id", user.id)
-    .order("created_at", { ascending: true })
-    .limit(1)
-    .single();
+  const activeOrgId = await getActiveOrgId(supabase, user.id);
+  const org = activeOrgId ? { id: activeOrgId } : null;
 
   if (!org) return { error: "Organizacija nije pronađena." };
 
@@ -217,13 +208,8 @@ export async function saveTimesheetSettings(
   } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
-  const { data: org } = await supabase
-    .from("organizations")
-    .select("id")
-    .eq("owner_id", user.id)
-    .order("created_at", { ascending: true })
-    .limit(1)
-    .single();
+  const activeOrgId = await getActiveOrgId(supabase, user.id);
+  const org = activeOrgId ? { id: activeOrgId } : null;
 
   if (!org) return { error: "Organizacija nije pronađena." };
 

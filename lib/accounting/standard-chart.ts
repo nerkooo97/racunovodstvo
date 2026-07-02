@@ -61,6 +61,7 @@ export const STANDARD_CHART: StandardAccount[] = [
   // ── Klasa 5 — Rashodi ──
   { code: "5", name: "Rashodi", account_class: 5, account_type: "expense", is_synthetic: true },
   { code: "5000", name: "Nabavna vrijednost / troškovi materijala i robe", account_class: 5, account_type: "expense", parent_code: "5" },
+  { code: "5010", name: "Nabavna vrijednost prodate robe", account_class: 5, account_type: "expense", parent_code: "5" },
   { code: "5300", name: "Troškovi usluga", account_class: 5, account_type: "expense", parent_code: "5" },
   { code: "5200", name: "Troškovi bruto plata", account_class: 5, account_type: "expense", parent_code: "5" },
   { code: "5210", name: "Troškovi doprinosa na plate (na teret poslodavca)", account_class: 5, account_type: "expense", parent_code: "5" },
@@ -105,6 +106,9 @@ export const POSTING_ACCOUNTS = {
   exportRevenue: "6010",
   otherRevenue: "6900",
   goodsExpense: "5000",
+  goodsInventory: "1300",
+  materialInventory: "1000",
+  costOfGoodsSold: "5010",
   servicesExpense: "5300",
   grossSalaryExpense: "5200",
   employerContribExpense: "5210",

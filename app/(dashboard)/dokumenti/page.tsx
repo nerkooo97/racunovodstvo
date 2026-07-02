@@ -2,6 +2,7 @@ import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { getActiveYear } from "@/lib/year";
 import PageHeader from "@/components/shared/page-header";
 import { formatDate } from "@/lib/utils";
 import {
@@ -24,7 +25,6 @@ export default async function DokumentiPage({
   searchParams,
 }: {
   searchParams: Promise<{
-    godina?: string;
     kategorija?: string;
     status?: string;
     radnik?: string;
@@ -47,8 +47,7 @@ export default async function DokumentiPage({
 
   if (!org) redirect("/nova-djelatnost");
 
-  const currentYear = new Date().getFullYear();
-  const year = parseInt(sp.godina ?? "") || currentYear;
+  const year = await getActiveYear();
   const category = (sp.kategorija ?? "all") as DocumentCategory | "all";
   const status = (sp.status ?? "issued") as "issued" | "cancelled" | "all";
   const employeeFilter = sp.radnik ?? "";
@@ -68,11 +67,8 @@ export default async function DokumentiPage({
 
   const { data: documents } = await query;
 
-  const years = Array.from({ length: 5 }, (_, i) => currentYear - i);
-
   function filterUrl(overrides: Record<string, string | undefined>) {
     const params = new URLSearchParams();
-    params.set("godina", overrides.godina ?? String(year));
     params.set("kategorija", overrides.kategorija ?? category);
     params.set("status", overrides.status ?? status);
     return `/dokumenti?${params.toString()}`;
@@ -88,22 +84,6 @@ export default async function DokumentiPage({
           <Link href="/dokumenti/novi">+ Novi dokument</Link>
         </Button>
       </PageHeader>
-
-      <div className="flex flex-wrap gap-2">
-        {years.map((y) => (
-          <Link
-            key={y}
-            href={filterUrl({ godina: String(y) })}
-            className={`px-3 py-1 rounded-md border text-sm transition-colors ${
-              y === year
-                ? "bg-primary text-primary-foreground"
-                : "bg-background text-muted-foreground hover:bg-muted"
-            }`}
-          >
-            {y}
-          </Link>
-        ))}
-      </div>
 
       <div className="flex flex-wrap gap-2">
         <Link

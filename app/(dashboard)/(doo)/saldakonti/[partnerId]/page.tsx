@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getPartnerCard } from "@/app/actions/accounting/partner-analytics";
-import { YearSelect } from "../YearSelect";
+import { getActiveYear } from "@/lib/year";
 
 function fmt(n: number) {
   return new Intl.NumberFormat("bs-BA", {
@@ -29,14 +29,11 @@ const SOURCE_LABELS: Record<string, string> = {
 
 export default async function PartnerCardPage({
   params,
-  searchParams,
 }: {
   params: Promise<{ partnerId: string }>;
-  searchParams: Promise<{ year?: string }>;
 }) {
   const { partnerId } = await params;
-  const sp = await searchParams;
-  const year = sp.year ? parseInt(sp.year, 10) : undefined;
+  const year = await getActiveYear();
 
   const { partner, lines, error } = await getPartnerCard(partnerId, year);
 
@@ -58,19 +55,12 @@ export default async function PartnerCardPage({
         <span className="text-foreground font-medium">{partner.name}</span>
       </div>
 
-      <div className="flex items-start justify-between gap-4">
-        <div>
-          <h1 className="text-2xl font-semibold">{partner.name}</h1>
-          <p className="text-sm text-muted-foreground mt-1">
-            {partner.tax_id ? `JIB/PDV: ${partner.tax_id} · ` : ""}
-            Analitička kartica{year ? ` za ${year}.` : " (sve godine)"}
-          </p>
-        </div>
-
-        <YearSelect
-          value={year?.toString() ?? ""}
-          basePath={`/saldakonti/${partnerId}`}
-        />
+      <div>
+        <h1 className="text-2xl font-semibold">{partner.name}</h1>
+        <p className="text-sm text-muted-foreground mt-1">
+          {partner.tax_id ? `JIB/PDV: ${partner.tax_id} · ` : ""}
+          Analitička kartica za {year}.
+        </p>
       </div>
 
       {error && (
@@ -130,7 +120,7 @@ export default async function PartnerCardPage({
             {(!lines || lines.length === 0) && (
               <tr>
                 <td colSpan={9} className="px-4 py-8 text-center text-muted-foreground">
-                  Nema knjiženja za ovog partnera{year ? ` u ${year}.` : "."}
+                  Nema knjiženja za ovog partnera u {year}.
                 </td>
               </tr>
             )}
@@ -192,7 +182,7 @@ export default async function PartnerCardPage({
       {lines && lines.length > 0 && (
         <div className="flex justify-end">
           <Link
-            href={`/saldakonti/${partnerId}/ios${year ? `?year=${year}` : ""}`}
+            href={`/saldakonti/${partnerId}/ios`}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-primary text-primary-foreground text-sm hover:bg-primary/90 transition-colors"
           >
             Generiši IOS (Izvod otvorenih stavki) →
